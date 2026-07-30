@@ -1,0 +1,3 @@
+• Batidas binaurais (beta): sobreponha tons cerebrais a qualquer som — precisa de fones de ouvido
+• Deslize para a esquerda ou direita para trocar de aba
+• O timer de desligamento agora é um botão flutuante com contagem regressiva ao vivo
