@@ -1,60 +1,99 @@
 package xyz.metiq.ui.components
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import xyz.metiq.ui.theme.LocalMetiqColors
 import kotlin.math.PI
+import kotlin.math.ceil
 import kotlin.math.cos
+import kotlin.math.floor
 import kotlin.math.sin
 import kotlin.random.Random
+
+private const val WAVE_PERIOD_SEC = 0.5f
+private const val WAVE_RING_COUNT = 3
+private const val WAVE_STAGGER_SEC = WAVE_PERIOD_SEC / WAVE_RING_COUNT
+private const val WAVE_REACH = 0.4f
 
 @Composable
 fun WaveRings(
     color: Color,
     diameter: Dp,
+    active: Boolean,
     modifier: Modifier = Modifier,
+    cornerRadius: Dp? = null,
 ) {
-    val infinite = rememberInfiniteTransition(label = "wave")
-    val phase by infinite.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 2400, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart,
-        ),
-        label = "phase",
-    )
     val maxAlpha = LocalMetiqColors.current.waveMaxAlpha
+    var clock by remember { mutableFloatStateOf(0f) }
+    var emitStart by remember { mutableStateOf<Float?>(null) }
+    var emitEnd by remember { mutableStateOf<Float?>(null) }
+
+    LaunchedEffect(active) {
+        if (active) {
+            if (emitStart == null) {
+                clock = 0f
+                emitStart = 0f
+            }
+            emitEnd = null
+        } else {
+            if (emitStart == null) return@LaunchedEffect
+            emitEnd = clock
+        }
+        var last = 0L
+        while (true) {
+            withFrameNanos { now ->
+                if (last != 0L) clock += (now - last) / 1e9f
+                last = now
+            }
+            val end = emitEnd
+            if (end != null && clock - end >= WAVE_PERIOD_SEC) {
+                emitStart = null
+                emitEnd = null
+                break
+            }
+        }
+    }
+
     Canvas(modifier = modifier) {
+        val start = emitStart ?: return@Canvas
+        val emitUntil = emitEnd ?: clock
         val center = Offset(size.width / 2f, size.height / 2f)
         val baseRadius = diameter.toPx() / 2f
-        val ringCount = 3
-        repeat(ringCount) { i ->
-            val p = (phase + i.toFloat() / ringCount) % 1f
-            val scale = 1f + p * 0.6f
-            val alpha = (1f - p) * maxAlpha
-            drawCircle(
-                color = color.copy(alpha = alpha),
-                radius = baseRadius * scale,
-                center = center,
-            )
+        val corner = cornerRadius?.toPx()
+        val firstK = maxOf(0, ceil((clock - WAVE_PERIOD_SEC - start) / WAVE_STAGGER_SEC).toInt())
+        val lastK = floor((emitUntil - start) / WAVE_STAGGER_SEC).toInt()
+        for (k in firstK..lastK) {
+            val age = clock - (start + k * WAVE_STAGGER_SEC)
+            if (age < 0f || age >= WAVE_PERIOD_SEC) continue
+            val p = age / WAVE_PERIOD_SEC
+            val scale = 1f + p * WAVE_REACH
+            val ringColor = color.copy(alpha = (1f - p) * maxAlpha)
+            if (corner == null) {
+                drawCircle(color = ringColor, radius = baseRadius * scale, center = center)
+            } else {
+                val half = baseRadius * scale
+                drawRoundRect(
+                    color = ringColor,
+                    topLeft = Offset(center.x - half, center.y - half),
+                    size = Size(half * 2f, half * 2f),
+                    cornerRadius = CornerRadius(corner * scale, corner * scale),
+                )
+            }
         }
     }
 }

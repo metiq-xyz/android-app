@@ -14,7 +14,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import kotlinx.coroutines.launch
 import xyz.metiq.audio.PcmStore
-import xyz.metiq.ui.HomeScreen
+import xyz.metiq.ui.home.HomeScreen
 import xyz.metiq.ui.theme.MetiqTheme
 
 private const val SPLASH_MAX_HOLD_MS = 2000L
@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
                     onTimerFadeSeconds = { scope.launch { repo.setTimerFadeSeconds(it) } },
                     onRequestAudioFocus = { scope.launch { repo.setRequestAudioFocus(it) } },
                     onThemePreference = { scope.launch { repo.setThemePreference(it) } },
+                    onBinauralVolume = { scope.launch { repo.setBinauralVolume(it) } },
+                    onBinauralBand = { scope.launch { repo.setBinauralBand(it) } },
                     onTimerPresets = { scope.launch { repo.setTimerPresetsSeconds(it) } },
                     onCustomMixes = { scope.launch { repo.setCustomMixes(it) } },
                     onLanguageTag = { scope.launch { repo.setLanguageTag(it) } },

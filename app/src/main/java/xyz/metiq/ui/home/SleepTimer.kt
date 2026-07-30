@@ -1,4 +1,4 @@
-package xyz.metiq.ui
+package xyz.metiq.ui.home
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -63,8 +63,15 @@ private fun hoursFor(seconds: Long): Int = (seconds / 3600L).toInt()
 private fun minutesFor(seconds: Long): Int = ((seconds / 60L) % 60L).toInt()
 private fun secondsFor(seconds: Long): Int = (seconds % 60L).toInt()
 
-// All sleep-timer state + behavior. Held by the screen (so playback changes can call
-// reset()), while the countdown itself is driven by rememberSleepTimerState below.
+fun formatTimerClock(seconds: Long): String {
+    val h = hoursFor(seconds)
+    val m = minutesFor(seconds)
+    val s = secondsFor(seconds)
+    return if (h > 0) "%d:%02d:%02d".format(h, m, s) else "%02d:%02d".format(m, s)
+}
+
+// Held by the screen so playback changes can call reset(); the countdown itself is
+// driven by rememberSleepTimerState below.
 @Stable
 class SleepTimerState {
     var remainingSeconds by mutableLongStateOf(0L)
@@ -131,8 +138,8 @@ class SleepTimerState {
     }
 }
 
-// Creates the timer state and drives its countdown. onFinished fires once when a running
-// timer reaches zero (the screen uses it to stop playback), after which the timer resets.
+// onFinished fires once when a running timer reaches zero (the screen stops playback
+// there), after which the timer resets.
 @Composable
 fun rememberSleepTimerState(onFinished: () -> Unit): SleepTimerState {
     val state = remember { SleepTimerState() }
@@ -151,81 +158,73 @@ fun rememberSleepTimerState(onFinished: () -> Unit): SleepTimerState {
     return state
 }
 
-// The sleep-timer UI: three editable H/M/S cells, presets, and a start/stop button.
-// `enabled` gates all interaction (e.g. only when something is playing).
 @Composable
 fun SleepTimer(
     state: SleepTimerState,
-    enabled: Boolean,
     presetsSeconds: List<Long>,
     modifier: Modifier = Modifier,
+    onPresetSelected: () -> Unit = {},
 ) {
-    val tokens = LocalMetiqColors.current
-    val blockAlpha by animateFloatAsState(
-        targetValue = if (enabled) 1f else tokens.disabledAlpha,
-        animationSpec = tween(durationMillis = ALPHA_ANIM_MS),
-        label = "timerBlockAlpha",
-    )
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
-            modifier = Modifier.alpha(blockAlpha),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
+            presetsSeconds.forEach { seconds ->
+                PresetChip(
+                    modifier = Modifier.weight(1f, fill = false),
+                    label = presetLabel(seconds),
+                    enabled = !state.running,
+                    onClick = {
+                        if (!state.running) {
+                            state.selectPreset(seconds)
+                            onPresetSelected()
+                        }
+                    },
+                )
+            }
+        }
+        Spacer(Modifier.height(12.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             TimerCell(
                 label = stringResource(R.string.timer_hours),
                 liveValue = hoursFor(state.remainingSeconds),
                 isEditing = state.editField == TimerField.HOURS,
                 editBuffer = state.editBuffer,
-                onBeginEdit = { if (enabled && !state.running) state.beginEdit(TimerField.HOURS) },
+                onBeginEdit = { if (!state.running) state.beginEdit(TimerField.HOURS) },
                 onBufferChange = state::onBufferChange,
                 onCommit = { state.commitField(TimerField.HOURS) },
-                enabled = enabled && !state.running,
+                enabled = !state.running,
             )
             TimerCell(
                 label = stringResource(R.string.timer_minutes),
                 liveValue = minutesFor(state.remainingSeconds),
                 isEditing = state.editField == TimerField.MINUTES,
                 editBuffer = state.editBuffer,
-                onBeginEdit = { if (enabled && !state.running) state.beginEdit(TimerField.MINUTES) },
+                onBeginEdit = { if (!state.running) state.beginEdit(TimerField.MINUTES) },
                 onBufferChange = state::onBufferChange,
                 onCommit = { state.commitField(TimerField.MINUTES) },
-                enabled = enabled && !state.running,
+                enabled = !state.running,
             )
             TimerCell(
                 label = stringResource(R.string.timer_seconds),
                 liveValue = secondsFor(state.remainingSeconds),
                 isEditing = state.editField == TimerField.SECONDS,
                 editBuffer = state.editBuffer,
-                onBeginEdit = { if (enabled && !state.running) state.beginEdit(TimerField.SECONDS) },
+                onBeginEdit = { if (!state.running) state.beginEdit(TimerField.SECONDS) },
                 onBufferChange = state::onBufferChange,
                 onCommit = { state.commitField(TimerField.SECONDS) },
-                enabled = enabled && !state.running,
+                enabled = !state.running,
             )
-        }
-        Spacer(Modifier.height(12.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth().alpha(blockAlpha),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            presetsSeconds.forEach { seconds ->
-                PresetChip(
-                    // fill = false: cap width on narrow screens without stretching
-                    // content-sized chips (a lone preset must not become a full-width pill).
-                    modifier = Modifier.weight(1f, fill = false),
-                    label = presetLabel(seconds),
-                    enabled = enabled && !state.running,
-                    onClick = { if (enabled && !state.running) state.selectPreset(seconds) },
-                )
-            }
         }
         Spacer(Modifier.height(16.dp))
         StartStopButton(
             running = state.running,
-            enabled = enabled && (state.running || state.remainingSeconds > 0L),
+            enabled = state.running || state.remainingSeconds > 0L,
             onClick = state::toggleRunning,
         )
     }

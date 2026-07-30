@@ -21,22 +21,16 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-// Ramps are applied in fixed FADE_STEP_MS-sized setVolume steps; the number of steps
-// scales with the user-configured fade duration (see setFadeMillis), so temporal
-// resolution stays constant at any duration. Fade-in uses an equal-power (sqrt) curve
-// so the sound is audible from the first step — responsive even at longer durations;
-// fade-out is dB-linear for a smooth tail, and stopping keeps the track alive until it
-// finishes, which makes color switches crossfade. A duration of 0 makes starts/stops
-// instant.
-private const val FADE_STEP_MS = 20L
+private const val FADE_STEP_MS = 10L
 private const val MAX_FADE_MILLIS = 30_000L
-
-// Noise layers are streamed block-by-block through a live low-pass so Warmth can be
-// applied on top of continuous playback (no track rebuild / restart).
 private const val NOISE_BLOCK_FRAMES = 1024
-// Per-block glide of the filter cutoff toward the target warmth — smooths coefficient
-// steps so dragging the slider sweeps the tone instead of clicking between values.
 private const val WARMTH_GLIDE = 0.2f
+private const val SYNTH_SAMPLE_RATE = 48000
+private const val SYNTH_BLOCK_FRAMES = 1024
+private const val SYNTH_GLIDE = 0.08
+private const val SYNTH_AMPLITUDE = 0.5
+
+const val BINAURAL_ID = "binaural"
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class AudioEngine(private val context: Context) {
@@ -44,38 +38,29 @@ class AudioEngine(private val context: Context) {
         val track: AudioTrack,
         var volume: Float,
         val warmthEligible: Boolean,
-        // Non-null for streamed noise layers: the coroutine feeding + filtering the
-        // track. It owns the track's teardown, so stopping just cancels this job.
         val feeder: Job? = null,
     ) {
-        // 0..1 start/stop ramp multiplied on top of the configured volume, so a
-        // stop mid-fade-in ramps down from wherever the fade-in got to.
         @Volatile
         var fadeFactor: Float = 1f
         var fadeJob: Job? = null
     }
 
     private val layers = ConcurrentHashMap<String, Layer>()
-
-    // In-flight startLayer coroutines keyed by id. Registered synchronously so a
-    // second tap can't spin up a duplicate, and a stop can cancel a start that
-    // hasn't finished registering its Layer yet (otherwise it becomes an orphan
-    // track that keeps playing and can't be stopped).
     private val startJobs = ConcurrentHashMap<String, Job>()
-
     private val feederScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var masterVolume: Float = 1f
+    private val fadeScope = CoroutineScope(SupervisorJob() + Dispatchers.Default.limitedParallelism(1))
+    private var fadeJob: Job? = null
 
-    // Warmth 0f = off (bright); 1f = warmest. Read live by each noise feeder every
-    // block, so a change takes effect on the next ~23 ms without touching the track.
     @Volatile
     private var warmth: Float = 0f
 
-    // User-configured fade duration (ms) for normal start/stop/pause/resume ramps
-    // (0 = instant), plus a separate, usually longer fade used when the sleep timer
-    // ends playback. Read at the start of each ramp. Seeded to 0 (instant): the UI
-    // pushes the real value from Settings on connect, before any layer starts, so
-    // the product default lives only in DEFAULT_SETTINGS — never duplicated here.
+    @Volatile
+    private var carrierHz: Float = 216f
+
+    @Volatile
+    private var beatHz: Float = 10f
+
     @Volatile
     private var fadeMillis: Long = 0L
 
@@ -84,26 +69,15 @@ class AudioEngine(private val context: Context) {
 
     private fun fadeSteps(ms: Long = fadeMillis): Int = (ms / FADE_STEP_MS).toInt()
 
-    // Single-threaded so a pause fade and a subsequent resume can never
-    // write track volumes concurrently.
-    private val fadeScope = CoroutineScope(SupervisorJob() + Dispatchers.Default.limitedParallelism(1))
-    private var fadeJob: Job? = null
 
-    // Rising gain: equal-power curve — jumps into the audible range immediately,
-    // then eases toward full. Keeps taps feeling instant.
     private fun fadeInGain(progress: Float): Float = sqrt(progress.coerceIn(0f, 1f))
 
-    // Falling gain: dB-linear over a 60 dB range — perceptually even slide to
-    // silence with no cliff at the end (human loudness perception is logarithmic).
     private fun fadeOutGain(progress: Float): Float =
         if (progress >= 1f) 0f else 10f.pow(-3f * progress.coerceAtLeast(0f))
 
     private fun appliedVolume(l: Layer): Float =
         (l.volume * masterVolume * l.fadeFactor).coerceIn(0f, 1f)
 
-    // Fire-and-forget: the engine owns the coroutine so a stop can cancel it. Returns
-    // immediately without starting a duplicate if the id is already playing or a start
-    // is already in flight.
     fun startLayer(
         id: String,
         assetPath: String,
@@ -112,7 +86,6 @@ class AudioEngine(private val context: Context) {
     ) {
         if (layers.containsKey(id) || startJobs.containsKey(id)) return
         val job = feederScope.launch {
-            // Tolerate missing/undecodable assets: the layer just stays unstarted.
             val pcm = try {
                 PcmStore.awaitPcm(context, id, assetPath)
             } catch (e: CancellationException) {
@@ -120,14 +93,7 @@ class AudioEngine(private val context: Context) {
             } catch (_: Throwable) {
                 return@launch
             }
-            // Every layer streams through a small (~85 ms) buffer: playback begins
-            // after one block instead of waiting for a full static-track upload —
-            // a 45 s ambient loop as a MODE_STATIC track needs a multi-MB AudioFlinger
-            // allocation plus a blocking copy of the whole PCM, which added hundreds
-            // of milliseconds between tap and sound. Noise layers additionally run
-            // through the live warmth low-pass.
             val track = withContext(Dispatchers.IO) { buildStreamTrack(pcm, 0f) }
-            // A stop cancelled us during the async work — never register the track.
             if (!isActive) {
                 runCatching { track.release() }
                 return@launch
@@ -142,8 +108,6 @@ class AudioEngine(private val context: Context) {
         startJobs[id] = job
     }
 
-    // Ramps the layer's gain from wherever it currently is up to full,
-    // reapplying the track volume each step.
     private fun rampIn(l: Layer): Job {
         l.fadeJob?.cancel()
         val job = fadeScope.launch {
@@ -154,7 +118,6 @@ class AudioEngine(private val context: Context) {
                 runCatching { l.track.setVolume(appliedVolume(l)) }
                 delay(FADE_STEP_MS)
             }
-            // Land exactly at full volume — also the instant path when steps == 0.
             l.fadeFactor = 1f
             runCatching { l.track.setVolume(appliedVolume(l)) }
         }
@@ -162,9 +125,6 @@ class AudioEngine(private val context: Context) {
         return job
     }
 
-    // Maps 0..1 warmth to the low-pass corner. w=0 sits well above the audible band
-    // (effectively bright/bypass); w=1 stops at ~2.2 kHz so the four colors stay
-    // distinguishable, never fully muffled.
     private fun warmthCutoffHz(w: Float): Float {
         val fMax = 18000.0
         val fMin = 2200.0
@@ -175,18 +135,12 @@ class AudioEngine(private val context: Context) {
         val minBuf = AudioTrack.getMinBufferSize(
             pcm.sampleRate, pcm.channelMask, AudioFormat.ENCODING_PCM_16BIT,
         )
-        // A few blocks of headroom so the feeder never starves during a filter pass.
         val desired = NOISE_BLOCK_FRAMES * pcm.channelCount * 2 * 4
         val t = buildTrack(pcm.sampleRate, pcm.channelMask, maxOf(minBuf, desired), stream = true)
         t.setVolume(effective)
         return t
     }
 
-    // Streams the PCM loop into the track block by block; the feeder owns the
-    // track's teardown. With `filtered`, blocks pass through a 2nd-order
-    // (Butterworth-Q) low-pass whose cutoff glides toward the live `warmth` —
-    // continuous playback, filtered on top, so changing warmth never restarts
-    // the sound. Unfiltered (ambient) blocks are plain wrap-around copies.
     private fun launchFeeder(track: AudioTrack, pcm: Pcm, filtered: Boolean): Job =
         feederScope.launch {
             val src = pcm.data
@@ -197,16 +151,15 @@ class AudioEngine(private val context: Context) {
                 return@launch
             }
             val sr = pcm.sampleRate
-            val fcMax = (sr * 0.45f) // keep the cutoff safely below Nyquist
+            val fcMax = (sr * 0.45f)
             val block = NOISE_BLOCK_FRAMES
             val total = block * ch
             val buf = ShortArray(total)
-            // Per-channel biquad state (Direct Form I).
             val x1 = DoubleArray(ch); val x2 = DoubleArray(ch)
             val y1 = DoubleArray(ch); val y2 = DoubleArray(ch)
-            // Start already at the target so opening at warmth>0 doesn't sweep in.
             var fc = warmthCutoffHz(warmth).coerceIn(2200f, fcMax)
             var b0 = 0.0; var b1 = 0.0; var b2 = 0.0; var a1 = 0.0; var a2 = 0.0
+            
             fun recompute(f: Double) {
                 val w0 = 2.0 * PI * f / sr
                 val cw = cos(w0)
@@ -218,9 +171,8 @@ class AudioEngine(private val context: Context) {
                 a1 = (-2.0 * cw) / a0
                 a2 = (1.0 - alpha) / a0
             }
+            
             var pos = 0
-            // play() is deferred until the first block is in the buffer, so output
-            // starts the instant playback begins instead of waiting on an underrun.
             var started = false
             try {
                 while (isActive) {
@@ -258,8 +210,6 @@ class AudioEngine(private val context: Context) {
                             track.play()
                             started = true
                         }
-                        // Buffer full (or track paused): yield instead of spinning. delay
-                        // is a cooperative cancellation point, so stop takes effect here.
                         if (off < total) delay(5)
                     }
                 }
@@ -269,28 +219,101 @@ class AudioEngine(private val context: Context) {
             }
         }
 
-    // Warmth is read live by each noise feeder, so this just updates the value; no
-    // track is rebuilt and playback is never interrupted.
     fun setWarmth(value: Float) {
         warmth = value.coerceIn(0f, 1f)
     }
 
-    // Sets the fade duration for normal start/stop/pause/resume ramps. 0 = instant.
     fun setFadeMillis(ms: Long) {
         fadeMillis = ms.coerceIn(0L, MAX_FADE_MILLIS)
     }
 
-    // Sets the fade used when the sleep timer ends playback (see stopAllTimerFade).
     fun setTimerFadeMillis(ms: Long) {
         timerFadeMillis = ms.coerceIn(0L, MAX_FADE_MILLIS)
     }
 
+    fun setBinaural(carrierHz: Float, beatHz: Float) {
+        this.carrierHz = carrierHz.coerceIn(20f, 1500f)
+        this.beatHz = beatHz.coerceIn(0f, 50f)
+    }
+
+    fun startBinaural(volume: Float = 1f) {
+        val id = BINAURAL_ID
+        if (layers.containsKey(id) || startJobs.containsKey(id)) return
+        val job = feederScope.launch {
+            val track = withContext(Dispatchers.IO) { buildSynthTrack() }
+            if (!isActive) {
+                runCatching { track.release() }
+                return@launch
+            }
+            val feeder = launchSynthFeeder(track)
+            val layer = Layer(track, volume, warmthEligible = false, feeder = feeder)
+            layer.fadeFactor = 0f
+            layers[id] = layer
+            rampIn(layer)
+        }
+        job.invokeOnCompletion { startJobs.remove(id, job) }
+        startJobs[id] = job
+    }
+
+    fun stopBinaural() = stopLayer(BINAURAL_ID)
+
+    private fun buildSynthTrack(): AudioTrack {
+        val minBuf = AudioTrack.getMinBufferSize(
+            SYNTH_SAMPLE_RATE, AudioFormat.CHANNEL_OUT_STEREO, AudioFormat.ENCODING_PCM_16BIT,
+        )
+        val desired = SYNTH_BLOCK_FRAMES * 2 * 2 * 4 // frames * stereo * 16-bit * headroom
+        val t = buildTrack(
+            SYNTH_SAMPLE_RATE, AudioFormat.CHANNEL_OUT_STEREO, maxOf(minBuf, desired), stream = true,
+        )
+        t.setVolume(0f)
+        return t
+    }
+
+    private fun launchSynthFeeder(track: AudioTrack): Job =
+        feederScope.launch {
+            val sr = SYNTH_SAMPLE_RATE
+            val block = SYNTH_BLOCK_FRAMES
+            val total = block * 2
+            val buf = ShortArray(total)
+            val amp = SYNTH_AMPLITUDE * Short.MAX_VALUE
+            val twoPi = 2.0 * PI
+            var phaseL = 0.0
+            var phaseR = 0.0
+            var curCarrier = carrierHz.toDouble()
+            var curBeat = beatHz.toDouble()
+            var started = false
+            try {
+                while (isActive) {
+                    curCarrier += (carrierHz - curCarrier) * SYNTH_GLIDE
+                    curBeat += (beatHz - curBeat) * SYNTH_GLIDE
+                    val incL = twoPi * curCarrier / sr
+                    val incR = twoPi * (curCarrier + curBeat) / sr
+                    for (f in 0 until block) {
+                        buf[f * 2] = (sin(phaseL) * amp).toInt().toShort()
+                        buf[f * 2 + 1] = (sin(phaseR) * amp).toInt().toShort()
+                        phaseL += incL; if (phaseL >= twoPi) phaseL -= twoPi
+                        phaseR += incR; if (phaseR >= twoPi) phaseR -= twoPi
+                    }
+                    var off = 0
+                    while (off < total && isActive) {
+                        val n = track.write(buf, off, total - off, AudioTrack.WRITE_NON_BLOCKING)
+                        if (n < 0) return@launch
+                        off += n
+                        if (!started && off > 0) {
+                            track.play()
+                            started = true
+                        }
+                        if (off < total) delay(5)
+                    }
+                }
+            } finally {
+                runCatching { track.stop() }
+                runCatching { track.release() }
+            }
+        }
+
     fun stopLayer(id: String, fadeMs: Long = fadeMillis) {
-        // Cancel any in-flight start so a stop that races the start doesn't leave an
-        // orphaned track playing (the start aborts before registering its Layer).
         startJobs.remove(id)?.cancel()
-        // Removed from the map immediately so a quick re-tap starts a fresh layer;
-        // this one fades out detached and tears itself down at the end.
         val l = layers.remove(id) ?: return
         l.fadeJob?.cancel()
         fadeScope.launch {
@@ -302,7 +325,6 @@ class AudioEngine(private val context: Context) {
                 delay(FADE_STEP_MS)
             }
             if (l.feeder != null) {
-                // The feeder's finally block stops + releases the track once it unwinds.
                 l.feeder.cancel()
             } else {
                 runCatching { l.track.stop() }
@@ -341,7 +363,6 @@ class AudioEngine(private val context: Context) {
             }
             for ((_, l) in layers) {
                 runCatching { l.track.pause() }
-                // Restore so a later resume plays at the configured level.
                 runCatching { l.track.setVolume(appliedVolume(l)) }
             }
         }
@@ -364,15 +385,12 @@ class AudioEngine(private val context: Context) {
                 }
                 delay(FADE_STEP_MS)
             }
-            // Land at full volume — also the instant path when steps == 0.
             for ((_, l) in layers) {
                 runCatching { l.track.setVolume(appliedVolume(l)) }
             }
         }
     }
 
-    // Also reached via hardStop() while the engine object stays in use, so only
-    // cancel the in-flight jobs — never the scopes.
     fun release() {
         fadeJob?.cancel()
         startJobs.values.forEach { it.cancel() }
@@ -394,7 +412,7 @@ class AudioEngine(private val context: Context) {
     fun layerVolume(id: String): Float? = layers[id]?.volume
 
     suspend fun switchTo(newId: String, newAssetPath: String) {
-        layers.keys.filter { it != newId }.forEach { stopLayer(it) }
+        layers.keys.filter { it != newId && it != BINAURAL_ID }.forEach { stopLayer(it) }
         if (!layers.containsKey(newId)) {
             startLayer(newId, newAssetPath, volume = 1f, warmthEligible = true)
         } else {
@@ -406,8 +424,6 @@ class AudioEngine(private val context: Context) {
         layers.keys.toList().forEach { stopLayer(it) }
     }
 
-    // Stops everything with the longer sleep-timer fade — a gentle wind-down when
-    // the timer ends playback, independent of the normal start/stop fade.
     fun stopAllTimerFade() {
         layers.keys.toList().forEach { stopLayer(it, timerFadeMillis) }
     }
@@ -423,9 +439,6 @@ class AudioEngine(private val context: Context) {
         val format = AudioFormat.Builder().setEncoding(AudioFormat.ENCODING_PCM_16BIT)
             .setSampleRate(sampleRate).setChannelMask(channelMask).build()
         val mode = if (stream) AudioTrack.MODE_STREAM else AudioTrack.MODE_STATIC
-        // Ask for the fast (low-latency) mixer path: the default deep-buffer route
-        // adds 100-200 ms between write and speaker, which makes taps feel laggy
-        // against the instant UI animation. Falls back gracefully where denied.
         return AudioTrack.Builder().setAudioAttributes(attrs).setAudioFormat(format)
             .setBufferSizeInBytes(bufferBytes).setTransferMode(mode)
             .setPerformanceMode(AudioTrack.PERFORMANCE_MODE_LOW_LATENCY)

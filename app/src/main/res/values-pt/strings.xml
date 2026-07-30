@@ -18,6 +18,16 @@
     <string name="ambient_cafe">Ambiente de café</string>
     <string name="ambient_wind">Vento</string>
 
+    <string name="binaural_now_playing">Batidas binaurais</string>
+    <string name="binaural_noti_label">%1$s binaural</string>
+    <string name="binaural_headphone_notice">Use fones de ouvido: cada ouvido precisa do seu próprio tom para o efeito funcionar.</string>
+    <string name="binaural_volume">Volume</string>
+    <string name="binaural_delta_feel">Sono profundo</string>
+    <string name="binaural_theta_feel">Meditação</string>
+    <string name="binaural_alpha_feel">Relaxamento</string>
+    <string name="binaural_beta_feel">Concentração</string>
+    <string name="binaural_gamma_feel">Atenção</string>
+
     <string name="color_pink">Rosa</string>
     <string name="color_brown">Marrom</string>
     <string name="color_white">Branco</string>

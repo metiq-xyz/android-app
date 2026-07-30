@@ -43,13 +43,6 @@ import xyz.metiq.ui.theme.Inter
 import xyz.metiq.ui.theme.LocalMetiqColors
 import xyz.metiq.ui.theme.MetiqTheme
 
-// Non-blocking "support us" note. Sits above the app content, doesn't steal focus,
-// and can be flicked away in either direction to dismiss (the only ways to close
-// it — action taps keep it open so the user can e.g. star AND donate).
-// [message] and [rateLabel] are resolved by the caller so the flavor decides the
-// wording (Play: rate a review; F-Droid: star the GitHub repo); [showFeedback]
-// gates the written-feedback cue — false on Play, where the review itself is the
-// feedback channel.
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RatePromptBanner(

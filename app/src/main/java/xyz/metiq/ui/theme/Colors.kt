@@ -2,9 +2,7 @@ package xyz.metiq.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// `wave` tints the ripple animation of an active noise color; defaults to the main
-// fill at each construction site so it matches unless overridden per variant.
-data class NoisePalette(val fill: Color, val onFill: Color, val outline: Color, val wave: Color)
+data class NoisePalette(val fill: Color, val onFill: Color, val wave: Color)
 
 data class MetiqColorTokens(
     val background: Color,
@@ -29,6 +27,17 @@ data class MetiqColorTokens(
     val noiseBrown: NoisePalette,
     val noiseWhite: NoisePalette,
     val noiseGrey: NoisePalette,
+    val binauralDelta: Color,
+    val binauralTheta: Color,
+    val binauralAlpha: Color,
+    val binauralBeta: Color,
+    val binauralGamma: Color,
+    val ambientSeawaves: Color,
+    val ambientRain: Color,
+    val ambientFire: Color,
+    val ambientBirds: Color,
+    val ambientCafe: Color,
+    val ambientWind: Color,
 )
 
 object MetiqColors {
@@ -36,12 +45,18 @@ object MetiqColors {
     private val BrownFill = Color(0xFFA34E08)
     private val GreyFill = Color(0xFF565656)
 
-    val AmbientSeawaves = Color(0xFF3A7BD5)
-    val AmbientRain = Color(0xFF6C5CE7)
-    val AmbientFire = Color(0xFFE8662B)
-    val AmbientBirds = Color(0xFF4CAF7D)
-    val AmbientCafe = Color(0xFFB8862B)
-    val AmbientWind = Color(0xFF3AA6B9)
+    private val AmbientSeawaves = Color(0xFF3A7BD5)
+    private val AmbientRain = Color(0xFF6C5CE7)
+    private val AmbientFire = Color(0xFFE8662B)
+    private val AmbientBirds = Color(0xFF4CAF7D)
+    private val AmbientCafe = Color(0xFFB8862B)
+    private val AmbientWind = Color(0xFF3AA6B9)
+
+    private val BinauralDelta = Color(0xFF7B6CF6)
+    private val BinauralTheta = Color(0xFF4C7BE8)
+    private val BinauralAlpha = Color(0xFF2FA9A0)
+    private val BinauralBeta = Color(0xFFCB9A2E)
+    private val BinauralGamma = Color(0xFFDF6478)
 
     val Dark = MetiqColorTokens(
         background = Color(0xFF111010),
@@ -62,10 +77,21 @@ object MetiqColors {
         waveMaxAlpha = 0.9f,
         particleBaseAlpha = 0.2f,
         particleAlphaJitter = 0.4f,
-        noisePink = NoisePalette(PinkFill, Color.Black, PinkFill, wave = PinkFill),
-        noiseBrown = NoisePalette(BrownFill, Color.White, BrownFill, wave = BrownFill),
-        noiseWhite = NoisePalette(Color.White, Color.Black, Color.White, wave = Color.White),
-        noiseGrey = NoisePalette(GreyFill, Color.White, GreyFill, wave = GreyFill),
+        noisePink = NoisePalette(PinkFill, Color.Black, wave = PinkFill),
+        noiseBrown = NoisePalette(BrownFill, Color.White, wave = BrownFill),
+        noiseWhite = NoisePalette(Color.White, Color.Black, wave = Color.White),
+        noiseGrey = NoisePalette(GreyFill, Color.White, wave = GreyFill),
+        binauralDelta = BinauralDelta,
+        binauralTheta = BinauralTheta,
+        binauralAlpha = BinauralAlpha,
+        binauralBeta = BinauralBeta,
+        binauralGamma = BinauralGamma,
+        ambientSeawaves = AmbientSeawaves,
+        ambientRain = AmbientRain,
+        ambientFire = AmbientFire,
+        ambientBirds = AmbientBirds,
+        ambientCafe = AmbientCafe,
+        ambientWind = AmbientWind,
     )
 
     val Light = MetiqColorTokens(
@@ -87,9 +113,20 @@ object MetiqColors {
         waveMaxAlpha = 0.9f,
         particleBaseAlpha = 0.2f,
         particleAlphaJitter = 0.4f,
-        noisePink = NoisePalette(PinkFill, Color.Black, PinkFill, wave = PinkFill),
-        noiseBrown = NoisePalette(BrownFill, Color.White, BrownFill, wave = BrownFill),
-        noiseWhite = NoisePalette(Color.White, Color.Black, Color.White, wave = Color(0xFFDCDFE7)),
-        noiseGrey = NoisePalette(GreyFill, Color.White, GreyFill, wave = GreyFill),
+        noisePink = NoisePalette(PinkFill, Color.Black, wave = PinkFill),
+        noiseBrown = NoisePalette(BrownFill, Color.White, wave = BrownFill),
+        noiseWhite = NoisePalette(Color.White, Color.Black, wave = Color(0xFFDCDFE7)),
+        noiseGrey = NoisePalette(GreyFill, Color.White, wave = GreyFill),
+        binauralDelta = BinauralDelta,
+        binauralTheta = BinauralTheta,
+        binauralAlpha = BinauralAlpha,
+        binauralBeta = BinauralBeta,
+        binauralGamma = BinauralGamma,
+        ambientSeawaves = AmbientSeawaves,
+        ambientRain = AmbientRain,
+        ambientFire = AmbientFire,
+        ambientBirds = AmbientBirds,
+        ambientCafe = AmbientCafe,
+        ambientWind = AmbientWind,
     )
 }

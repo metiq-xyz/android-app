@@ -34,6 +34,8 @@ data class Settings(
     val timerFadeSeconds: Float,
     val requestAudioFocus: Boolean,
     val themePreference: ThemePreference,
+    val binauralVolume: Float,
+    val binauralBand: String?,
 )
 
 val DEFAULT_SETTINGS = Settings(
@@ -48,6 +50,8 @@ val DEFAULT_SETTINGS = Settings(
     timerFadeSeconds = 2f,
     requestAudioFocus = false,
     themePreference = ThemePreference.SYSTEM,
+    binauralVolume = 0.5f,
+    binauralBand = null,
 )
 
 const val MAX_TIMER_PRESETS = 4
@@ -105,6 +109,8 @@ private object Keys {
     val TIMER_FADE_SECONDS = floatPreferencesKey("timer_fade_seconds")
     val REQUEST_AUDIO_FOCUS = booleanPreferencesKey("request_audio_focus")
     val THEME_PREFERENCE = stringPreferencesKey("theme_preference")
+    val BINAURAL_VOLUME = floatPreferencesKey("binaural_volume")
+    val BINAURAL_BAND = stringPreferencesKey("binaural_band")
     val TIMER_PRESETS = stringPreferencesKey("timer_presets")
     val CUSTOM_MIXES = stringPreferencesKey("custom_mixes")
     val LANGUAGE_TAG = stringPreferencesKey("language_tag")
@@ -144,6 +150,17 @@ class SettingsRepository(context: Context) {
         store.edit { it[Keys.THEME_PREFERENCE] = preference.name }
     }
 
+    suspend fun setBinauralVolume(volume: Float) {
+        store.edit { it[Keys.BINAURAL_VOLUME] = volume.coerceIn(0f, 1f) }
+    }
+
+    suspend fun setBinauralBand(band: String?) {
+        store.edit {
+            if (band == null) it.remove(Keys.BINAURAL_BAND)
+            else it[Keys.BINAURAL_BAND] = band
+        }
+    }
+
     suspend fun setTimerPresetsSeconds(presets: List<Long>) {
         val capped = presets.take(MAX_TIMER_PRESETS).filter { it > 0L }
         store.edit { it[Keys.TIMER_PRESETS] = capped.joinToString(",") }
@@ -161,8 +178,7 @@ class SettingsRepository(context: Context) {
         applyLanguageTag(tag)
     }
 
-    // Whether the "rate us" note should currently be shown. Recomputed on every
-    // emission (i.e. each launch increment), against the current wall clock.
+    // Recomputed on every emission (each launch increment) against the wall clock.
     val ratePromptVisible: Flow<Boolean> = store.data.catch { e ->
         if (e is IOException) emit(emptyPreferences()) else throw e
     }.map { prefs ->
@@ -177,7 +193,6 @@ class SettingsRepository(context: Context) {
             (lastPrompt == 0L || now - lastPrompt >= RATE_REPROMPT_MILLIS)
     }
 
-    // Call once per cold start: stamps the first launch and bumps the counter.
     suspend fun registerLaunch() {
         val now = System.currentTimeMillis()
         store.edit { prefs ->
@@ -209,6 +224,9 @@ class SettingsRepository(context: Context) {
         val themePreference = this[Keys.THEME_PREFERENCE]
             ?.let { runCatching { ThemePreference.valueOf(it) }.getOrNull() }
             ?: DEFAULT_SETTINGS.themePreference
+        val binauralVolume = (this[Keys.BINAURAL_VOLUME] ?: DEFAULT_SETTINGS.binauralVolume)
+            .coerceIn(0f, 1f)
+        val binauralBand = this[Keys.BINAURAL_BAND]
         return Settings(
             particlesEnabled = particles,
             timerPresetsSeconds = presets,
@@ -219,6 +237,8 @@ class SettingsRepository(context: Context) {
             timerFadeSeconds = timerFadeSeconds,
             requestAudioFocus = requestAudioFocus,
             themePreference = themePreference,
+            binauralVolume = binauralVolume,
+            binauralBand = binauralBand,
         )
     }
 }

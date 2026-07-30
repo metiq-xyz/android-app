@@ -24,6 +24,24 @@
     <string name="ambient_cafe">Café ambience</string>
     <string name="ambient_wind">Wind</string>
 
+    <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
+         under each hints at the mental state it nudges toward. -->
+    <string name="binaural_now_playing">Binaural beats</string>
+    <!-- Notification suffix when a binaural beat plays; %1$s is the band's Greek letter -->
+    <string name="binaural_noti_label">%1$s binaural</string>
+    <string name="binaural_headphone_notice">Use headphones: each ear needs its own tone for the effect to work.</string>
+    <string name="binaural_volume">Volume</string>
+    <string name="binaural_delta" translatable="false">Delta</string>
+    <string name="binaural_theta" translatable="false">Theta</string>
+    <string name="binaural_alpha" translatable="false">Alpha</string>
+    <string name="binaural_beta" translatable="false">Beta</string>
+    <string name="binaural_gamma" translatable="false">Gamma</string>
+    <string name="binaural_delta_feel">Deep sleep</string>
+    <string name="binaural_theta_feel">Meditation</string>
+    <string name="binaural_alpha_feel">Relaxation</string>
+    <string name="binaural_beta_feel">Focus</string>
+    <string name="binaural_gamma_feel">Alertness</string>
+
     <!-- Mix presets -->
     <string name="mix_cabin">Cozy cabin</string>
     <string name="mix_beach">Tropical beach</string>

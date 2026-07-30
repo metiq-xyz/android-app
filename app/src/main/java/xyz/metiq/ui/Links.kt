@@ -21,8 +21,6 @@ fun openUrlWithFallback(context: Context, primary: String, fallback: String) {
     if (!ok) runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, fallback.toUri())) }
 }
 
-// Open the store rating page for the current flavor (F-Droid or Play Store),
-// falling back to the https page when the store app isn't installed.
 fun openStoreRating(context: Context) {
     openUrlWithFallback(
         context,
