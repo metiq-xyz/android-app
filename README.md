@@ -18,21 +18,13 @@
 </p>
 
 <p align="center">
-    <a href="https://ko-fi.com/metiq">
-      <img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-Fi">
-    </a>
-    <a href="https://github.com/sponsors/metiq-xyz">
-      <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA" alt="GH sponsor">
-    </a>
+    <a href="https://ko-fi.com/metiq"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-Fi"></a>
+    <a href="https://github.com/sponsors/metiq-xyz"><img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA" alt="GH sponsor"></a>
 </p>
 
 <p align="center">
-    <a href="https://f-droid.org/packages/xyz.metiq">
-      <img src=".github/static/badges/giofd.png" alt="Get it on F-Droid" height="60">
-    </a>
-    <a href="https://play.google.com/store/apps/details?id=xyz.metiq">
-      <img src=".github/static/badges/giogp.png" alt="Get it on Google Play" height="60">
-    </a>
+    <a href="https://f-droid.org/packages/xyz.metiq"><img src=".github/static/badges/giofd.png" alt="Get it on F-Droid" height="60"></a>
+    <a href="https://play.google.com/store/apps/details?id=xyz.metiq"><img src=".github/static/badges/giogp.png" alt="Get it on Google Play" height="60"></a>
 </p>
 
 # Metiq
