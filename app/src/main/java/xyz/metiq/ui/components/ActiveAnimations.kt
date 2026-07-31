@@ -25,7 +25,7 @@ import kotlin.math.floor
 import kotlin.math.sin
 import kotlin.random.Random
 
-private const val WAVE_PERIOD_SEC = 0.5f
+private const val WAVE_PERIOD_SEC = 1.5f
 private const val WAVE_RING_COUNT = 3
 private const val WAVE_STAGGER_SEC = WAVE_PERIOD_SEC / WAVE_RING_COUNT
 private const val WAVE_REACH = 0.4f
