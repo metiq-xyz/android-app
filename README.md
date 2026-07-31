@@ -38,24 +38,25 @@
 # Metiq
 
 A no-nonsense noise app for focus, sleep, study, and relaxation. Colored noise
-(white, pink, brown, grey) and natural ambient sounds you can layer into your
-own mixes, with a sleep timer. Designed around two non-negotiables: simplicity
-and battery efficiency.
+(white, pink, brown, grey), natural ambient sounds you can layer into your own
+mixes, and binaural beats — with a sleep timer. Designed around two
+non-negotiables: simplicity and battery efficiency.
 
 ## What it does
 
 - **Colored noise playback** — pre-rendered, seamless loops at -22 LUFS so every
   color sounds equally loud.
-- **Ambient sounds and mixes** — sea waves, thunderstorm, fire, birds, café, and
-  wind. Layer them at independent levels, start from a preset, or save your own
-  mixes.
+- **Ambient sounds and mixes** — sea waves, rain, fire, birds, café, and wind.
+  Layer them at independent levels, start from a preset, or save your own mixes.
+- **Binaural beats** — layer brainwave tones (Delta through Gamma) over any
+  noise or ambient sound to nudge toward sleep, relaxation, or focus. Headphones
+  needed.
 - **Sleep timer** — set hours, minutes, and seconds, or pick from your saved
   presets. Audio fades out gracefully when the timer expires.
 - **Stays out of your way** — no accounts, no cloud, no tracking, no ads. The
   app runs without an internet connection.
-- **Light on your battery** — audio is handled by the hardware mixer via
-  Android's `AudioTrack` in static mode, so the app process stays idle while you
-  sleep.
+- **Light on your battery** — a lean, native audio pipeline built on Android's
+  `AudioTrack`, with a small memory and CPU footprint.
 - **Familiar media controls** — lock screen, notification, and Bluetooth headset
   transport buttons all work the way you'd expect.
 - **Five languages out of the box** — English, Italian, Spanish, French,
@@ -72,7 +73,7 @@ and battery efficiency.
   [releases](https://github.com/metiq-xyz/android-app/releases) on this
   repository
 
-Metiq targets Android 10 (API 29) and newer, which covers the vast majority of
+Metiq targets Android 9 (API 28) and newer, which covers the vast majority of
 devices in active use today.
 
 ## Contributing
@@ -84,8 +85,8 @@ the architecture overview, and the development workflow.
 ## Credits
 
 Metiq is built on the work of others — Jetpack Compose, Material 3, AndroidX
-Media3, the Kotlin standard library, and the Satoshi typeface by Indian Type
-Foundry. Full attribution is available inside the app under \_Settings → About →
+Media3, the Kotlin standard library, and the Inter typeface by Rasmus Andersson.
+Full attribution is available inside the app under \_Settings → About →
 Open-source licenses.
 
 ## License
