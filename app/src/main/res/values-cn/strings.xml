@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="help_cd">帮助</string>
+    <string name="help_title">使用方法</string>
+    <string name="home_helper">点击噪音颜色播放或暂停。\n想要自动停止的话，设置计时。\n太明亮/刺耳？在设置里用暖度柔化。\n想要开始和停止播放时更缓和？在设置里设置渐变时长。</string>
+    <string name="ambient_helper">点击预设播放，再次点击停止。\n点击圆形播放一个声音，滑动滑条设置音量。\n用“保存搭配”保存你的搭配，用垃圾箱图标删除搭配。\n想要开始和停止播放时更缓和？在设置里设置渐变时长。</string>
+
+    <string name="tab_noise">噪音</string>
+    <string name="tab_ambient">环境音</string>
+    <string name="tab_settings">设置</string>
+
+    <string name="ambient_off">关</string>
+    <string name="ambient_now_playing">环境音搭配</string>
+    <string name="ambient_seawaves">海浪</string>
+    <string name="ambient_rain">雨</string>
+    <string name="ambient_fire">火焰</string>
+    <string name="ambient_birds">鸟鸣</string>
+    <string name="ambient_cafe">咖啡厅</string>
+    <string name="ambient_wind">风</string>
+
+    <string name="binaural_now_playing">双耳差频</string>
+    <string name="binaural_noti_label">%1$s双耳差频</string>
+    <string name="binaural_headphone_notice">请使用耳机：要产生双耳差频效果，每只耳朵需要听到不同的音调。</string>
+    <string name="binaural_volume">音量</string>
+    <string name="binaural_delta_feel">深睡</string>
+    <string name="binaural_theta_feel">冥想</string>
+    <string name="binaural_alpha_feel">放松</string>
+    <string name="binaural_beta_feel">专注</string>
+    <string name="binaural_gamma_feel">警觉</string>
+
+    <string name="color_pink">粉</string>
+    <string name="color_brown">棕</string>
+    <string name="color_white">白</string>
+    <string name="color_grey">灰</string>
+
+    <string name="noise_title_pink">粉噪音</string>
+    <string name="noise_title_brown">棕噪音</string>
+    <string name="noise_title_white">白噪音</string>
+    <string name="noise_title_grey">灰噪音</string>
+
+    <string name="timer_label">计时</string>
+    <string name="timer_start">开始计时</string>
+    <string name="timer_stop">停止计时</string>
+    <string name="timer_hours">小时</string>
+    <string name="timer_minutes">分钟</string>
+    <string name="timer_seconds">秒</string>
+
+    <string name="settings_title">设置</string>
+    <string name="settings_back_cd">返回</string>
+
+    <string name="settings_section_sound">声音</string>
+    <string name="settings_warmth_label">暖度</string>
+    <string name="settings_warmth_description">减弱高频率声段以柔化刺耳的噪音颜色。不影响环境音。</string>
+    <string name="settings_warmth_bright">明亮</string>
+    <string name="settings_warmth_warm">柔和</string>
+    <string name="settings_fade_label">渐变</string>
+    <string name="settings_fade_description">声音开始、停止播放或切换时的渐变时长。</string>
+    <string name="settings_fade_unit" translatable="false">s</string>
+    <string name="settings_timer_fade_label">计时器渐变</string>
+    <string name="settings_timer_fade_description">专用于计时结束时的渐出。</string>
+    <string name="settings_request_focus_label">请求音频焦点</string>
+    <string name="settings_request_focus_description">播放时暂停其他正在播放的音频，如音乐或播客。</string>
+
+    <string name="settings_section_appearance">外观</string>
+    <string name="settings_theme_label">主题</string>
+    <string name="settings_theme_system">跟随系统</string>
+    <string name="settings_theme_light">亮</string>
+    <string name="settings_theme_dark">暗</string>
+    <string name="settings_particles_label">背景粒子</string>
+    <string name="settings_particles_description">显示与播放中声音的颜色同色的颗粒动画</string>
+
+    <string name="settings_section_language">语言</string>
+    <string name="settings_language_label">语言</string>
+    <string name="settings_language_system">跟随系统</string>
+
+    <string name="settings_section_timer_presets">计时器预设（分钟）</string>
+    <string name="settings_timer_unit_min">分</string>
+    <string name="settings_timer_save">保存预设</string>
+
+    <string name="settings_section_support">支持</string>
+    <string name="settings_rate_label">在%1$s上给Metiq打分</string>
+    <string name="settings_donate_description">Metiq永远免费。小小打赏，让免费一直持续。</string>
+    <string name="settings_donate_kofi_label">在Ko-fi上给我们买杯咖啡</string>
+    <string name="settings_donate_github_label">在GitHub上赞助我们</string>
+
+    <string name="rate_prompt_title">喜欢Metiq？</string>
+    <string name="rate_prompt_message">在%1$s上评分，或捐赠帮助app保持免费。</string>
+    <string name="rate_prompt_cta">打分</string>
+    <string name="rate_prompt_feedback_cta">反馈</string>
+    <string name="rate_prompt_donate_cta">捐赠</string>
+    <string name="rate_prompt_dismiss_cd">关闭</string>
+
+    <string name="settings_section_about">关于</string>
+    <string name="settings_about_version">版本</string>
+    <string name="settings_about_open_licenses">开源许可</string>
+    <string name="licenses_title">开源许可</string>
+    <string name="licenses_intro">Metiq建立在其他人的工作的基础之上。它们的许可如下。</string>
+
+    <string name="mix_cabin">舒适的小屋</string>
+    <string name="mix_beach">热带海滩</string>
+    <string name="mix_bar">拥挤的酒吧</string>
+
+    <!-- Custom mixes -->
+    <string name="mix_save_chip">保存搭配</string>
+    <string name="mix_save_title">保存当前搭配</string>
+    <string name="mix_save_name_hint">名称</string>
+    <string name="mix_save_confirm">保存</string>
+    <string name="mix_delete_title">删除此搭配？</string>
+    <string name="mix_delete_message">“%1$s” 将被移除。</string>
+    <string name="mix_delete_confirm">删除</string>
+    <string name="dialog_cancel">取消</string>
+</resources>
