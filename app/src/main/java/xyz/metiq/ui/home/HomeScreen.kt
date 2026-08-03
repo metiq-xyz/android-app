@@ -10,6 +10,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -121,6 +122,9 @@ import xyz.metiq.ui.theme.LocalMetiqColors
 import xyz.metiq.ui.theme.MetiqTheme
 
 private val FAB_INSET: Dp = 6.dp
+private val FAB_SHADOW_PAD: Dp = 12.dp
+
+private data class AmbientParticleField(val color: Color, val count: Int, val seed: Long)
 
 private enum class HomeTab { NOISE, AMBIENT, SETTINGS }
 
@@ -464,8 +468,8 @@ fun HomeScreen(
         floatingActionButton = {
             AnimatedVisibility(
                 visible = !showLicenses && tab != HomeTab.SETTINGS,
-                enter = scaleIn() + fadeIn(),
-                exit = scaleOut() + fadeOut(),
+                enter = scaleIn(),
+                exit = scaleOut(),
             ) {
                 Column(
                     modifier = Modifier.padding(end = FAB_INSET, bottom = FAB_INSET),
@@ -473,10 +477,11 @@ fun HomeScreen(
                 ) {
                     AnimatedVisibility(
                         visible = timerEnabled,
+                        modifier = Modifier.offset(x = FAB_SHADOW_PAD),
                         enter = scaleIn() + fadeIn(),
                         exit = scaleOut() + fadeOut(),
                     ) {
-                        Box(modifier = Modifier.padding(bottom = 12.dp)) {
+                        Box(modifier = Modifier.padding(FAB_SHADOW_PAD)) {
                             TimerFab(
                                 state = timer,
                                 onClick = { showTimerSheet = true },
@@ -531,9 +536,17 @@ fun HomeScreen(
                     HomeTab.NOISE -> TabCard(
                         onHelp = { showHelp = true },
                         particles = {
-                            if (particlesOn) {
+                            val particleAlpha by animateFloatAsState(
+                                targetValue = if (particlesOn) 1f else 0f,
+                                animationSpec = tween(durationMillis = PARTICLE_FADE_MS),
+                                label = "noiseParticleFade",
+                            )
+                            var particleFill by remember { mutableStateOf(Color.Unspecified) }
+                            if (activeColor != null) particleFill = paletteFor(activeColor.id).fill
+                            if (particleAlpha > 0f && particleFill != Color.Unspecified) {
                                 ParticleField(
-                                    color = paletteFor(activeColor.id).fill,
+                                    color = particleFill,
+                                    intensity = particleAlpha,
                                     modifier = Modifier.fillMaxSize(),
                                 )
                             }
@@ -558,14 +571,30 @@ fun HomeScreen(
                     HomeTab.AMBIENT -> TabCard(
                         onHelp = { showHelp = true },
                         particles = {
+                            val particleAlpha by animateFloatAsState(
+                                targetValue = if (ambientParticlesOn) 1f else 0f,
+                                animationSpec = tween(durationMillis = PARTICLE_FADE_MS),
+                                label = "ambientParticleFade",
+                            )
+                            var particleFields by remember { mutableStateOf(emptyList<AmbientParticleField>()) }
                             if (ambientParticlesOn) {
                                 val activeAmbient = AMBIENT_SOUNDS.filter { ambientLevels.containsKey(it.id) }
                                 val perField = (AMBIENT_PARTICLE_TOTAL / activeAmbient.size).coerceAtLeast(1)
-                                activeAmbient.forEach { sound ->
-                                    ParticleField(
+                                particleFields = activeAmbient.map { sound ->
+                                    AmbientParticleField(
                                         color = lerp(ambientAccentFor(sound.id), tokens.accentHighlight, 0.40f),
                                         count = perField,
                                         seed = sound.id.hashCode().toLong(),
+                                    )
+                                }
+                            }
+                            if (particleAlpha > 0f) {
+                                particleFields.forEach { field ->
+                                    ParticleField(
+                                        color = field.color,
+                                        count = field.count,
+                                        seed = field.seed,
+                                        intensity = particleAlpha,
                                         modifier = Modifier.fillMaxSize(),
                                     )
                                 }
@@ -696,6 +725,7 @@ fun HomeScreen(
             BinauralSheet(
                 activeBand = binauralBandId,
                 wavesOn = binauralWavesOn,
+                particlesOn = binauralWavesOn && settings.particlesEnabled,
                 volume = binauralVolume,
                 onTap = tapBinaural,
                 onVolume = { binauralVolume = it },

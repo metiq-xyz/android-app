@@ -47,6 +47,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.CornerRadius
@@ -395,7 +396,7 @@ private fun AmbientOrb(
         ) {
             WaveRings(
                 color = orbFill,
-                diameter = orbSize,
+                baseWidth = orbSize,
                 active = active && wavesOn,
                 modifier = Modifier
                     .wrapContentSize(align = Alignment.Center, unbounded = true)

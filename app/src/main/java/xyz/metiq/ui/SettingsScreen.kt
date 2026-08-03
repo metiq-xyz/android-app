@@ -699,13 +699,13 @@ private fun TimerPresetsEditor(
         Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(100.dp))
-                .background(tokens.subtleFill)
+                .background(tokens.textPrimary)
                 .clickable { commit() }
                 .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
             Text(
                 text = stringResource(R.string.settings_timer_save),
-                color = tokens.textPrimary,
+                color = tokens.foreground,
                 style = TextStyle(
                     fontFamily = Inter,
                     fontSize = 15.sp,

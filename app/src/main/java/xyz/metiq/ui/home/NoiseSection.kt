@@ -94,7 +94,7 @@ private fun ColorButton(
     ) {
         WaveRings(
             color = palette.wave,
-            diameter = BUTTON_HEIGHT,
+            baseWidth = BUTTON_HEIGHT,
             active = waveOn,
             modifier = Modifier
                 .wrapContentSize(align = Alignment.Center, unbounded = true)

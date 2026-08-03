@@ -5,12 +5,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -31,32 +32,26 @@ import xyz.metiq.ui.theme.LocalMetiqColors
 @Composable
 internal fun TimerFab(state: SleepTimerState, onClick: () -> Unit) {
     val tokens = LocalMetiqColors.current
-    if (state.running) {
-        ExtendedFloatingActionButton(
-            onClick = onClick,
-            containerColor = tokens.cellBackground,
-            contentColor = tokens.textPrimary,
-        ) {
-            Text(
-                text = formatTimerClock(state.remainingSeconds),
-                style = TextStyle(
-                    fontFamily = FontFamily.Monospace,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                ),
-            )
-        }
-    } else {
-        FloatingActionButton(
-            onClick = onClick,
-            containerColor = tokens.cellBackground,
-            contentColor = tokens.textPrimary,
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Timer,
-                contentDescription = stringResource(R.string.timer_label),
-            )
-        }
+    ExtendedFloatingActionButton(
+        onClick = onClick,
+        containerColor = tokens.cellBackground,
+        contentColor = tokens.textPrimary,
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.Timer,
+            contentDescription = null,
+            modifier = Modifier.size(20.dp),
+        )
+        Spacer(Modifier.width(8.dp))
+        Text(
+            text = if (state.running) formatTimerClock(state.remainingSeconds)
+            else stringResource(R.string.timer_label),
+            style = if (state.running) {
+                TextStyle(fontFamily = FontFamily.Monospace, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            } else {
+                TextStyle(fontFamily = Inter, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+            },
+        )
     }
 }
 

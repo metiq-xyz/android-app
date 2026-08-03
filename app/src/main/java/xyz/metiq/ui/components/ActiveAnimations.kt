@@ -25,7 +25,7 @@ import kotlin.math.floor
 import kotlin.math.sin
 import kotlin.random.Random
 
-private const val WAVE_PERIOD_SEC = 1.5f
+private const val WAVE_PERIOD_SEC = 1.2f
 private const val WAVE_RING_COUNT = 3
 private const val WAVE_STAGGER_SEC = WAVE_PERIOD_SEC / WAVE_RING_COUNT
 private const val WAVE_REACH = 0.4f
@@ -33,9 +33,10 @@ private const val WAVE_REACH = 0.4f
 @Composable
 fun WaveRings(
     color: Color,
-    diameter: Dp,
     active: Boolean,
+    baseWidth: Dp,
     modifier: Modifier = Modifier,
+    baseHeight: Dp = baseWidth,
     cornerRadius: Dp? = null,
 ) {
     val maxAlpha = LocalMetiqColors.current.waveMaxAlpha
@@ -73,7 +74,8 @@ fun WaveRings(
         val start = emitStart ?: return@Canvas
         val emitUntil = emitEnd ?: clock
         val center = Offset(size.width / 2f, size.height / 2f)
-        val baseRadius = diameter.toPx() / 2f
+        val bw = baseWidth.toPx()
+        val bh = baseHeight.toPx()
         val corner = cornerRadius?.toPx()
         val firstK = maxOf(0, ceil((clock - WAVE_PERIOD_SEC - start) / WAVE_STAGGER_SEC).toInt())
         val lastK = floor((emitUntil - start) / WAVE_STAGGER_SEC).toInt()
@@ -84,13 +86,14 @@ fun WaveRings(
             val scale = 1f + p * WAVE_REACH
             val ringColor = color.copy(alpha = (1f - p) * maxAlpha)
             if (corner == null) {
-                drawCircle(color = ringColor, radius = baseRadius * scale, center = center)
+                drawCircle(color = ringColor, radius = (bw / 2f) * scale, center = center)
             } else {
-                val half = baseRadius * scale
+                val w = bw * scale
+                val h = bh * scale
                 drawRoundRect(
                     color = ringColor,
-                    topLeft = Offset(center.x - half, center.y - half),
-                    size = Size(half * 2f, half * 2f),
+                    topLeft = Offset(center.x - w / 2f, center.y - h / 2f),
+                    size = Size(w, h),
                     cornerRadius = CornerRadius(corner * scale, corner * scale),
                 )
             }

@@ -19,6 +19,7 @@
     <string name="ambient_wind">Viento</string>
 
     <string name="binaural_now_playing">Sonidos binaurales</string>
+    <string name="binaural_fab_label">Binaurales</string>
     <string name="binaural_noti_label">%1$s binaural</string>
     <string name="binaural_headphone_notice">Usa auriculares: cada oído necesita su propio tono para que el efecto funcione.</string>
     <string name="binaural_volume">Volumen</string>
