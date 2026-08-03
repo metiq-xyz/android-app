@@ -118,6 +118,7 @@
     <string name="settings_language_spanish" translatable="false">Español</string>
     <string name="settings_language_french" translatable="false">Français</string>
     <string name="settings_language_portuguese" translatable="false">Português</string>
+    <string name="settings_language_polish" translatable="false">Polski</string>
 
     <!-- Settings: timer presets section -->
     <string name="settings_section_timer_presets">Timer presets (minutes)</string>

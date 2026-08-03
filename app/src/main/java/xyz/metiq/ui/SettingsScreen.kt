@@ -102,6 +102,7 @@ private val LANGUAGE_OPTIONS = listOf(
     LanguageOption("es", R.string.settings_language_spanish),
     LanguageOption("fr", R.string.settings_language_french),
     LanguageOption("pt", R.string.settings_language_portuguese),
+    LanguageOption("pl", R.string.settings_language_polish),
 )
 
 private const val GH_SPONSORS_URL = "https://github.com/sponsors/metiq-xyz"
