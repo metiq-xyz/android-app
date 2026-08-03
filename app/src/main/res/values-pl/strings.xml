@@ -2,37 +2,106 @@
 <resources>
     <string name="help_cd">Pomoc</string>
     <string name="help_title">Jak to działa</string>
-    <string name="home_helper">Dotknij koloru szumu, aby go odtworzyć lub zatrzymać.\nUstaw timer, jeśli chcesz, aby dźwięk wyłączył się automatycznie.\nZbyt jasny lub ostry? Złagodź go ciepłem w ustawieniach.\nWolisz łagodniejsze starty i zakończenia? Ustaw długość przejścia w ustawieniach.</string>
-    <string name="ambient_helper">Dotknij presetu, aby go odtworzyć; dotknij ponownie, aby zatrzymać.\nDotknij kuli, aby uruchomić dźwięk, a potem przeciągnij suwak, aby ustawić poziom.\nZapisz własny miks przyciskiem „Zapisz miks”, a ikoną kosza go usuń.\nWolisz łagodniejsze starty i zakończenia? Ustaw długość przejścia w ustawieniach.</string>
+    <string name="home_helper">Dotknij koloru szumu, aby go odtworzyć lub zatrzymać.\nUstaw minutnik, jeśli chcesz, aby wyłączał się automatycznie.\nZbyt jasny lub ostry? Złagodź go ciepłem w ustawieniach.\nWolisz łagodniejsze początki i zakończenia? Ustaw długość przejścia w ustawieniach.</string>
+    <string name="ambient_helper">Dotknij zestawu, aby go odtworzyć, dotknij ponownie, aby zatrzymać.\nDotknij kuli, aby uruchomić dźwięk, a następnie przeciągnij suwak, aby ustawić poziom.\nZapisz własny miks za pomocą „Zapisz miks” i użyj ikony kosza, aby go usunąć.\nWolisz łagodniejsze rozpoczęcie i zakończenie? Ustaw długość wyciszenia w ustawieniach.</string>
 
     <string name="tab_noise">Szum</string>
     <string name="tab_ambient">Otoczenie</string>
     <string name="tab_settings">Ustawienia</string>
 
-    <string name="ambient_off">Wył.</string>
+    <string name="ambient_off">Wyłączony</string>
     <string name="ambient_now_playing">Miks otoczenia</string>
     <string name="ambient_seawaves">Fale morskie</string>
     <string name="ambient_rain">Deszcz</string>
     <string name="ambient_fire">Trzask ognia</string>
-    <string name="ambient_birds">Śpiew ptaków</string>
-    <string name="ambient_cafe">Gwar kawiarni</string>
+    <string name="ambient_birds">Ćwierkanie ptaków</string>
+    <string name="ambient_cafe">Kawiarnia</string>
     <string name="ambient_wind">Wiatr</string>
 
-    <string name="binaural_now_playing">Dudnienia binauralne</string>
+    <string name="binaural_now_playing">Bity binauralne</string>
     <string name="binaural_fab_label">Binauralne</string>
     <string name="binaural_noti_label">%1$s binauralne</string>
-    <string name="binaural_headphone_notice">Użyj słuchawek: każde ucho musi słyszeć osobny ton, aby efekt zadziałał.</string>
+    <string name="binaural_headphone_notice">Użyj słuchawek: aby efekt zadziałał, każde ucho musi odbierać osobny ton.</string>
     <string name="binaural_volume">Głośność</string>
     <string name="binaural_delta_feel">Głęboki sen</string>
     <string name="binaural_theta_feel">Medytacja</string>
-    <string name="binaural_alpha_feel">Relaks</string>
+    <string name="binaural_alpha_feel">Relaksacja</string>
     <string name="binaural_beta_feel">Skupienie</string>
     <string name="binaural_gamma_feel">Czujność</string>
 
-    <string name="mix_cabin">Przytulna chata</string>
+    <string name="color_pink">Różowy</string>
+    <string name="color_brown">Brązowy</string>
+    <string name="color_white">Biały</string>
+    <string name="color_grey">Szary</string>
+
+    <string name="noise_title_pink">Różowy szum</string>
+    <string name="noise_title_brown">Brązowy szum</string>
+    <string name="noise_title_white">Biały szum</string>
+    <string name="noise_title_grey">Szary szum</string>
+    
+    <string name="timer_label">Minutnik</string>
+    <string name="timer_start">Uruchom minutnik</string>
+    <string name="timer_stop">Zatrzymaj minutnik</string>
+    <string name="timer_hours">Godziny</string>
+    <string name="timer_minutes">Minuty</string>
+    <string name="timer_seconds">Sekundy</string>
+    
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_back_cd">Wróć</string>
+
+    <string name="settings_section_sound">Dźwięk</string>
+    <string name="settings_warmth_label">Ciepło</string>
+    <string name="settings_warmth_description">Wycisza wysokie tony, aby złagodzić ostre kolory szumu. Dźwięki otoczenia pozostają niezmienione.</string>
+    <string name="settings_warmth_bright">Jasne</string>
+    <string name="settings_warmth_warm">Ciepłe</string>
+    <string name="settings_fade_label">Wyciszenie</string>
+    <string name="settings_fade_description">Określa, jak długo dźwięki stopniowo narastają i zanikają podczas uruchamiania, zatrzymywania lub przełączania.</string>
+    <string name="settings_fade_unit" translatable="false">s</string>
+    <string name="settings_timer_fade_label">Wyciszenie minutnika</string>
+    <string name="settings_timer_fade_description">Osobny czas wyciszenia używany, gdy minutnik kończy odtwarzanie.</string>
+    <string name="settings_request_focus_label">Wymagaj priorytetu dźwięku</string>
+    <string name="settings_request_focus_description">Wstrzymaj inne dźwięki, takie jak muzyka lub podcasty, podczas odtwarzania dźwięków.</string>
+
+    <string name="settings_section_appearance">Wygląd</string>
+    <string name="settings_theme_label">Motyw</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_light">Jasny</string>
+    <string name="settings_theme_dark">Ciemny</string>
+    <string name="settings_particles_label">Cząsteczki tła</string>
+    <string name="settings_particles_description">Animowane kropki za aktywnym kolorem</string>
+
+    <string name="settings_section_language">Język</string>
+    <string name="settings_language_label">Język</string>
+    <string name="settings_language_system">Domyślny systemu</string>
+
+    <string name="settings_section_timer_presets">Presety minutnika (minuty)</string>
+    <string name="settings_timer_unit_min">min</string>
+    <string name="settings_timer_save">Zapisz presety</string>
+
+    <string name="settings_section_support">Wsparcie</string>
+    <string name="settings_rate_label">Oceń Metiq w serwisie %1$s</string>
+    <string name="settings_donate_description">Metiq jest bezpłatny na zawsze. Wystarczy niewielka darowizna, by tak pozostało.</string>
+    <string name="settings_donate_kofi_label">Postaw nam kawę na Ko-fi</string>
+    <string name="settings_donate_github_label">Wesprzyj nas na GitHub</string>
+
+    <string name="rate_prompt_title">Podoba Ci się Metiq?</string>
+    <string name="rate_prompt_message">Oceń w serwisie %1$s lub przekaż darowiznę, aby aplikacja pozostała bezpłatna.</string>
+    <string name="rate_prompt_cta">Oceń</string>
+    <string name="rate_prompt_feedback_cta">Feedback</string>
+    <string name="rate_prompt_donate_cta">Darowizna</string>
+    <string name="rate_prompt_dismiss_cd">Odrzuć</string>
+
+    <string name="settings_section_about">O aplikacji</string>
+    <string name="settings_about_version">Wersja</string>
+    <string name="settings_about_open_licenses">Licencje Open-source</string>
+    <string name="licenses_title">Licencje Open-source</string>
+    <string name="licenses_intro">Metiq powstał w oparciu o pracę innych. Poniżej przedstawiono ich licencje.</string>
+
+    <string name="mix_cabin">Przytulna chatka</string>
     <string name="mix_beach">Tropikalna plaża</string>
     <string name="mix_bar">Zatłoczony bar</string>
 
+    <!-- Custom mixes -->
     <string name="mix_save_chip">Zapisz miks</string>
     <string name="mix_save_title">Zapisz bieżący miks</string>
     <string name="mix_save_name_hint">Nazwa</string>
@@ -41,72 +110,4 @@
     <string name="mix_delete_message">„%1$s” zostanie usunięty.</string>
     <string name="mix_delete_confirm">Usuń</string>
     <string name="dialog_cancel">Anuluj</string>
-
-    <string name="color_pink">Różowy</string>
-    <string name="color_brown">Brązowy</string>
-    <string name="color_white">Biały</string>
-    <string name="color_grey">Szary</string>
-
-    <string name="noise_title_pink">Szum różowy</string>
-    <string name="noise_title_brown">Szum brązowy</string>
-    <string name="noise_title_white">Szum biały</string>
-    <string name="noise_title_grey">Szum szary</string>
-
-    <string name="timer_label">Timer</string>
-    <string name="timer_start">Uruchom timer</string>
-    <string name="timer_stop">Zatrzymaj timer</string>
-    <string name="timer_hours">Godziny</string>
-    <string name="timer_minutes">Minuty</string>
-    <string name="timer_seconds">Sekundy</string>
-
-    <string name="settings_title">Ustawienia</string>
-    <string name="settings_back_cd">Wstecz</string>
-
-    <string name="settings_section_sound">Dźwięk</string>
-    <string name="settings_warmth_label">Ciepło</string>
-    <string name="settings_warmth_description">Ścisza wysokie tony, łagodząc ostre kolory szumu. Nie wpływa na dźwięki otoczenia.</string>
-    <string name="settings_warmth_bright">Jasny</string>
-    <string name="settings_warmth_warm">Ciepły</string>
-    <string name="settings_fade_label">Płynne przejście</string>
-    <string name="settings_fade_description">Jak długo dźwięki narastają i wygasają przy uruchamianiu, zatrzymywaniu lub przełączaniu.</string>
-    <string name="settings_timer_fade_label">Wyciszanie timera</string>
-    <string name="settings_timer_fade_description">Osobny czas wyciszania używany, gdy timer kończy odtwarzanie.</string>
-    <string name="settings_request_focus_label">Przejmuj fokus audio</string>
-    <string name="settings_request_focus_description">Wstrzymuje inne dźwięki, np. muzykę lub podcasty, podczas odtwarzania.</string>
-
-    <string name="settings_section_appearance">Wygląd</string>
-    <string name="settings_theme_label">Motyw</string>
-    <string name="settings_theme_system">Systemowy</string>
-    <string name="settings_theme_light">Jasny</string>
-    <string name="settings_theme_dark">Ciemny</string>
-    <string name="settings_particles_label">Cząsteczki w tle</string>
-    <string name="settings_particles_description">Animowane kropki za aktywnym kolorem</string>
-
-    <string name="settings_section_language">Język</string>
-    <string name="settings_language_label">Język</string>
-    <string name="settings_language_system">Domyślny systemu</string>
-
-    <string name="settings_section_timer_presets">Presety timera (minuty)</string>
-    <string name="settings_timer_unit_min">min</string>
-    <string name="settings_timer_save">Zapisz presety</string>
-
-    <string name="settings_section_support">Wsparcie</string>
-    <string name="settings_rate_label">Oceń Metiq w %1$s</string>
-    <string name="settings_donate_description">Metiq jest darmowy na zawsze. Drobny napiwek pomaga, by tak zostało.</string>
-    <string name="settings_donate_kofi_label">Postaw nam kawę na Ko-fi</string>
-    <string name="settings_donate_github_label">Wesprzyj nas na GitHubie</string>
-
-    <string name="rate_prompt_title">Podoba Ci się Metiq?</string>
-    <string name="rate_prompt_message">Oceń w %1$s lub wesprzyj, aby pozostał darmowy.</string>
-    <string name="rate_prompt_cta">Oceń</string>
-    <string name="rate_prompt_feedback_cta">Opinia</string>
-    <string name="rate_prompt_donate_cta">Wesprzyj</string>
-    <string name="rate_prompt_dismiss_cd">Zamknij</string>
-
-    <string name="settings_section_about">O aplikacji</string>
-    <string name="settings_about_version">Wersja</string>
-    <string name="settings_about_open_licenses">Licencje open source</string>
-
-    <string name="licenses_title">Licencje open source</string>
-    <string name="licenses_intro">Metiq powstał dzięki pracy innych. Poniżej ich licencje.</string>
 </resources>
