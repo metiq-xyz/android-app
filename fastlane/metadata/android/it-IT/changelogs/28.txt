@@ -1,0 +1,3 @@
+• I puntini animati ora appaiono e scompaiono in dissolvenza con la riproduzione, anche dietro il pannello dei binaurali
+• Animazioni dei pulsanti flottanti più fluide: niente più ombre tagliate o larghezza bloccata
+• Piccole rifiniture visive nelle impostazioni

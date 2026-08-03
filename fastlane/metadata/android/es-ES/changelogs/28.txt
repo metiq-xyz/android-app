@@ -1,0 +1,3 @@
+• Los puntos animados ahora aparecen y desaparecen con un fundido junto a la reproducción, también detrás del panel de binaurales
+• Animaciones de los botones flotantes más fluidas: se acabaron las sombras recortadas y el ancho atascado
+• Pequeños retoques visuales en los ajustes

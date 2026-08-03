@@ -1,0 +1,3 @@
+• Os pontos animados agora aparecem e somem em fade junto com a reprodução, inclusive atrás do painel de binaurais
+• Animações dos botões flutuantes mais suaves: chega de sombras cortadas ou largura travada
+• Pequenos retoques visuais nos ajustes

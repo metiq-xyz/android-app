@@ -1,0 +1,3 @@
+• Animated dots now fade in and out with playback, including behind the binaural sheet
+• Smoother floating button animations: no more clipped shadows or stuck width
+• Small visual polish across settings
