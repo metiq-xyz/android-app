@@ -2,7 +2,7 @@
 <resources>
     <string name="help_cd">帮助</string>
     <string name="help_title">使用方法</string>
-    <string name="home_helper">点击噪音颜色播放或暂停。\n想要自动停止的话，设置计时。\n太明亮/刺耳？在设置里用暖度柔化。\n想要开始和停止播放时更缓和？在设置里设置渐变时长。</string>
+    <string name="home_helper">点击噪音颜色播放或停止。\n想要自动停止的话，设置计时。\n太明亮/刺耳？在设置里用暖度柔化。\n想要开始和停止播放时更缓和？在设置里设置渐变时长。</string>
     <string name="ambient_helper">点击预设播放，再次点击停止。\n点击圆形播放一个声音，滑动滑条设置音量。\n用“保存搭配”保存你的搭配，用垃圾箱图标删除搭配。\n想要开始和停止播放时更缓和？在设置里设置渐变时长。</string>
 
     <string name="tab_noise">噪音</string>
