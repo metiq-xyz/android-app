@@ -196,12 +196,6 @@ internal fun BinauralSheet(
                 .padding(bottom = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text = stringResource(R.string.binaural_now_playing),
-                color = tokens.textPrimary,
-                style = TextStyle(fontFamily = Inter, fontSize = 17.sp, fontWeight = FontWeight.SemiBold),
-            )
-            Spacer(Modifier.height(16.dp))
             BinauralHeadphoneNotice()
             Spacer(Modifier.height(20.dp))
             BinauralGrid(activeBand = activeBand, wavesOn = wavesOn, onTap = onTap)

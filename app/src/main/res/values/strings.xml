@@ -108,6 +108,8 @@
     <string name="settings_theme_dark">Dark</string>
     <string name="settings_particles_label">Background particles</string>
     <string name="settings_particles_description">Animated dots behind the active color</string>
+    <string name="settings_waves_label">Ripple animation</string>
+    <string name="settings_waves_description">Expanding rings around playing sounds</string>
 
     <!-- Settings: language section -->
     <string name="settings_section_language">Language</string>

@@ -77,12 +77,6 @@ internal fun TimerSheet(
                 .padding(bottom = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text = stringResource(R.string.timer_label),
-                color = tokens.textPrimary,
-                style = TextStyle(fontFamily = Inter, fontSize = 17.sp, fontWeight = FontWeight.SemiBold),
-            )
-            Spacer(Modifier.height(16.dp))
             SleepTimer(
                 state = state,
                 presetsSeconds = presetsSeconds,

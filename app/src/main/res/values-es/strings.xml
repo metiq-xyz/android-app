@@ -69,6 +69,8 @@
     <string name="settings_theme_dark">Oscuro</string>
     <string name="settings_particles_label">Partículas de fondo</string>
     <string name="settings_particles_description">Puntos animados detrás del color activo</string>
+    <string name="settings_waves_label">Animación de ondas</string>
+    <string name="settings_waves_description">Anillos que se expanden alrededor de los sonidos en reproducción</string>
 
     <string name="settings_section_language">Idioma</string>
     <string name="settings_language_label">Idioma</string>

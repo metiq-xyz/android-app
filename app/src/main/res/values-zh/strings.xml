@@ -70,6 +70,8 @@
     <string name="settings_theme_dark">暗</string>
     <string name="settings_particles_label">背景粒子</string>
     <string name="settings_particles_description">显示与播放中声音的颜色同色的颗粒动画</string>
+    <string name="settings_waves_label">波纹动画</string>
+    <string name="settings_waves_description">播放声音周围扩散的圆环</string>
 
     <string name="settings_section_language">语言</string>
     <string name="settings_language_label">语言</string>

@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
@@ -15,6 +16,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import xyz.metiq.ui.theme.LocalMetiqColors
@@ -29,6 +31,10 @@ private const val WAVE_PERIOD_SEC = 1.2f
 private const val WAVE_RING_COUNT = 3
 private const val WAVE_STAGGER_SEC = WAVE_PERIOD_SEC / WAVE_RING_COUNT
 private const val WAVE_REACH = 0.4f
+private const val STATIC_RING_SCALE = 1.16f
+private val STATIC_RING_STROKE: Dp = 2.5.dp
+
+val LocalWaveAnimationEnabled = staticCompositionLocalOf { true }
 
 @Composable
 fun WaveRings(
@@ -40,6 +46,35 @@ fun WaveRings(
     cornerRadius: Dp? = null,
 ) {
     val maxAlpha = LocalMetiqColors.current.waveMaxAlpha
+    if (!LocalWaveAnimationEnabled.current) {
+        if (active) {
+            Canvas(modifier = modifier) {
+                val center = Offset(size.width / 2f, size.height / 2f)
+                val stroke = Stroke(width = STATIC_RING_STROKE.toPx())
+                val ringColor = color.copy(alpha = maxAlpha)
+                val corner = cornerRadius?.toPx()
+                if (corner == null) {
+                    drawCircle(
+                        color = ringColor,
+                        radius = (baseWidth.toPx() / 2f) * STATIC_RING_SCALE,
+                        center = center,
+                        style = stroke,
+                    )
+                } else {
+                    val w = baseWidth.toPx() * STATIC_RING_SCALE
+                    val h = baseHeight.toPx() * STATIC_RING_SCALE
+                    drawRoundRect(
+                        color = ringColor,
+                        topLeft = Offset(center.x - w / 2f, center.y - h / 2f),
+                        size = Size(w, h),
+                        cornerRadius = CornerRadius(corner * STATIC_RING_SCALE, corner * STATIC_RING_SCALE),
+                        style = stroke,
+                    )
+                }
+            }
+        }
+        return
+    }
     var clock by remember { mutableFloatStateOf(0f) }
     var emitStart by remember { mutableStateOf<Float?>(null) }
     var emitEnd by remember { mutableStateOf<Float?>(null) }

@@ -69,6 +69,8 @@
     <string name="settings_theme_dark">Sombre</string>
     <string name="settings_particles_label">Particules d\'arrière-plan</string>
     <string name="settings_particles_description">Points animés derrière la couleur active</string>
+    <string name="settings_waves_label">Animation d\'ondes</string>
+    <string name="settings_waves_description">Anneaux qui s\'étendent autour des sons en lecture</string>
 
     <string name="settings_section_language">Langue</string>
     <string name="settings_language_label">Langue</string>

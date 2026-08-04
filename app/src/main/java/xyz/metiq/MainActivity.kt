@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 HomeScreen(
                     settings = settings,
                     onParticlesEnabled = { scope.launch { repo.setParticlesEnabled(it) } },
+                    onWavesEnabled = { scope.launch { repo.setWavesEnabled(it) } },
                     onWarmth = { scope.launch { repo.setWarmth(it) } },
                     onFadeSeconds = { scope.launch { repo.setFadeSeconds(it) } },
                     onTimerFadeSeconds = { scope.launch { repo.setTimerFadeSeconds(it) } },

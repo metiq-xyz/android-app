@@ -69,6 +69,8 @@
     <string name="settings_theme_dark">Ciemny</string>
     <string name="settings_particles_label">Cząsteczki tła</string>
     <string name="settings_particles_description">Animowane kropki za aktywnym kolorem</string>
+    <string name="settings_waves_label">Animacja fal</string>
+    <string name="settings_waves_description">Rozchodzące się pierścienie wokół odtwarzanych dźwięków</string>
 
     <string name="settings_section_language">Język</string>
     <string name="settings_language_label">Język</string>

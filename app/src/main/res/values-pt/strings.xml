@@ -69,6 +69,8 @@
     <string name="settings_theme_dark">Escuro</string>
     <string name="settings_particles_label">Partículas de fundo</string>
     <string name="settings_particles_description">Pontos animados atrás da cor ativa</string>
+    <string name="settings_waves_label">Animação de ondas</string>
+    <string name="settings_waves_description">Anéis que se expandem ao redor dos sons em reprodução</string>
 
     <string name="settings_section_language">Idioma</string>
     <string name="settings_language_label">Idioma</string>

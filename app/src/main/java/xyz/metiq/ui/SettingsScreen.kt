@@ -119,6 +119,7 @@ private fun themeLabelRes(preference: ThemePreference): Int = when (preference) 
 fun SettingsScreen(
     settings: Settings,
     onParticlesEnabled: (Boolean) -> Unit,
+    onWavesEnabled: (Boolean) -> Unit = {},
     onWarmth: (Float) -> Unit,
     onWarmthPreview: (Float) -> Unit = {},
     onFadeSeconds: (Float) -> Unit = {},
@@ -164,6 +165,7 @@ fun SettingsScreen(
         SettingsContent(
             settings = settings,
             onParticlesEnabled = onParticlesEnabled,
+            onWavesEnabled = onWavesEnabled,
             onWarmth = onWarmth,
             onWarmthPreview = onWarmthPreview,
             onFadeSeconds = onFadeSeconds,
@@ -182,6 +184,7 @@ fun SettingsScreen(
 fun SettingsContent(
     settings: Settings,
     onParticlesEnabled: (Boolean) -> Unit,
+    onWavesEnabled: (Boolean) -> Unit = {},
     onWarmth: (Float) -> Unit,
     onTimerPresets: (List<Long>) -> Unit,
     onLanguageTag: (String?) -> Unit,
@@ -244,6 +247,12 @@ fun SettingsContent(
                 description = stringResource(R.string.settings_particles_description),
                 checked = settings.particlesEnabled,
                 onToggle = onParticlesEnabled,
+            )
+            ToggleRow(
+                label = stringResource(R.string.settings_waves_label),
+                description = stringResource(R.string.settings_waves_description),
+                checked = settings.wavesEnabled,
+                onToggle = onWavesEnabled,
             )
         }
         Section(stringResource(R.string.settings_section_language)) {

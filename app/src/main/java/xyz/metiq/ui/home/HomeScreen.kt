@@ -60,6 +60,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -115,6 +116,7 @@ import xyz.metiq.ui.LicensesScreen
 import xyz.metiq.ui.SettingsContent
 import xyz.metiq.ui.openStoreRating
 import xyz.metiq.ui.openUrl
+import xyz.metiq.ui.components.LocalWaveAnimationEnabled
 import xyz.metiq.ui.components.ParticleField
 import xyz.metiq.ui.components.RatePromptBanner
 import xyz.metiq.ui.theme.Inter
@@ -132,6 +134,7 @@ private enum class HomeTab { NOISE, AMBIENT, SETTINGS }
 fun HomeScreen(
     settings: Settings,
     onParticlesEnabled: (Boolean) -> Unit,
+    onWavesEnabled: (Boolean) -> Unit,
     onWarmth: (Float) -> Unit,
     onFadeSeconds: (Float) -> Unit,
     onTimerFadeSeconds: (Float) -> Unit,
@@ -444,6 +447,7 @@ fun HomeScreen(
         scope.launch { pagerState.animateScrollToPage(HomeTab.NOISE.ordinal) }
     }
 
+    CompositionLocalProvider(LocalWaveAnimationEnabled provides settings.wavesEnabled) {
     Box(modifier = Modifier.fillMaxSize()) {
     Scaffold(
         containerColor = tokens.background,
@@ -649,6 +653,7 @@ fun HomeScreen(
                         SettingsContent(
                             settings = settings,
                             onParticlesEnabled = onParticlesEnabled,
+                            onWavesEnabled = onWavesEnabled,
                             onWarmth = onWarmth,
                             onWarmthPreview = { w -> binder?.engine?.setWarmth(w) },
                             onFadeSeconds = onFadeSeconds,
@@ -749,6 +754,7 @@ fun HomeScreen(
         ) {
             LicensesScreen(onBack = { showLicenses = false })
         }
+    }
     }
 }
 
@@ -883,6 +889,7 @@ private fun HomeScreenPreview() {
         HomeScreen(
             settings = DEFAULT_SETTINGS,
             onParticlesEnabled = {},
+            onWavesEnabled = {},
             onWarmth = {},
             onFadeSeconds = {},
             onTimerFadeSeconds = {},
