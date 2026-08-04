@@ -1,4 +1,4 @@
-Metiq plays high-quality colored noise — white, pink, brown and grey — and relaxing ambient sounds to help you focus, study, meditate, fall asleep, or block out the world with soothing background noise.
+Metiq plays high-quality colored noise — white, pink, brown and grey — binaural beats, and relaxing ambient sounds to help you focus, study, meditate, fall asleep, or block out the world with soothing background noise.
 
 Open it, tap, listen. That's the whole app.
 
@@ -9,11 +9,15 @@ Colored noise
 • Grey noise — perceptually flat, designed to feel even across the spectrum.
 
 Ambient sounds
-• Sea waves, thunderstorm with rain, fire crackling, birds chirping, café ambience, and wind.
+• Sea waves, rain, fire crackling, birds chirping, café ambience, and wind.
 • Start from a preset, or blend nature sounds into your own relaxing mix, set each level, and save it as a preset.
 
+Binaural beats
+• Layer delta, theta, alpha, beta or gamma tones under any sound — headphones required.
+• Each band nudges a different mental state: deep sleep, meditation, relaxation, focus, alertness.
+
 Features
-• Four colored noises and six ambient sounds, looped seamlessly.
+• Four colored noises, six ambient sounds and five binaural bands, looped seamlessly.
 • Layer and mix ambient sounds, with quick presets and your own saved mixes.
 • Sleep timer with quick presets and custom hours/minutes/seconds.
 • Media-session integration: control playback from your lock screen, notification, or Bluetooth headset.

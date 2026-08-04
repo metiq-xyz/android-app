@@ -1,0 +1,3 @@
+• Nowy język: chiński (uproszczony)
+• Chipy presetów otoczenia są teraz wyśrodkowane, gdy mieszczą się na ekranie
+• Przesuwanie paska presetów nie przełącza już przypadkowo kart

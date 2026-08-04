@@ -1,26 +1,30 @@
-Metiq riproduce rumore colorato di alta qualità — bianco, rosa, marrone e grigio — e suoni ambientali rilassanti per aiutarti a concentrarti, studiare, meditare, addormentarti o isolarti dal mondo con un rumore di fondo rilassante.
+Metiq riproduce rumore colorato di alta qualità — bianco, rosa, marrone e grigio —, battiti binaurali e suoni ambient rilassanti per aiutarti a concentrarti, studiare, meditare, addormentarti o isolarti dal mondo con un rumore di fondo rilassante.
 
 Apri, tocca, ascolta. Tutta qui l'app.
 
 Rumore colorato
-• Rumore bianco — il classico, copre i suoni improvvisi.
-• Rumore rosa — più morbido del bianco, ideale per sonno e lettura.
-• Rumore marrone — profondo e caldo, utile per concentrazione e sollievo dall'acufene.
-• Rumore grigio — percettivamente piatto, pensato per risultare uniforme su tutto lo spettro.
+• Rumore bianco — il classico, maschera i suoni improvvisi.
+• Rumore rosa — più morbido del bianco, ottimo per sonno e lettura.
+• Rumore marrone — profondo e caldo, utile per la concentrazione e il sollievo dall'acufene.
+• Rumore grigio — percettivamente piatto, pensato per suonare uniforme su tutto lo spettro.
 
-Suoni ambientali
-• Onde del mare, temporale con pioggia, crepitio del fuoco, cinguettio di uccelli, atmosfera da caffè e vento.
-• Parti da un preset, o mescola i suoni della natura nel tuo mix rilassante, regola ogni livello e salvalo come preset.
+Suoni ambient
+• Onde del mare, pioggia, crepitio del fuoco, cinguettio di uccelli, atmosfera da caffè e vento.
+• Parti da un preset oppure unisci i suoni della natura nel tuo mix rilassante, regola ogni livello e salvalo come preset.
 
-Caratteristiche
-• Quattro rumori colorati e sei suoni ambientali, in loop senza interruzioni.
-• Sovrapponi e mescola i suoni ambientali, con preset rapidi e i tuoi mix salvati.
-• Timer di spegnimento con preset rapidi e ore/minuti/secondi personalizzabili.
-• Integrazione MediaSession: controlla la riproduzione da schermata di blocco, notifica o cuffie Bluetooth.
-• Funziona completamente offline. L'audio è incluso — niente streaming, niente account, niente permesso internet.
-• Niente pubblicità. Niente tracciamento. Niente analytics. Niente SDK di terze parti.
-• Footprint minimo, consumo batteria ridotto.
+Battiti binaurali
+• Sovrapponi toni delta, theta, alpha, beta o gamma a qualsiasi suono — servono le cuffie.
+• Ogni banda favorisce uno stato mentale diverso: sonno profondo, meditazione, relax, concentrazione, prontezza.
 
-Che tu voglia una macchina del rumore per far dormire un bimbo, un rumore di fondo calmo per studiare o concentrarti, suoni di temporale e pioggia per rilassarti, o suoni per dormire tutta la notte — Metiq resta semplice.
+Funzionalità
+• Quattro rumori colorati, sei suoni ambient e cinque bande binaurali, in loop senza interruzioni.
+• Sovrapponi e mixa i suoni ambient, con preset rapidi e i tuoi mix salvati.
+• Timer di spegnimento con preset rapidi e ore/minuti/secondi personalizzati.
+• Integrazione con la sessione multimediale: controlla la riproduzione da schermata di blocco, notifica o cuffie Bluetooth.
+• Funziona completamente offline. L'audio è integrato — niente streaming, niente account, nessun permesso Internet.
+• Niente pubblicità. Niente tracciamento. Niente analytics. Nessun SDK di terze parti.
+• Dimensioni minime, consumo di batteria minimo.
+
+Che tu voglia una macchina del rumore per far dormire un bambino, un rumore di fondo tranquillo per studiare o concentrarti, suoni di temporale e pioggia per rilassarti o suoni costanti per dormire tutta la notte — Metiq punta alla semplicità.
 
 Open source con licenza GPL v3. Codice sorgente su GitHub: https://github.com/metiq-xyz/android-app

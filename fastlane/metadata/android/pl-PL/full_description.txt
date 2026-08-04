@@ -1,0 +1,30 @@
+Metiq odtwarza wysokiej jakości kolorowe szumy — biały, różowy, brązowy i szary — dudnienia binauralne oraz relaksujące dźwięki otoczenia, które pomagają się skupić, uczyć, medytować, zasnąć lub odciąć od świata kojącym szumem w tle.
+
+Otwierasz, dotykasz, słuchasz. To cała aplikacja.
+
+Kolorowe szumy
+• Biały szum — klasyka, maskuje nagłe dźwięki.
+• Różowy szum — łagodniejszy od białego, świetny do snu i czytania.
+• Brązowy szum — głęboki i ciepły, dobry na skupienie i ulgę w szumach usznych.
+• Szary szum — percepcyjnie płaski, zaprojektowany tak, by brzmieć równo w całym paśmie.
+
+Dźwięki otoczenia
+• Fale morskie, deszcz, trzask ognia, śpiew ptaków, gwar kawiarni i wiatr.
+• Zacznij od presetu albo połącz odgłosy natury we własny relaksujący miks, ustaw poziom każdego z nich i zapisz jako preset.
+
+Dudnienia binauralne
+• Nakładaj tony delta, theta, alfa, beta lub gamma na dowolny dźwięk — wymagane słuchawki.
+• Każde pasmo sprzyja innemu stanowi umysłu: głęboki sen, medytacja, relaks, skupienie, czujność.
+
+Funkcje
+• Cztery kolorowe szumy, sześć dźwięków otoczenia i pięć pasm binauralnych, zapętlone bezszwowo.
+• Nakładaj i miksuj dźwięki otoczenia — szybkie presety i własne zapisane miksy.
+• Minutnik z szybkimi presetami oraz własnym czasem (godziny/minuty/sekundy).
+• Integracja z sesją multimediów: steruj odtwarzaniem z ekranu blokady, powiadomienia lub słuchawek Bluetooth.
+• Działa w pełni offline. Dźwięki są wbudowane — bez streamingu, bez konta, bez uprawnienia do internetu.
+• Bez reklam. Bez śledzenia. Bez analityki. Bez zewnętrznych SDK.
+• Mały rozmiar, minimalne zużycie baterii.
+
+Niezależnie od tego, czy szukasz szumu do usypiania dziecka, spokojnego tła do nauki i koncentracji, odgłosów burzy i deszczu na relaks, czy stałych dźwięków do snu przez całą noc — Metiq stawia na prostotę.
+
+Otwarte oprogramowanie na licencji GPL v3. Kod źródłowy na GitHubie: https://github.com/metiq-xyz/android-app

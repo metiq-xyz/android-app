@@ -1,0 +1,3 @@
+• Novo idioma: chinês (simplificado)
+• Os chips de presets ambientes agora ficam centralizados quando cabem na tela
+• Deslizar a faixa de presets não troca mais de aba sem querer

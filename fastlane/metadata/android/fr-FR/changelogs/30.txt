@@ -1,0 +1,3 @@
+• Nouvelle langue: chinois (simplifié)
+• Les puces de préréglages sont désormais centrées quand la place le permet
+• Faire glisser la bande de préréglages ne change plus d'onglet par accident

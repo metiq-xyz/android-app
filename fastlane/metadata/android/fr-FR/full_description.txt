@@ -1,27 +1,30 @@
-Metiq joue du bruit coloré de haute qualité — blanc, rose, brun et gris — et des sons d'ambiance relaxants pour vous aider à vous concentrer, étudier, méditer, vous endormir ou vous couper du monde avec un bruit de fond apaisant.
+Metiq diffuse des bruits colorés de haute qualité — blanc, rose, brun et gris —, des battements binauraux et des sons ambiants relaxants pour vous aider à vous concentrer, étudier, méditer, vous endormir ou vous couper du monde avec un fond sonore apaisant.
 
-Ouvrez, touchez, écoutez. C'est toute l'appli.
+Ouvrez, touchez, écoutez. C'est toute l'application.
 
-Bruit coloré
+Bruits colorés
 • Bruit blanc — le classique, masque les sons soudains.
 • Bruit rose — plus doux que le blanc, idéal pour le sommeil et la lecture.
 • Bruit brun — profond et chaud, bon pour la concentration et le soulagement des acouphènes.
-• Bruit gris — perceptivement plat, conçu pour rester uniforme sur tout le spectre.
+• Bruit gris — perceptuellement plat, conçu pour paraître uniforme sur tout le spectre.
 
-Sons d'ambiance
-• Vagues de la mer, orage avec pluie, crépitement du feu, chant des oiseaux, ambiance de café et vent.
-• Partez d'un préréglage, ou mélangez les sons de la nature dans votre propre mix relaxant, réglez chaque niveau et enregistrez-le comme préréglage.
+Sons ambiants
+• Vagues de la mer, pluie, feu qui crépite, chants d'oiseaux, ambiance de café et vent.
+• Partez d'un préréglage ou mélangez les sons de la nature en votre propre mix relaxant, réglez chaque niveau et enregistrez-le comme préréglage.
+
+Battements binauraux
+• Superposez des tons delta, thêta, alpha, bêta ou gamma sous n'importe quel son — casque requis.
+• Chaque bande favorise un état mental différent : sommeil profond, méditation, détente, concentration, vigilance.
 
 Fonctionnalités
-• Quatre bruits colorés et six sons d'ambiance, en boucle sans coupure.
-• Superposez et mélangez les sons d'ambiance, avec des préréglages rapides et vos propres mix enregistrés.
-• Minuteur d'arrêt avec préréglages rapides et heures/minutes/secondes personnalisables.
-• Intégration MediaSession : contrôlez la lecture depuis l'écran de verrouillage, la notification ou un casque Bluetooth.
-• Fonctionne entièrement hors-ligne. L'audio est embarqué — pas de streaming, pas de compte, pas d'autorisation internet.
-• Sans publicité. Sans pistage. Sans analytique. Sans SDK tiers.
-• Empreinte minimale, faible consommation de batterie.
+• Quatre bruits colorés, six sons ambiants et cinq bandes binaurales, en boucle sans coupure.
+• Superposez et mixez les sons ambiants, avec des préréglages rapides et vos propres mix enregistrés.
+• Minuteur de sommeil avec préréglages rapides et durée personnalisée (heures/minutes/secondes).
+• Intégration à la session multimédia : contrôlez la lecture depuis l'écran de verrouillage, la notification ou votre casque Bluetooth.
+• Fonctionne entièrement hors ligne. L'audio est intégré — pas de streaming, pas de compte, pas d'autorisation Internet.
+• Pas de publicité. Pas de pistage. Pas d'analytique. Pas de SDK tiers.
+• Empreinte minuscule, consommation de batterie minimale.
 
-Que vous cherchiez une machine à bruit pour endormir un bébé, un bruit de fond calme pour étudier ou vous concentrer, des sons d'orage et de pluie pour vous relaxer, ou des sons de sommeil réguliers toute la nuit — Metiq reste simple.
+Que vous cherchiez une machine à bruit pour endormir un bébé, un fond sonore calme pour étudier ou vous concentrer, des sons de pluie et d'orage pour vous détendre, ou des sons de sommeil réguliers toute la nuit — Metiq reste simple.
 
-Open source sous licence GPL v3. Code source sur GitHub: https://github.com/metiq-xyz/android-app
- 
+Open source sous licence GPL v3. Code source sur GitHub : https://github.com/metiq-xyz/android-app

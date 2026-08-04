@@ -1,26 +1,30 @@
-O Metiq reproduz ruído colorido de alta qualidade — branco, rosa, marrom e cinza — e sons ambientes relaxantes para te ajudar a focar, estudar, meditar, dormir ou se isolar do mundo com um ruído de fundo relaxante.
+O Metiq reproduz ruído colorido de alta qualidade — branco, rosa, marrom e cinza —, batidas binaurais e sons ambientes relaxantes para ajudar você a focar, estudar, meditar, adormecer ou se isolar do mundo com um ruído de fundo suave.
 
-Abra, toque, ouça. É só isso o app.
+Abra, toque, ouça. O app é só isso.
 
 Ruído colorido
 • Ruído branco — o clássico, mascara sons repentinos.
-• Ruído rosa — mais suave que o branco, ótimo para sono e leitura.
-• Ruído marrom — profundo e quente, bom para foco e alívio de zumbido no ouvido.
-• Ruído cinza — perceptivamente plano, feito para soar uniforme em todo o espectro.
+• Ruído rosa — mais suave que o branco, ótimo para dormir e ler.
+• Ruído marrom — profundo e quente, bom para foco e alívio do zumbido.
+• Ruído cinza — perceptualmente plano, feito para soar uniforme em todo o espectro.
 
 Sons ambientes
-• Ondas do mar, tempestade com chuva, crepitar do fogo, canto dos pássaros, ambiente de café e vento.
-• Comece por um preset, ou misture os sons da natureza no seu próprio mix relaxante, ajuste cada nível e salve como preset.
+• Ondas do mar, chuva, fogo crepitando, pássaros cantando, ambiente de café e vento.
+• Comece por um preset ou combine sons da natureza no seu próprio mix relaxante, ajuste cada nível e salve como preset.
+
+Batidas binaurais
+• Sobreponha tons delta, theta, alfa, beta ou gama a qualquer som — fones de ouvido necessários.
+• Cada faixa induz um estado mental diferente: sono profundo, meditação, relaxamento, foco, atenção.
 
 Recursos
-• Quatro ruídos coloridos e seis sons ambientes, em loop contínuo.
-• Sobreponha e misture os sons ambientes, com presets rápidos e seus próprios mixes salvos.
-• Temporizador de desligamento com presets rápidos e horas/minutos/segundos personalizáveis.
-• Integração com MediaSession: controle a reprodução pela tela de bloqueio, notificação ou fones Bluetooth.
-• Funciona totalmente offline. O áudio vem embutido — sem streaming, sem conta, sem permissão de internet.
+• Quatro ruídos coloridos, seis sons ambientes e cinco faixas binaurais, em loop contínuo.
+• Sobreponha e misture sons ambientes, com presets rápidos e seus próprios mixes salvos.
+• Timer de sono com presets rápidos e horas/minutos/segundos personalizados.
+• Integração com a sessão de mídia: controle a reprodução pela tela de bloqueio, notificação ou fone Bluetooth.
+• Funciona totalmente offline. O áudio vem incluído — sem streaming, sem conta, sem permissão de internet.
 • Sem anúncios. Sem rastreamento. Sem analytics. Sem SDKs de terceiros.
-• Pegada mínima, baixo consumo de bateria.
+• Tamanho mínimo, consumo mínimo de bateria.
 
-Seja uma máquina de ruído para o bebê dormir, ruído de fundo calmo para estudar ou se concentrar, sons de tempestade e chuva para relaxar, ou sons de sono a noite toda — o Metiq mantém tudo simples.
+Se você quer uma máquina de ruído para o bebê dormir, um fundo calmo para estudar ou se concentrar, sons de tempestade e chuva para relaxar, ou sons constantes para dormir a noite toda — o Metiq mantém tudo simples.
 
-Código aberto sob licença GPL v3. Código-fonte no GitHub: https://github.com/metiq-xyz/android-app
+Código aberto sob GPL v3. Código-fonte no GitHub: https://github.com/metiq-xyz/android-app

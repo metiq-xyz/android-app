@@ -1,0 +1,3 @@
+• Nuova lingua: cinese (semplificato)
+• Le chip dei preset ambientali ora sono centrate quando c'è spazio
+• Scorrere la striscia dei preset non cambia più scheda per sbaglio
