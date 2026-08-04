@@ -60,8 +60,12 @@ import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -178,8 +182,21 @@ internal fun MixPresets(
 ) {
     val tokens = LocalMetiqColors.current
     val scroll = rememberScrollState()
-    Row(
+    val consumeLeftoverHorizontal = remember {
+        object : NestedScrollConnection {
+            override fun onPostScroll(
+                consumed: Offset,
+                available: Offset,
+                source: NestedScrollSource,
+            ): Offset = Offset(available.x, 0f)
+
+            override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity =
+                Velocity(available.x, 0f)
+        }
+    }
+    Box(
         modifier = Modifier
+            .nestedScroll(consumeLeftoverHorizontal)
             .layout { measurable, constraints ->
                 val expanded =
                     constraints.maxWidth + (CONTENT_HORIZONTAL_PADDING * 2).roundToPx()
@@ -213,12 +230,16 @@ internal fun MixPresets(
                         blendMode = BlendMode.DstIn,
                     )
                 }
-            }
+            },
+        contentAlignment = Alignment.Center,
+    ) {
+      Row(
+        modifier = Modifier
             .horizontalScroll(scroll)
             .padding(horizontal = CONTENT_HORIZONTAL_PADDING),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
-    ) {
+      ) {
         customMixes.forEach { mix ->
             key(mix.name) {
                 val active = mixMatches(activeMix, mix.layers)
@@ -247,6 +268,7 @@ internal fun MixPresets(
                 onClick = { if (active) onStop() else onApply(preset.layers) },
             )
         }
+      }
     }
 }
 
