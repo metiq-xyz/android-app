@@ -1,0 +1,3 @@
+• O painel do timer agora continua aberto após escolher um preset
+• Novo ajuste para desativar a animação de ondas; um anel sutil marca os sons em reprodução
+• Painéis do timer e dos binaurais mais limpos

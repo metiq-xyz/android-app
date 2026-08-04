@@ -1,0 +1,3 @@
+• Timer sheet stays open after picking a preset
+• New setting to disable the ripple animation; a subtle ring marks playing sounds instead
+• Cleaner timer and binaural panels

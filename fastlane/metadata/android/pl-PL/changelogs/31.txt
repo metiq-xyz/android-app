@@ -1,0 +1,3 @@
+• Panel minutnika pozostaje teraz otwarty po wybraniu presetu
+• Nowe ustawienie wyłączające animację fal; odtwarzane dźwięki oznacza dyskretny pierścień
+• Czystsze panele minutnika i dudnień binauralnych

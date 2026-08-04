@@ -1,0 +1,3 @@
+• Le panneau du minuteur reste désormais ouvert après le choix d'un préréglage
+• Nouveau réglage pour désactiver l'animation d'ondes ; un anneau discret signale les sons en lecture
+• Panneaux du minuteur et des binauraux épurés

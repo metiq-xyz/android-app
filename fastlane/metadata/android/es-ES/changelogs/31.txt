@@ -1,0 +1,3 @@
+• El panel del temporizador ahora permanece abierto al elegir un preajuste
+• Nuevo ajuste para desactivar la animación de ondas; un anillo sutil marca los sonidos en reproducción
+• Paneles del temporizador y binaurales más limpios

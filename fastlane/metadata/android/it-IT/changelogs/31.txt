@@ -1,0 +1,3 @@
+• Il pannello del timer ora resta aperto dopo aver scelto un preset
+• Nuova impostazione per disattivare l'animazione a onde; un anello discreto indica i suoni in riproduzione
+• Pannelli timer e binaurali più puliti
