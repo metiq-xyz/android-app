@@ -163,7 +163,6 @@ fun SleepTimer(
     state: SleepTimerState,
     presetsSeconds: List<Long>,
     modifier: Modifier = Modifier,
-    onPresetSelected: () -> Unit = {},
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -180,10 +179,7 @@ fun SleepTimer(
                     label = presetLabel(seconds),
                     enabled = !state.running,
                     onClick = {
-                        if (!state.running) {
-                            state.selectPreset(seconds)
-                            onPresetSelected()
-                        }
+                        if (!state.running) state.selectPreset(seconds)
                     },
                 )
             }

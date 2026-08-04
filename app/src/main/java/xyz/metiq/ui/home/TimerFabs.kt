@@ -86,7 +86,6 @@ internal fun TimerSheet(
             SleepTimer(
                 state = state,
                 presetsSeconds = presetsSeconds,
-                onPresetSelected = onDismiss,
             )
         }
     }
