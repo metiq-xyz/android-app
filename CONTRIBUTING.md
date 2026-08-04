@@ -35,7 +35,7 @@ request and we'll review.
 - **Android Studio** — Ladybug (2024.2) or newer
 - **JDK 17** — bundled with Android Studio; if you build from the command line,
   make sure `JAVA_HOME` points at a JDK 17 installation
-- **A device or emulator** running Android 10 (API 29) or newer
+- **A device or emulator** running Android 9 (API 28) or newer
 
 ### Cloning and opening
 

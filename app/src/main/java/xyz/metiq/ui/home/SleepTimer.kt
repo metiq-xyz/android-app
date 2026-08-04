@@ -353,8 +353,14 @@ private fun TimerCell(
 @Composable
 private fun PresetChip(modifier: Modifier = Modifier, label: String, enabled: Boolean, onClick: () -> Unit) {
     val tokens = LocalMetiqColors.current
+    val chipAlpha by animateFloatAsState(
+        targetValue = if (enabled) 1f else tokens.disabledAlpha,
+        animationSpec = tween(durationMillis = ALPHA_ANIM_MS),
+        label = "presetChipAlpha",
+    )
     Box(
         modifier = modifier
+            .alpha(chipAlpha)
             .clip(RoundedCornerShape(100.dp))
             .background(tokens.cellBackground)
             .clickable(enabled = enabled, onClick = onClick)

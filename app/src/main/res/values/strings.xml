@@ -27,6 +27,7 @@
     <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
          under each hints at the mental state it nudges toward. -->
     <string name="binaural_now_playing">Binaural beats</string>
+    <string name="binaural_fab_label">Binaurals</string>
     <!-- Notification suffix when a binaural beat plays; %1$s is the band's Greek letter -->
     <string name="binaural_noti_label">%1$s binaural</string>
     <string name="binaural_headphone_notice">Use headphones: each ear needs its own tone for the effect to work.</string>
@@ -117,6 +118,7 @@
     <string name="settings_language_spanish" translatable="false">Español</string>
     <string name="settings_language_french" translatable="false">Français</string>
     <string name="settings_language_portuguese" translatable="false">Português</string>
+    <string name="settings_language_polish" translatable="false">Polski</string>
 
     <!-- Settings: timer presets section -->
     <string name="settings_section_timer_presets">Timer presets (minutes)</string>

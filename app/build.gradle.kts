@@ -20,8 +20,8 @@ android {
         applicationId = "xyz.metiq"
         minSdk = 28
         targetSdk = 36
-        versionCode = 26
-        versionName = "0.13.0-beta.1"
+        versionCode = 29
+        versionName = "0.15.0"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -29,7 +29,7 @@ android {
     }
 
     androidResources {
-        localeFilters += listOf("en", "it", "es", "fr", "pt")
+        localeFilters += listOf("en", "it", "es", "fr", "pt", "pl")
     }
 
     signingConfigs {

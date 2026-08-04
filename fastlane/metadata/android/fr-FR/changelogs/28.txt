@@ -1,0 +1,3 @@
+• Les points animés apparaissent et disparaissent désormais en fondu avec la lecture, y compris derrière le panneau des binauraux
+• Animations des boutons flottants plus fluides : fini les ombres coupées et la largeur bloquée
+• Petites retouches visuelles dans les réglages

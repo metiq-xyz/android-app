@@ -3,6 +3,7 @@ package xyz.metiq.ui.home
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,18 +29,23 @@ import androidx.compose.material.icons.outlined.Headphones
 import androidx.compose.material.icons.outlined.Hearing
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -47,16 +53,17 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.metiq.R
+import xyz.metiq.ui.components.ParticleField
 import xyz.metiq.ui.components.WaveRings
 import xyz.metiq.ui.theme.Inter
 import xyz.metiq.ui.theme.LocalMetiqColors
 
 internal const val BINAURAL_CARRIER_HZ = 216f
-private val BINAURAL_FAB_SIZE: Dp = 56.dp
-private val BINAURAL_FAB_CORNER: Dp = 16.dp
+private val EXTENDED_FAB_CORNER: Dp = 16.dp
 
 internal data class BinauralBand(
     val id: String,
@@ -97,32 +104,47 @@ internal fun BinauralFab(band: BinauralBand?, wavesOn: Boolean, onClick: () -> U
         label = "binauralFabColor",
     )
     val contentColor = accent?.let { lerp(it, tokens.accentShade, 0.55f) } ?: tokens.textPrimary
-    Box(modifier = Modifier.size(BINAURAL_FAB_SIZE), contentAlignment = Alignment.Center) {
-        WaveRings(
-            color = container,
-            diameter = BINAURAL_FAB_SIZE,
-            active = wavesOn,
-            cornerRadius = BINAURAL_FAB_CORNER,
-            modifier = Modifier
-                .wrapContentSize(align = Alignment.Center, unbounded = true)
-                .size(BINAURAL_FAB_SIZE * WAVE_OVERSHOOT),
-        )
-        FloatingActionButton(
+    val density = LocalDensity.current
+    var fabSize by remember { mutableStateOf(DpSize.Zero) }
+    Box(contentAlignment = Alignment.Center) {
+        if (fabSize.width > 0.dp) {
+            WaveRings(
+                color = container,
+                active = wavesOn,
+                baseWidth = fabSize.width,
+                baseHeight = fabSize.height,
+                cornerRadius = EXTENDED_FAB_CORNER,
+                modifier = Modifier
+                    .matchParentSize()
+                    .wrapContentSize(align = Alignment.Center, unbounded = true)
+                    .size(fabSize.width * WAVE_OVERSHOOT, fabSize.height * WAVE_OVERSHOOT),
+            )
+        }
+        ExtendedFloatingActionButton(
             onClick = onClick,
             containerColor = container,
             contentColor = contentColor,
+            modifier = Modifier.onSizeChanged {
+                fabSize = with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
+            },
         ) {
             if (band != null) {
                 Text(
                     text = band.glyph,
-                    style = TextStyle(fontFamily = Inter, fontSize = 24.sp, fontWeight = FontWeight.SemiBold),
+                    style = TextStyle(fontFamily = Inter, fontSize = 20.sp, fontWeight = FontWeight.SemiBold),
                 )
             } else {
                 Icon(
                     imageVector = Icons.Outlined.Hearing,
-                    contentDescription = stringResource(R.string.binaural_now_playing),
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp),
                 )
             }
+            Spacer(Modifier.width(8.dp))
+            Text(
+                text = stringResource(R.string.binaural_fab_label),
+                style = TextStyle(fontFamily = Inter, fontSize = 14.sp, fontWeight = FontWeight.SemiBold),
+            )
         }
     }
 }
@@ -132,6 +154,7 @@ internal fun BinauralFab(band: BinauralBand?, wavesOn: Boolean, onClick: () -> U
 internal fun BinauralSheet(
     activeBand: String?,
     wavesOn: Boolean,
+    particlesOn: Boolean,
     volume: Float,
     onTap: (String) -> Unit,
     onVolume: (Float) -> Unit,
@@ -146,6 +169,25 @@ internal fun BinauralSheet(
         containerColor = tokens.foreground,
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
+      Box {
+        val particleAlpha by animateFloatAsState(
+            targetValue = if (particlesOn) 1f else 0f,
+            animationSpec = tween(durationMillis = PARTICLE_FADE_MS),
+            label = "binauralParticleFade",
+        )
+        var particleFill by remember { mutableStateOf(Color.Unspecified) }
+        if (activeBand != null) {
+            particleFill = lerp(binauralAccentFor(activeBand), tokens.accentHighlight, 0.40f)
+        }
+        if (particleAlpha > 0f && particleFill != Color.Unspecified) {
+            ParticleField(
+                color = particleFill,
+                count = 28,
+                seed = 0xB1AA,
+                intensity = particleAlpha,
+                modifier = Modifier.matchParentSize(),
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -183,6 +225,7 @@ internal fun BinauralSheet(
                 }
             }
         }
+      }
     }
 }
 
@@ -270,7 +313,7 @@ private fun BinauralOrb(
         ) {
             WaveRings(
                 color = orbFill,
-                diameter = orbSize,
+                baseWidth = orbSize,
                 active = wavesOn,
                 modifier = Modifier
                     .wrapContentSize(align = Alignment.Center, unbounded = true)
