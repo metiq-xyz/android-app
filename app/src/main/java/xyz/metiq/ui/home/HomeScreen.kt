@@ -419,9 +419,13 @@ fun HomeScreen(
             val band = BINAURAL_BANDS.firstOrNull { it.id == id }
             if (band != null) {
                 if (binauralBandId == id) {
-                    binauralBandId = null
-                    b.engine.stopBinaural()
-                    syncSession()
+                    if (!playing) {
+                        c.play()
+                    } else {
+                        binauralBandId = null
+                        b.engine.stopBinaural()
+                        syncSession()
+                    }
                 } else {
                     val firstStart = binauralBandId == null
                     binauralBandId = id
@@ -436,7 +440,7 @@ fun HomeScreen(
 
     val tapAmbient: (String) -> Unit = { id ->
         if (ambientLevels.containsKey(id)) {
-            disableAmbient(id)
+            if (!playing) controller?.play() else disableAmbient(id)
         } else {
             activateAmbient(id, AMBIENT_DEFAULT_VOLUME)
         }
@@ -561,11 +565,15 @@ fun HomeScreen(
                             wavesOn = wavesOn,
                             onSelect = { id ->
                                 if (id in NOISE_IDS) {
-                                    if (activeId != id) timer.reset()
-                                    ambientLevels.clear()
-                                    startJob?.cancel()
-                                    startJob = scope.launch {
-                                        selectColor(id, activeId, binder, { activeId = it }, syncSession)
+                                    if (activeId == id && !playing) {
+                                        controller?.play()
+                                    } else {
+                                        if (activeId != id) timer.reset()
+                                        ambientLevels.clear()
+                                        startJob?.cancel()
+                                        startJob = scope.launch {
+                                            selectColor(id, activeId, binder, { activeId = it }, syncSession)
+                                        }
                                     }
                                 }
                             },
