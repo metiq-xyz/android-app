@@ -1,0 +1,3 @@
+• Correction du son qui ne redémarrait pas après un arrêt depuis la notification
+• Correction d'un flash de couleur sur le curseur de volume binaural
+• Les changements de langue s'appliquent instantanément; traduction polonaise actualisée

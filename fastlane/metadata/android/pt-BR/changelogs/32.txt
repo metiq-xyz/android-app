@@ -1,0 +1,3 @@
+• Corrigido o som que não reiniciava após ser parado pela notificação
+• Corrigido um flash de cor no controle de volume binaural
+• Mudanças de idioma agora aplicadas na hora; tradução polonesa atualizada
