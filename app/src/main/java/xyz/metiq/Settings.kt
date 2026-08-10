@@ -80,6 +80,8 @@ private fun encodeCustomMixes(mixes: List<CustomMix>): String =
         "$name|$layers"
     }
 
+// Maps sound ids that once shipped but were later removed to their closest
+// current replacement, so old saved mixes keep playing something sensible.
 private val LEGACY_LAYER_IDS = mapOf("thunderstorm" to "rain")
 
 private fun decodeCustomMixes(encoded: String): List<CustomMix> =

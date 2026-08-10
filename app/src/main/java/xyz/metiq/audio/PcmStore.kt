@@ -47,6 +47,8 @@ object PcmStore {
         "birds" to "audio/ambient/birds.ogg",
         "cafe" to "audio/ambient/cafe.ogg",
         "wind" to "audio/ambient/wind.ogg",
+        "crickets" to "audio/ambient/crickets.ogg",
+        "stream" to "audio/ambient/stream.ogg",
     )
 
     private val cache = ConcurrentHashMap<String, Deferred<Pcm>>()
@@ -151,7 +153,7 @@ object PcmStore {
     }
 
     // Deletes cache files that no current sound owns — renamed/removed ids
-    // (e.g. thunderstorm -> rain) and half-written .tmp files from crashes.
+    // and half-written .tmp files from crashes.
     private fun sweepStaleCacheFiles(context: Context) {
         val valid = (NOISE_ASSETS.keys + AMBIENT_ASSETS.keys).map { "$it.pcm" }.toSet()
         File(context.filesDir, "pcm").listFiles()?.forEach { f ->

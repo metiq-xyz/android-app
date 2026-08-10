@@ -23,6 +23,8 @@
     <string name="ambient_birds">Birds chirping</string>
     <string name="ambient_cafe">Café ambience</string>
     <string name="ambient_wind">Wind</string>
+    <string name="ambient_crickets">Crickets</string>
+    <string name="ambient_stream">Stream</string>
 
     <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
          under each hints at the mental state it nudges toward. -->

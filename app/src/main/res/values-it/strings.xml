@@ -17,6 +17,8 @@
     <string name="ambient_birds">Cinguettio di uccelli</string>
     <string name="ambient_cafe">Atmosfera da caffè</string>
     <string name="ambient_wind">Vento</string>
+    <string name="ambient_crickets">Grilli</string>
+    <string name="ambient_stream">Ruscello</string>
 
     <string name="binaural_now_playing">Battiti binaurali</string>
     <string name="binaural_fab_label">Binaurali</string>

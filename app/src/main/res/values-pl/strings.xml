@@ -17,6 +17,8 @@
     <string name="ambient_birds">Ćwierkanie ptaków</string>
     <string name="ambient_cafe">Gwar kawiarni</string>
     <string name="ambient_wind">Wiatr</string>
+    <string name="ambient_crickets">Świerszcze</string>
+    <string name="ambient_stream">Strumień</string>
 
     <string name="binaural_now_playing">Dudnienie binauralne</string>
     <string name="binaural_fab_label">Binauralne</string>

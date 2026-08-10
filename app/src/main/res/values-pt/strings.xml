@@ -17,6 +17,8 @@
     <string name="ambient_birds">Canto dos pássaros</string>
     <string name="ambient_cafe">Ambiente de café</string>
     <string name="ambient_wind">Vento</string>
+    <string name="ambient_crickets">Grilos</string>
+    <string name="ambient_stream">Riacho</string>
 
     <string name="binaural_now_playing">Batidas binaurais</string>
     <string name="binaural_fab_label">Binaurais</string>

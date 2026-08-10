@@ -30,8 +30,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Air
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Grass
 import androidx.compose.material.icons.outlined.LocalFireDepartment
 import androidx.compose.material.icons.outlined.Storefront
+import androidx.compose.material.icons.outlined.Water
 import androidx.compose.material.icons.outlined.WaterDrop
 import androidx.compose.material.icons.outlined.Waves
 import androidx.compose.material3.AlertDialog
@@ -113,6 +115,8 @@ internal val AMBIENT_SOUNDS = listOf(
     AmbientSound("birds", R.string.ambient_birds, iconResId = R.drawable.ic_ambient_birds),
     AmbientSound("cafe", R.string.ambient_cafe, iconVector = Icons.Outlined.Storefront),
     AmbientSound("wind", R.string.ambient_wind, iconVector = Icons.Outlined.Air),
+    AmbientSound("crickets", R.string.ambient_crickets, iconVector = Icons.Outlined.Grass),
+    AmbientSound("stream", R.string.ambient_stream, iconVector = Icons.Outlined.Water),
 )
 internal val AMBIENT_IDS = AMBIENT_SOUNDS.map { it.id }.toSet()
 
@@ -132,6 +136,8 @@ internal fun ambientAccentFor(id: String): Color {
         "birds" -> tokens.ambientBirds
         "cafe" -> tokens.ambientCafe
         "wind" -> tokens.ambientWind
+        "crickets" -> tokens.ambientCrickets
+        "stream" -> tokens.ambientStream
         else -> tokens.ambientSeawaves
     }
 }

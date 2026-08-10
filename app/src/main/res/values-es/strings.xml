@@ -17,6 +17,8 @@
     <string name="ambient_birds">Canto de pájaros</string>
     <string name="ambient_cafe">Ambiente de café</string>
     <string name="ambient_wind">Viento</string>
+    <string name="ambient_crickets">Grillos</string>
+    <string name="ambient_stream">Arroyo</string>
 
     <string name="binaural_now_playing">Sonidos binaurales</string>
     <string name="binaural_fab_label">Binaurales</string>

@@ -17,6 +17,8 @@
     <string name="ambient_birds">Chant des oiseaux</string>
     <string name="ambient_cafe">Ambiance de café</string>
     <string name="ambient_wind">Vent</string>
+    <string name="ambient_crickets">Grillons</string>
+    <string name="ambient_stream">Ruisseau</string>
 
     <string name="binaural_now_playing">Battements binauraux</string>
     <string name="binaural_fab_label">Binauraux</string>
