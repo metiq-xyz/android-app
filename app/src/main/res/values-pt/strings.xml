@@ -67,6 +67,8 @@
     <string name="settings_theme_system">Sistema</string>
     <string name="settings_theme_light">Claro</string>
     <string name="settings_theme_dark">Escuro</string>
+    <string name="settings_dynamic_colors_label">Cores dinâmicas</string>
+    <string name="settings_dynamic_colors_description">Aplica ao app as cores do seu papel de parede (Material You)</string>
     <string name="settings_particles_label">Partículas de fundo</string>
     <string name="settings_particles_description">Pontos animados atrás da cor ativa</string>
     <string name="settings_waves_label">Animação de ondas</string>

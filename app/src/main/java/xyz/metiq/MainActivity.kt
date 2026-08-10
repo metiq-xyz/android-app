@@ -82,11 +82,12 @@ class MainActivity : AppCompatActivity() {
                         LayoutDirection.Ltr
                     },
             ) {
-            MetiqTheme(darkTheme = darkTheme) {
+            MetiqTheme(darkTheme = darkTheme, dynamicColors = settings.dynamicColorsEnabled) {
                 HomeScreen(
                     settings = settings,
                     onParticlesEnabled = { scope.launch { repo.setParticlesEnabled(it) } },
                     onWavesEnabled = { scope.launch { repo.setWavesEnabled(it) } },
+                    onDynamicColors = { scope.launch { repo.setDynamicColorsEnabled(it) } },
                     onWarmth = { scope.launch { repo.setWarmth(it) } },
                     onFadeSeconds = { scope.launch { repo.setFadeSeconds(it) } },
                     onTimerFadeSeconds = { scope.launch { repo.setTimerFadeSeconds(it) } },

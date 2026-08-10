@@ -67,6 +67,8 @@
     <string name="settings_theme_system">Sistema</string>
     <string name="settings_theme_light">Chiaro</string>
     <string name="settings_theme_dark">Scuro</string>
+    <string name="settings_dynamic_colors_label">Colori dinamici</string>
+    <string name="settings_dynamic_colors_description">Colora l\'app con i colori dello sfondo (Material You)</string>
     <string name="settings_particles_label">Particelle di sfondo</string>
     <string name="settings_particles_description">Puntini animati dietro al colore attivo</string>
     <string name="settings_waves_label">Animazione a onde</string>

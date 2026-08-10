@@ -27,6 +27,7 @@ enum class ThemePreference { SYSTEM, LIGHT, DARK }
 data class Settings(
     val particlesEnabled: Boolean,
     val wavesEnabled: Boolean,
+    val dynamicColorsEnabled: Boolean,
     val timerPresetsSeconds: List<Long>,
     val languageTag: String?,
     val customMixes: List<CustomMix>,
@@ -42,6 +43,7 @@ data class Settings(
 val DEFAULT_SETTINGS = Settings(
     particlesEnabled = true,
     wavesEnabled = true,
+    dynamicColorsEnabled = false,
     timerPresetsSeconds = listOf(
         15L * 60, 30L * 60, 45L * 60, 60L * 60
     ),
@@ -94,7 +96,7 @@ private fun decodeCustomMixes(encoded: String): List<CustomMix> =
         if (name.isNotEmpty() && layers.isNotEmpty()) CustomMix(name, layers) else null
     }.take(MAX_CUSTOM_MIXES).toList()
 
-val SUPPORTED_LANGUAGE_TAGS: List<String> = listOf("en", "it", "es", "fr", "pt")
+val SUPPORTED_LANGUAGE_TAGS: List<String> = listOf("en", "it", "es", "fr", "pt", "pl", "zh")
 
 // Rate-prompt policy: only nudge once the user has clearly stuck around, and
 // re-nudge sparingly after a swipe-away so it never feels nagging.
@@ -107,6 +109,7 @@ private val Context.dataStore by preferencesDataStore(name = "metiq_settings")
 private object Keys {
     val PARTICLES_ENABLED = booleanPreferencesKey("particles_enabled")
     val WAVES_ENABLED = booleanPreferencesKey("waves_enabled")
+    val DYNAMIC_COLORS_ENABLED = booleanPreferencesKey("dynamic_colors_enabled")
     val WARMTH = floatPreferencesKey("warmth")
     val FADE_SECONDS = floatPreferencesKey("fade_seconds")
     val TIMER_FADE_SECONDS = floatPreferencesKey("timer_fade_seconds")
@@ -135,6 +138,10 @@ class SettingsRepository(context: Context) {
 
     suspend fun setWavesEnabled(enabled: Boolean) {
         store.edit { it[Keys.WAVES_ENABLED] = enabled }
+    }
+
+    suspend fun setDynamicColorsEnabled(enabled: Boolean) {
+        store.edit { it[Keys.DYNAMIC_COLORS_ENABLED] = enabled }
     }
 
     suspend fun setWarmth(warmth: Float) {
@@ -217,6 +224,8 @@ class SettingsRepository(context: Context) {
     private fun Preferences.toSettings(): Settings {
         val particles = this[Keys.PARTICLES_ENABLED] ?: DEFAULT_SETTINGS.particlesEnabled
         val waves = this[Keys.WAVES_ENABLED] ?: DEFAULT_SETTINGS.wavesEnabled
+        val dynamicColors = this[Keys.DYNAMIC_COLORS_ENABLED]
+            ?: DEFAULT_SETTINGS.dynamicColorsEnabled
         val warmth = (this[Keys.WARMTH] ?: DEFAULT_SETTINGS.warmth).coerceIn(0f, 1f)
         val presets = this[Keys.TIMER_PRESETS]?.split(',')?.mapNotNull { it.toLongOrNull() }
             ?.filter { it > 0L }?.take(MAX_TIMER_PRESETS)?.ifEmpty { null }
@@ -238,6 +247,7 @@ class SettingsRepository(context: Context) {
         return Settings(
             particlesEnabled = particles,
             wavesEnabled = waves,
+            dynamicColorsEnabled = dynamicColors,
             timerPresetsSeconds = presets,
             languageTag = languageTag,
             customMixes = customMixes,
