@@ -182,19 +182,23 @@ fun HomeScreen(
     }
 
     val timer = rememberSleepTimerState(
-        onFinished = {
-            val c = controller
-            val b = binder
-            if (c != null && b != null) {
-                b.engine.stopAllTimerFade()
-                b.setActiveColor(null, null)
-                c.stop()
+        onStart = { seconds -> binder?.startSleepTimer(seconds) },
+        onCancel = { binder?.cancelSleepTimer() },
+    )
+
+    LaunchedEffect(binder) {
+        val b = binder ?: return@LaunchedEffect
+        b.timerRemainingSeconds.collect { remaining ->
+            if (remaining != null) {
+                timer.syncFromService(remaining)
+            } else if (timer.running) {
+                timer.reset()
                 activeId = null
                 ambientLevels.clear()
                 binauralBandId = null
             }
-        },
-    )
+        }
+    }
 
     DisposableEffect(Unit) {
         var controllerFuture: ListenableFuture<MediaController>? = null
@@ -367,7 +371,6 @@ fun HomeScreen(
             activeId = null
             ambientLevels.keys.toList().forEach { b.engine.stopLayer(it) }
             ambientLevels.clear()
-            timer.reset()
             valid.forEach { (id, vol) -> ambientLevels[id] = vol }
             syncSession()
             valid.forEach { (id, vol) ->
@@ -386,7 +389,6 @@ fun HomeScreen(
                 b.engine.stopLayer(noise)
                 activeId = null
             }
-            if (ambientLevels.isEmpty()) timer.reset()
             ambientLevels[id] = vol
             syncSession()
             scope.launch {
@@ -569,7 +571,6 @@ fun HomeScreen(
                                     if (activeId == id && !playing) {
                                         controller?.play()
                                     } else {
-                                        if (activeId != id) timer.reset()
                                         ambientLevels.clear()
                                         startJob?.cancel()
                                         startJob = scope.launch {
