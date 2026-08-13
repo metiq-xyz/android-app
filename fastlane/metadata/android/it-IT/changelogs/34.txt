@@ -1,0 +1,3 @@
+• Nuovi suoni ambientali: ruscello e grilli
+• Il timer continua quando cambi suono
+• Timer più affidabile: non si perde più se l'app si riavvia

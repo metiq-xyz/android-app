@@ -1,0 +1,3 @@
+• New ambient sounds: water stream and crickets
+• Sleep timer keeps running when you switch sounds
+• Sleep timer is more reliable and no longer lost if the app restarts

@@ -1,0 +1,3 @@
+• Nuevos sonidos ambientales: arroyo y grillos
+• El temporizador sigue funcionando al cambiar de sonido
+• Temporizador más fiable: ya no se pierde si la aplicación se reinicia

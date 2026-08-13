@@ -1,0 +1,3 @@
+• Nouveaux sons d'ambiance: ruisseau et grillons
+• La minuterie continue lorsque vous changez de son
+• Minuterie plus fiable: elle n'est plus perdue si l'application redémarre
