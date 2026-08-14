@@ -1,0 +1,3 @@
+• Nowe dźwięki otoczenia: strumień i świerszcze
+• Minutnik działa dalej przy zmianie dźwięku
+• Minutnik jest bardziej niezawodny: nie znika po ponownym uruchomieniu aplikacji

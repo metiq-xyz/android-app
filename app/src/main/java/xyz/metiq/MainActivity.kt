@@ -1,14 +1,25 @@
 package xyz.metiq
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.os.LocaleList
 import android.os.SystemClock
+import android.view.View
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -20,6 +31,13 @@ import xyz.metiq.ui.theme.MetiqTheme
 private const val SPLASH_MAX_HOLD_MS = 2000L
 
 class MainActivity : AppCompatActivity() {
+    private var systemConfig by mutableStateOf<Configuration?>(null)
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        systemConfig = Configuration(newConfig)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashShownAt = SystemClock.uptimeMillis()
         installSplashScreen().setKeepOnScreenCondition {
@@ -45,11 +63,31 @@ class MainActivity : AppCompatActivity() {
                     isAppearanceLightNavigationBars = !darkTheme
                 }
             }
-            MetiqTheme(darkTheme = darkTheme) {
+            val baseConfig = systemConfig
+            val localizedContext = remember(settings.languageTag, baseConfig) {
+                val config = Configuration(baseConfig ?: resources.configuration)
+                if (settings.languageTag != null) {
+                    config.setLocales(LocaleList.forLanguageTags(settings.languageTag))
+                }
+                createConfigurationContext(config)
+            }
+            val localizedConfig = localizedContext.resources.configuration
+            CompositionLocalProvider(
+                LocalContext provides localizedContext,
+                LocalConfiguration provides localizedConfig,
+                LocalLayoutDirection provides
+                    if (localizedConfig.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+                        LayoutDirection.Rtl
+                    } else {
+                        LayoutDirection.Ltr
+                    },
+            ) {
+            MetiqTheme(darkTheme = darkTheme, dynamicColors = settings.dynamicColorsEnabled) {
                 HomeScreen(
                     settings = settings,
                     onParticlesEnabled = { scope.launch { repo.setParticlesEnabled(it) } },
                     onWavesEnabled = { scope.launch { repo.setWavesEnabled(it) } },
+                    onDynamicColors = { scope.launch { repo.setDynamicColorsEnabled(it) } },
                     onWarmth = { scope.launch { repo.setWarmth(it) } },
                     onFadeSeconds = { scope.launch { repo.setFadeSeconds(it) } },
                     onTimerFadeSeconds = { scope.launch { repo.setTimerFadeSeconds(it) } },
@@ -63,6 +101,7 @@ class MainActivity : AppCompatActivity() {
                     ratePromptVisible = ratePromptVisible,
                     onRatePromptDismiss = { scope.launch { repo.snoozeRatePrompt() } },
                 )
+            }
             }
         }
     }

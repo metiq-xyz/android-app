@@ -25,7 +25,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,11 +45,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.delay
 import xyz.metiq.R
 import xyz.metiq.ui.theme.Inter
 import xyz.metiq.ui.theme.LocalMetiqColors
-import kotlin.time.Duration.Companion.seconds
 
 internal const val ALPHA_ANIM_MS = 300
 
@@ -70,8 +67,6 @@ fun formatTimerClock(seconds: Long): String {
     return if (h > 0) "%d:%02d:%02d".format(h, m, s) else "%02d:%02d".format(m, s)
 }
 
-// Held by the screen so playback changes can call reset(); the countdown itself is
-// driven by rememberSleepTimerState below.
 @Stable
 class SleepTimerState {
     var remainingSeconds by mutableLongStateOf(0L)
@@ -82,20 +77,24 @@ class SleepTimerState {
         private set
     internal var editBuffer by mutableStateOf("")
         private set
+    internal var onStart: (Long) -> Unit = {}
+    internal var onCancel: () -> Unit = {}
 
     fun reset() {
+        val wasRunning = running
         remainingSeconds = 0L
         running = false
         editField = null
         editBuffer = ""
+        if (wasRunning) onCancel()
     }
 
     internal fun toggleRunning() {
         if (running) {
-            running = false
-            remainingSeconds = 0L
+            reset()
         } else if (remainingSeconds > 0L) {
             running = true
+            onStart(remainingSeconds)
         }
     }
 
@@ -104,6 +103,12 @@ class SleepTimerState {
         running = true
         editField = null
         editBuffer = ""
+        onStart(seconds)
+    }
+
+    internal fun syncFromService(remaining: Long) {
+        running = true
+        remainingSeconds = remaining
     }
 
     internal fun beginEdit(field: TimerField) {
@@ -126,6 +131,8 @@ class SleepTimerState {
             val m = if (field == TimerField.MINUTES) clamped else minutesFor(remainingSeconds)
             val s = if (field == TimerField.SECONDS) clamped else secondsFor(remainingSeconds)
             remainingSeconds = h * 3600L + m * 60L + s
+            // Editing a live timer restarts the service countdown from the new value.
+            if (running) onStart(remainingSeconds)
         }
         if (editField == field) {
             editField = null
@@ -133,28 +140,16 @@ class SleepTimerState {
         }
     }
 
-    internal fun tick() {
-        if (remainingSeconds > 0L) remainingSeconds -= 1L
-    }
 }
 
-// onFinished fires once when a running timer reaches zero (the screen stops playback
-// there), after which the timer resets.
 @Composable
-fun rememberSleepTimerState(onFinished: () -> Unit): SleepTimerState {
+fun rememberSleepTimerState(
+    onStart: (Long) -> Unit,
+    onCancel: () -> Unit,
+): SleepTimerState {
     val state = remember { SleepTimerState() }
-    val latestOnFinished by rememberUpdatedState(onFinished)
-    LaunchedEffect(state.running) {
-        if (!state.running) return@LaunchedEffect
-        while (state.running && state.remainingSeconds > 0L) {
-            delay(1.seconds)
-            if (state.running) state.tick()
-        }
-        if (state.running && state.remainingSeconds == 0L) {
-            latestOnFinished()
-            state.reset()
-        }
-    }
+    state.onStart = onStart
+    state.onCancel = onCancel
     return state
 }
 

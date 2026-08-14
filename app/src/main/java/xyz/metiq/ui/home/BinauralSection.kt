@@ -200,8 +200,10 @@ internal fun BinauralSheet(
             Spacer(Modifier.height(20.dp))
             BinauralGrid(activeBand = activeBand, wavesOn = wavesOn, onTap = onTap)
             Spacer(Modifier.height(24.dp))
+            var volumeAccent by remember { mutableStateOf(Color.Unspecified) }
+            if (activeBand != null) volumeAccent = binauralAccentFor(activeBand)
             AnimatedVisibility(visible = activeBand != null) {
-                val accent = activeBand?.let { binauralAccentFor(it) } ?: tokens.textPrimary
+                val accent = volumeAccent.takeIf { it != Color.Unspecified } ?: tokens.textPrimary
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = stringResource(R.string.binaural_volume),

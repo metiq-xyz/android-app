@@ -17,6 +17,8 @@
     <string name="ambient_birds">Chant des oiseaux</string>
     <string name="ambient_cafe">Ambiance de café</string>
     <string name="ambient_wind">Vent</string>
+    <string name="ambient_crickets">Grillons</string>
+    <string name="ambient_stream">Ruisseau</string>
 
     <string name="binaural_now_playing">Battements binauraux</string>
     <string name="binaural_fab_label">Binauraux</string>
@@ -67,6 +69,8 @@
     <string name="settings_theme_system">Système</string>
     <string name="settings_theme_light">Clair</string>
     <string name="settings_theme_dark">Sombre</string>
+    <string name="settings_dynamic_colors_label">Couleurs dynamiques</string>
+    <string name="settings_dynamic_colors_description">Teinte l\'application avec les couleurs de votre fond d\'écran (Material You)</string>
     <string name="settings_particles_label">Particules d\'arrière-plan</string>
     <string name="settings_particles_description">Points animés derrière la couleur active</string>
     <string name="settings_waves_label">Animation d\'ondes</string>

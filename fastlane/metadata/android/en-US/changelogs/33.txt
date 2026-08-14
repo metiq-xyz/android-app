@@ -1,0 +1,1 @@
+• New: dynamic colors (Material You) — tint the app with your wallpaper colors, optional toggle under Appearance (Android 12+)

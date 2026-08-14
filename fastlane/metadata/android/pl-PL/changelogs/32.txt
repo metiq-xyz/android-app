@@ -1,0 +1,3 @@
+• Naprawiono dźwięk, który nie uruchamiał się ponownie po zatrzymaniu z powiadomienia
+• Naprawiono błysk koloru na suwaku głośności dudnień binauralnych
+• Zmiany języka działają natychmiast; odświeżone polskie tłumaczenie

@@ -1,0 +1,3 @@
+• Novos sons ambientes: riacho e grilos
+• O temporizador continua ao trocar de som
+• Temporizador mais confiável: não se perde mais se o app reiniciar

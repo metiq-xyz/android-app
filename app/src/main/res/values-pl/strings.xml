@@ -3,7 +3,7 @@
     <string name="help_cd">Pomoc</string>
     <string name="help_title">Jak to działa</string>
     <string name="home_helper">Dotknij koloru szumu, aby go odtworzyć lub zatrzymać.\nUstaw minutnik, jeśli chcesz, aby wyłączał się automatycznie.\nZbyt jasny lub ostry? Złagodź go ciepłem w ustawieniach.\nWolisz łagodniejsze początki i zakończenia? Ustaw długość przejścia w ustawieniach.</string>
-    <string name="ambient_helper">Dotknij zestawu, aby go odtworzyć, dotknij ponownie, aby zatrzymać.\nDotknij kuli, aby uruchomić dźwięk, a następnie przeciągnij suwak, aby ustawić poziom.\nZapisz własny miks za pomocą „Zapisz miks” i użyj ikony kosza, aby go usunąć.\nWolisz łagodniejsze rozpoczęcie i zakończenie? Ustaw długość wyciszenia w ustawieniach.</string>
+    <string name="ambient_helper">Dotknij zestaw, aby go odtworzyć, dotknij ponownie, aby zatrzymać.\nDotknij kuli, aby uruchomić dźwięk, a następnie przeciągnij suwak, aby ustawić głośność.\nZapisz własny miks za pomocą „Zapisz miks” i użyj ikony kosza, aby go usunąć.\nWolisz łagodniejsze rozpoczęcie i zakończenie? Ustaw długość przejścia w ustawieniach</string>
 
     <string name="tab_noise">Szum</string>
     <string name="tab_ambient">Otoczenie</string>
@@ -15,19 +15,21 @@
     <string name="ambient_rain">Deszcz</string>
     <string name="ambient_fire">Trzask ognia</string>
     <string name="ambient_birds">Ćwierkanie ptaków</string>
-    <string name="ambient_cafe">Kawiarnia</string>
+    <string name="ambient_cafe">Gwar kawiarni</string>
     <string name="ambient_wind">Wiatr</string>
+    <string name="ambient_crickets">Świerszcze</string>
+    <string name="ambient_stream">Strumień</string>
 
-    <string name="binaural_now_playing">Bity binauralne</string>
+    <string name="binaural_now_playing">Dudnienie binauralne</string>
     <string name="binaural_fab_label">Binauralne</string>
     <string name="binaural_noti_label">%1$s binauralne</string>
     <string name="binaural_headphone_notice">Użyj słuchawek: aby efekt zadziałał, każde ucho musi odbierać osobny ton.</string>
     <string name="binaural_volume">Głośność</string>
     <string name="binaural_delta_feel">Głęboki sen</string>
     <string name="binaural_theta_feel">Medytacja</string>
-    <string name="binaural_alpha_feel">Relaksacja</string>
+    <string name="binaural_alpha_feel">Relaks</string>
     <string name="binaural_beta_feel">Skupienie</string>
-    <string name="binaural_gamma_feel">Czujność</string>
+    <string name="binaural_gamma_feel">Koncentracja</string>
 
     <string name="color_pink">Różowy</string>
     <string name="color_brown">Brązowy</string>
@@ -51,10 +53,10 @@
 
     <string name="settings_section_sound">Dźwięk</string>
     <string name="settings_warmth_label">Ciepło</string>
-    <string name="settings_warmth_description">Wycisza wysokie tony, aby złagodzić ostre kolory szumu. Dźwięki otoczenia pozostają niezmienione.</string>
+    <string name="settings_warmth_description">Obcina wysokie tony, aby złagodzić ostre zabarwienie szumu. Nie wpływa na dźwięki otoczenia.</string>
     <string name="settings_warmth_bright">Jasne</string>
     <string name="settings_warmth_warm">Ciepłe</string>
-    <string name="settings_fade_label">Wyciszenie</string>
+    <string name="settings_fade_label">Przejście</string>
     <string name="settings_fade_description">Określa, jak długo dźwięki stopniowo narastają i zanikają podczas uruchamiania, zatrzymywania lub przełączania.</string>
     <string name="settings_fade_unit" translatable="false">s</string>
     <string name="settings_timer_fade_label">Wyciszenie minutnika</string>
@@ -64,9 +66,11 @@
 
     <string name="settings_section_appearance">Wygląd</string>
     <string name="settings_theme_label">Motyw</string>
-    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_system">Systemowy</string>
     <string name="settings_theme_light">Jasny</string>
     <string name="settings_theme_dark">Ciemny</string>
+    <string name="settings_dynamic_colors_label">Dynamiczne kolory</string>
+    <string name="settings_dynamic_colors_description">Barwi aplikację kolorami tapety (Material You)</string>
     <string name="settings_particles_label">Cząsteczki tła</string>
     <string name="settings_particles_description">Animowane kropki za aktywnym kolorem</string>
     <string name="settings_waves_label">Animacja fal</string>
@@ -76,9 +80,9 @@
     <string name="settings_language_label">Język</string>
     <string name="settings_language_system">Domyślny systemu</string>
 
-    <string name="settings_section_timer_presets">Presety minutnika (minuty)</string>
+    <string name="settings_section_timer_presets">Ustawienia minutnika (minuty)</string>
     <string name="settings_timer_unit_min">min</string>
-    <string name="settings_timer_save">Zapisz presety</string>
+    <string name="settings_timer_save">Zapisz</string>
 
     <string name="settings_section_support">Wsparcie</string>
     <string name="settings_rate_label">Oceń Metiq w serwisie %1$s</string>
@@ -89,7 +93,7 @@
     <string name="rate_prompt_title">Podoba Ci się Metiq?</string>
     <string name="rate_prompt_message">Oceń w serwisie %1$s lub przekaż darowiznę, aby aplikacja pozostała bezpłatna.</string>
     <string name="rate_prompt_cta">Oceń</string>
-    <string name="rate_prompt_feedback_cta">Feedback</string>
+    <string name="rate_prompt_feedback_cta">Opinia</string>
     <string name="rate_prompt_donate_cta">Darowizna</string>
     <string name="rate_prompt_dismiss_cd">Odrzuć</string>
 

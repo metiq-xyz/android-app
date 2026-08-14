@@ -1,5 +1,6 @@
 package xyz.metiq.ui
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -120,6 +121,7 @@ fun SettingsScreen(
     settings: Settings,
     onParticlesEnabled: (Boolean) -> Unit,
     onWavesEnabled: (Boolean) -> Unit = {},
+    onDynamicColors: (Boolean) -> Unit = {},
     onWarmth: (Float) -> Unit,
     onWarmthPreview: (Float) -> Unit = {},
     onFadeSeconds: (Float) -> Unit = {},
@@ -166,6 +168,7 @@ fun SettingsScreen(
             settings = settings,
             onParticlesEnabled = onParticlesEnabled,
             onWavesEnabled = onWavesEnabled,
+            onDynamicColors = onDynamicColors,
             onWarmth = onWarmth,
             onWarmthPreview = onWarmthPreview,
             onFadeSeconds = onFadeSeconds,
@@ -195,6 +198,7 @@ fun SettingsContent(
     onTimerFadeSeconds: (Float) -> Unit = {},
     onRequestAudioFocus: (Boolean) -> Unit = {},
     onThemePreference: (ThemePreference) -> Unit = {},
+    onDynamicColors: (Boolean) -> Unit = {},
 ) {
     val context = LocalContext.current
     val version = remember {
@@ -242,6 +246,14 @@ fun SettingsContent(
                 labelFor = { stringResource(themeLabelRes(it)) },
                 onPick = onThemePreference,
             )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                ToggleRow(
+                    label = stringResource(R.string.settings_dynamic_colors_label),
+                    description = stringResource(R.string.settings_dynamic_colors_description),
+                    checked = settings.dynamicColorsEnabled,
+                    onToggle = onDynamicColors,
+                )
+            }
             ToggleRow(
                 label = stringResource(R.string.settings_particles_label),
                 description = stringResource(R.string.settings_particles_description),

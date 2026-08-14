@@ -23,6 +23,8 @@
     <string name="ambient_birds">Birds chirping</string>
     <string name="ambient_cafe">Café ambience</string>
     <string name="ambient_wind">Wind</string>
+    <string name="ambient_crickets">Crickets</string>
+    <string name="ambient_stream">Stream</string>
 
     <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
          under each hints at the mental state it nudges toward. -->
@@ -106,6 +108,8 @@
     <string name="settings_theme_system">System</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_theme_dark">Dark</string>
+    <string name="settings_dynamic_colors_label">Dynamic colors</string>
+    <string name="settings_dynamic_colors_description">Tint the app with colors from your wallpaper (Material You)</string>
     <string name="settings_particles_label">Background particles</string>
     <string name="settings_particles_description">Animated dots behind the active color</string>
     <string name="settings_waves_label">Ripple animation</string>

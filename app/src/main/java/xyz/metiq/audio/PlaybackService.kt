@@ -7,11 +7,21 @@ import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.os.Binder
 import android.os.IBinder
+import android.os.SystemClock
 import androidx.annotation.OptIn
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaSession
 import androidx.media3.session.MediaSessionService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 @OptIn(markerClass = [UnstableApi::class])
 class PlaybackService : MediaSessionService() {
@@ -25,14 +35,22 @@ class PlaybackService : MediaSessionService() {
     @Volatile
     private var requestFocusEnabled = false
 
+    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    private var timerJob: Job? = null
+    private val timerRemainingSeconds = MutableStateFlow<Long?>(null)
+
     inner class EngineBinder : Binder() {
         val engine: AudioEngine get() = this@PlaybackService.engine
+        val timerRemainingSeconds: StateFlow<Long?>
+            get() = this@PlaybackService.timerRemainingSeconds
         fun setActiveColor(label: String?, tintArgb: Int?) {
             this@PlaybackService.player.setActiveColor(label, tintArgb)
         }
         fun requestAudioFocusNow(): Boolean = this@PlaybackService.requestAudioFocus()
         fun setRequestAudioFocus(enabled: Boolean) =
             this@PlaybackService.setRequestAudioFocus(enabled)
+        fun startSleepTimer(seconds: Long) = this@PlaybackService.startSleepTimer(seconds)
+        fun cancelSleepTimer() = this@PlaybackService.cancelSleepTimer()
     }
 
     private val engineBinder = EngineBinder()
@@ -98,6 +116,7 @@ class PlaybackService : MediaSessionService() {
     }
 
     override fun onDestroy() {
+        serviceScope.cancel()
         abandonAudioFocus()
         session?.run {
             player.removeListener(playerListener)
@@ -108,7 +127,36 @@ class PlaybackService : MediaSessionService() {
         super.onDestroy()
     }
 
+    private fun startSleepTimer(seconds: Long) {
+        timerJob?.cancel()
+        if (seconds <= 0L) {
+            timerRemainingSeconds.value = null
+            return
+        }
+        timerRemainingSeconds.value = seconds
+        timerJob = serviceScope.launch {
+            val deadline = SystemClock.elapsedRealtime() + seconds * 1000L
+            while (true) {
+                val leftMs = deadline - SystemClock.elapsedRealtime()
+                if (leftMs <= 0L) break
+                timerRemainingSeconds.value = (leftMs + 999L) / 1000L
+                delay(minOf(1000L, leftMs))
+            }
+            engine.stopAllTimerFade()
+            player.setActiveColor(null, null)
+            player.stop()
+            timerRemainingSeconds.value = null
+        }
+    }
+
+    private fun cancelSleepTimer() {
+        timerJob?.cancel()
+        timerJob = null
+        timerRemainingSeconds.value = null
+    }
+
     private fun hardStop() {
+        cancelSleepTimer()
         engine.release()
         player.setActiveColor(null, null)
         player.notifyStopped()

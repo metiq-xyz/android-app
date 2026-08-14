@@ -1,0 +1,3 @@
+• Risolto il suono che non ripartiva dopo l'arresto dalla notifica
+• Risolto un lampeggio di colore sul cursore del volume binaurale
+• I cambi di lingua si applicano subito; traduzione polacca aggiornata

@@ -1,0 +1,1 @@
+• Nouveau: couleurs dynamiques (Material You) — teinte l'application avec les couleurs de votre fond d'écran, option dans Apparence (Android 12+)

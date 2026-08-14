@@ -17,6 +17,8 @@
     <string name="ambient_birds">Canto dos pássaros</string>
     <string name="ambient_cafe">Ambiente de café</string>
     <string name="ambient_wind">Vento</string>
+    <string name="ambient_crickets">Grilos</string>
+    <string name="ambient_stream">Riacho</string>
 
     <string name="binaural_now_playing">Batidas binaurais</string>
     <string name="binaural_fab_label">Binaurais</string>
@@ -67,6 +69,8 @@
     <string name="settings_theme_system">Sistema</string>
     <string name="settings_theme_light">Claro</string>
     <string name="settings_theme_dark">Escuro</string>
+    <string name="settings_dynamic_colors_label">Cores dinâmicas</string>
+    <string name="settings_dynamic_colors_description">Aplica ao app as cores do seu papel de parede (Material You)</string>
     <string name="settings_particles_label">Partículas de fundo</string>
     <string name="settings_particles_description">Pontos animados atrás da cor ativa</string>
     <string name="settings_waves_label">Animação de ondas</string>

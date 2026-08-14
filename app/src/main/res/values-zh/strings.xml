@@ -17,6 +17,8 @@
     <string name="ambient_birds">鸟鸣</string>
     <string name="ambient_cafe">咖啡厅</string>
     <string name="ambient_wind">风</string>
+    <string name="ambient_crickets">蟋蟀</string>
+    <string name="ambient_stream">溪流</string>
 
     <string name="binaural_now_playing">双耳差频</string>
     <!-- Button label: -->
@@ -68,6 +70,8 @@
     <string name="settings_theme_system">跟随系统</string>
     <string name="settings_theme_light">亮</string>
     <string name="settings_theme_dark">暗</string>
+    <string name="settings_dynamic_colors_label">动态取色</string>
+    <string name="settings_dynamic_colors_description">根据壁纸为应用着色（Material You）</string>
     <string name="settings_particles_label">背景粒子</string>
     <string name="settings_particles_description">显示与播放中声音的颜色同色的颗粒动画</string>
     <string name="settings_waves_label">波纹动画</string>

@@ -38,6 +38,8 @@ data class MetiqColorTokens(
     val ambientBirds: Color,
     val ambientCafe: Color,
     val ambientWind: Color,
+    val ambientCrickets: Color,
+    val ambientStream: Color,
 )
 
 object MetiqColors {
@@ -51,6 +53,8 @@ object MetiqColors {
     private val AmbientBirds = Color(0xFF4CAF7D)
     private val AmbientCafe = Color(0xFFB8862B)
     private val AmbientWind = Color(0xFF3AA6B9)
+    private val AmbientCrickets = Color(0xFF8FAE3C)
+    private val AmbientStream = Color(0xFF4FC3E8)
 
     private val BinauralDelta = Color(0xFF7B6CF6)
     private val BinauralTheta = Color(0xFF4C7BE8)
@@ -92,6 +96,8 @@ object MetiqColors {
         ambientBirds = AmbientBirds,
         ambientCafe = AmbientCafe,
         ambientWind = AmbientWind,
+        ambientCrickets = AmbientCrickets,
+        ambientStream = AmbientStream,
     )
 
     val Light = MetiqColorTokens(
@@ -128,5 +134,7 @@ object MetiqColors {
         ambientBirds = AmbientBirds,
         ambientCafe = AmbientCafe,
         ambientWind = AmbientWind,
+        ambientCrickets = AmbientCrickets,
+        ambientStream = AmbientStream,
     )
 }

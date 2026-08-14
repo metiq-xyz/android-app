@@ -1,0 +1,3 @@
+• Fixed sound not restarting after stopping it from the notification
+• Fixed a color flash on the binaural volume slider
+• Language changes now apply instantly; Polish translation refreshed

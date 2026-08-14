@@ -25,7 +25,7 @@ LOOP_S=45          # loop length to ship (shorter masters use their full length)
 CROSSFADE_S=3      # tail-into-head crossfade
 TARGET_LUFS=-16
 
-KNOWN_IDS="seawaves rain fire birds cafe wind"
+KNOWN_IDS="seawaves rain fire birds cafe wind crickets stream"
 
 for src in "$MASTERS"/*; do
     id=$(basename "${src%.*}")
