@@ -24,7 +24,7 @@
     <!-- Button label: -->
     <string name="binaural_fab_label">双耳差频</string>
     <string name="binaural_noti_label">%1$s双耳差频</string>
-    <string name="binaural_headphone_notice">请使用耳机：要产生双耳差频效果，每只耳朵需要听到不同的音调。</string>
+    <string name="binaural_headphone_notice">请佩戴耳机：要产生双耳差频效果，每只耳朵需要听到不同的音调。</string>
     <string name="binaural_volume">音量</string>
     <string name="binaural_delta_feel">深睡</string>
     <string name="binaural_theta_feel">冥想</string>
@@ -75,7 +75,7 @@
     <string name="settings_particles_label">背景粒子</string>
     <string name="settings_particles_description">显示与播放中声音的颜色同色的颗粒动画</string>
     <string name="settings_waves_label">波纹动画</string>
-    <string name="settings_waves_description">播放声音周围扩散的圆环</string>
+    <string name="settings_waves_description">播放中的声音周围扩散的圆环</string>
 
     <string name="settings_section_language">语言</string>
     <string name="settings_language_label">语言</string>
