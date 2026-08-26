@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
+import android.os.Process
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ import kotlin.math.sqrt
 private const val FADE_STEP_MS = 10L
 private const val MAX_FADE_MILLIS = 30_000L
 private const val NOISE_BLOCK_FRAMES = 1024
+private const val BUFFER_BLOCKS = 16
 private const val WARMTH_GLIDE = 0.2f
 private const val SYNTH_SAMPLE_RATE = 48000
 private const val SYNTH_BLOCK_FRAMES = 1024
@@ -135,7 +137,7 @@ class AudioEngine(private val context: Context) {
         val minBuf = AudioTrack.getMinBufferSize(
             pcm.sampleRate, pcm.channelMask, AudioFormat.ENCODING_PCM_16BIT,
         )
-        val desired = NOISE_BLOCK_FRAMES * pcm.channelCount * 2 * 4
+        val desired = NOISE_BLOCK_FRAMES * pcm.channelCount * 2 * BUFFER_BLOCKS
         val t = buildTrack(pcm.sampleRate, pcm.channelMask, maxOf(minBuf, desired), stream = true)
         t.setVolume(effective)
         return t
@@ -174,46 +176,67 @@ class AudioEngine(private val context: Context) {
             
             var pos = 0
             var started = false
+            var bypassed = false
+            val previousPriority = Process.getThreadPriority(Process.myTid())
+            Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_AUDIO)
+
+            fun copyBlock() {
+                var f = 0
+                while (f < block) {
+                    val n = minOf(block - f, frames - pos)
+                    System.arraycopy(src, pos * ch, buf, f * ch, n * ch)
+                    pos += n
+                    f += n
+                    if (pos >= frames) pos = 0
+                }
+            }
+
             try {
                 while (isActive) {
                     if (filtered) {
                         val target = warmthCutoffHz(warmth).coerceIn(2200f, fcMax)
                         fc += (target - fc) * WARMTH_GLIDE
-                        recompute(fc.toDouble())
-                        for (f in 0 until block) {
-                            val base = pos * ch
-                            for (c in 0 until ch) {
-                                val x0 = src[base + c].toDouble()
-                                val y0 = b0 * x0 + b1 * x1[c] + b2 * x2[c] - a1 * y1[c] - a2 * y2[c]
-                                x2[c] = x1[c]; x1[c] = x0; y2[c] = y1[c]; y1[c] = y0
-                                buf[f * ch + c] = y0.coerceIn(-32768.0, 32767.0).toInt().toShort()
+                        if (warmth == 0f && target - fc < 1f) {
+                            bypassed = true
+                            copyBlock()
+                        } else {
+                            if (bypassed) {
+                                val base = pos * ch
+                                for (c in 0 until ch) {
+                                    val x0 = src[base + c].toDouble()
+                                    x1[c] = x0; x2[c] = x0; y1[c] = x0; y2[c] = x0
+                                }
+                                bypassed = false
                             }
-                            pos++
-                            if (pos >= frames) pos = 0
+                            recompute(fc.toDouble())
+                            for (f in 0 until block) {
+                                val base = pos * ch
+                                for (c in 0 until ch) {
+                                    val x0 = src[base + c].toDouble()
+                                    val y0 = b0 * x0 + b1 * x1[c] + b2 * x2[c] - a1 * y1[c] - a2 * y2[c]
+                                    x2[c] = x1[c]; x1[c] = x0; y2[c] = y1[c]; y1[c] = y0
+                                    buf[f * ch + c] = y0.coerceIn(-32768.0, 32767.0).toInt().toShort()
+                                }
+                                pos++
+                                if (pos >= frames) pos = 0
+                            }
                         }
                     } else {
-                        var f = 0
-                        while (f < block) {
-                            val n = minOf(block - f, frames - pos)
-                            System.arraycopy(src, pos * ch, buf, f * ch, n * ch)
-                            pos += n
-                            f += n
-                            if (pos >= frames) pos = 0
-                        }
+                        copyBlock()
                     }
                     var off = 0
                     while (off < total && isActive) {
-                        val n = track.write(buf, off, total - off, AudioTrack.WRITE_NON_BLOCKING)
+                        val n = track.write(buf, off, total - off, AudioTrack.WRITE_BLOCKING)
                         if (n < 0) return@launch
                         off += n
                         if (!started && off > 0) {
                             track.play()
                             started = true
                         }
-                        if (off < total) delay(5)
                     }
                 }
             } finally {
+                Process.setThreadPriority(previousPriority)
                 runCatching { track.stop() }
                 runCatching { track.release() }
             }
@@ -261,7 +284,7 @@ class AudioEngine(private val context: Context) {
         val minBuf = AudioTrack.getMinBufferSize(
             SYNTH_SAMPLE_RATE, AudioFormat.CHANNEL_OUT_STEREO, AudioFormat.ENCODING_PCM_16BIT,
         )
-        val desired = SYNTH_BLOCK_FRAMES * 2 * 2 * 4 // frames * stereo * 16-bit * headroom
+        val desired = SYNTH_BLOCK_FRAMES * 2 * 2 * BUFFER_BLOCKS // frames * stereo * 16-bit * headroom
         val t = buildTrack(
             SYNTH_SAMPLE_RATE, AudioFormat.CHANNEL_OUT_STEREO, maxOf(minBuf, desired), stream = true,
         )
@@ -282,6 +305,8 @@ class AudioEngine(private val context: Context) {
             var curCarrier = carrierHz.toDouble()
             var curBeat = beatHz.toDouble()
             var started = false
+            val previousPriority = Process.getThreadPriority(Process.myTid())
+            Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_AUDIO)
             try {
                 while (isActive) {
                     curCarrier += (carrierHz - curCarrier) * SYNTH_GLIDE
@@ -296,17 +321,17 @@ class AudioEngine(private val context: Context) {
                     }
                     var off = 0
                     while (off < total && isActive) {
-                        val n = track.write(buf, off, total - off, AudioTrack.WRITE_NON_BLOCKING)
+                        val n = track.write(buf, off, total - off, AudioTrack.WRITE_BLOCKING)
                         if (n < 0) return@launch
                         off += n
                         if (!started && off > 0) {
                             track.play()
                             started = true
                         }
-                        if (off < total) delay(5)
                     }
                 }
             } finally {
+                Process.setThreadPriority(previousPriority)
                 runCatching { track.stop() }
                 runCatching { track.release() }
             }
@@ -441,7 +466,7 @@ class AudioEngine(private val context: Context) {
         val mode = if (stream) AudioTrack.MODE_STREAM else AudioTrack.MODE_STATIC
         return AudioTrack.Builder().setAudioAttributes(attrs).setAudioFormat(format)
             .setBufferSizeInBytes(bufferBytes).setTransferMode(mode)
-            .setPerformanceMode(AudioTrack.PERFORMANCE_MODE_LOW_LATENCY)
+            .setPerformanceMode(AudioTrack.PERFORMANCE_MODE_POWER_SAVING)
             .build()
     }
 }
