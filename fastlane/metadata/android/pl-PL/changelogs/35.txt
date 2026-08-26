@@ -1,0 +1,3 @@
+• Naprawiono losowe przerwy i trzaski w dźwięku, zwłaszcza przez Bluetooth
+• Znacznie mniejsze zużycie baterii podczas odtwarzania
+• Ulepszone tłumaczenie na chiński uproszczony

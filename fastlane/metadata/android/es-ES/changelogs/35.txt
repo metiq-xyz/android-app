@@ -1,0 +1,3 @@
+• Corregidos cortes y clics aleatorios en el audio, sobre todo por Bluetooth
+• Consumo de batería mucho menor durante la reproducción
+• Traducción al chino simplificado mejorada

@@ -1,0 +1,3 @@
+• Fixed random audio stuttering and clicks, especially on Bluetooth
+• Much lower battery use during playback
+• Improved simplified Chinese translation

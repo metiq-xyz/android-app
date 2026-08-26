@@ -1,0 +1,3 @@
+• Correction de saccades et clics aléatoires dans l'audio, surtout en Bluetooth
+• Consommation de batterie bien plus faible pendant la lecture
+• Traduction en chinois simplifié améliorée

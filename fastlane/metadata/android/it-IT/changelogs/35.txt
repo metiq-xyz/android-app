@@ -1,0 +1,3 @@
+• Risolti scatti e clic casuali nell'audio, soprattutto via Bluetooth
+• Consumo di batteria molto ridotto durante la riproduzione
+• Traduzione in cinese semplificato migliorata

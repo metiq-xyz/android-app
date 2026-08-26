@@ -1,0 +1,3 @@
+• Corrigidos engasgos e cliques aleatórios no áudio, principalmente via Bluetooth
+• Consumo de bateria bem menor durante a reprodução
+• Tradução para chinês simplificado aprimorada
