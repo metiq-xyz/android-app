@@ -1,1 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Metiq</string>
 
+    <!-- Help modal (opened from the circled question mark on the Noise/Ambient screens) -->
+    <string name="help_cd">مساعدة</string>
+    <string name="help_title">كيف يعمل؟ </string>
+    <string name="home_helper">اضغط على لون ضوضاء لتشغيله أو إيقافه.\n يمكنك ضبط مؤقت إذا أردت أن ينطفئ تلقائياً.\nهل هو مزعج جداً أم قاسٍ؟ قم بتلطيف وتنعيم الصوت في الإعدادات.\nتفضل بدايات وتوقف للصوت هادئة؟ اضبط تلاشي الصوت في الإعدادات.</string>
+    <string name="ambient_helper">اضغط على الكرة لتشغيلها، ثم اضغط عليها مرة أخرى لإيقافها.\nاضغط على الكرة لبدء الصوت، ثم اسحب المنزل الخاص بها لضبط مستوى الصوت.\nاحفظ المزيج الخاص بك باستخدام "حفظ المزيج"، واستخدم أيقونة النفايات لحذفه.\nتفضل البدايات والتوقف الناعمة؟ اضبط طول التلاشي في الإعدادات.</string>
+    <string name="dialog_ok" translatable="false">OK</string>
+
+    <!-- Bottom navigation tabs -->
+    <string name="tab_noise">الضوضاء</string>
+    <string name="tab_ambient">الأجواء</string>
+    <string name="tab_settings">الإعدادات</string>
+
+    <!-- Ambient mixer -->
+    <string name="ambient_off">متوقف</string>
+    <string name="ambient_now_playing">مزيج محيطي</string>
+    <string name="ambient_seawaves">أمواج البحر</string>
+    <string name="ambient_rain">المطر</string>
+    <string name="ambient_fire">فرقعة النار</string>
+    <string name="ambient_birds">تغريد الطيور</string>
+    <string name="ambient_cafe">أجواء المقهى</string>
+    <string name="ambient_wind">الرياح</string>
+    <string name="ambient_crickets">صراصير الليل</string>
+    <string name="ambient_stream">البث</string>
+
+    <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
+         under each hints at the mental state it nudges toward. -->
+    <string name="binaural_now_playing">النبضات الثنائية</string>
+    <string name="binaural_fab_label">النغمات الثنائية</string>
+    <!-- Notification suffix when a binaural beat plays; %1$s is the band's Greek letter -->
+    <string name="binaural_noti_label">%1$s نغمة ثنائية</string>
+    <string name="binaural_headphone_notice">Use headphones: each ear needs its own tone for the effect to work.</string>
+    <string name="binaural_volume">Volume</string>
+    <string name="binaural_delta" translatable="false">Delta</string>
+    <string name="binaural_theta" translatable="false">Theta</string>
+    <string name="binaural_alpha" translatable="false">Alpha</string>
+    <string name="binaural_beta" translatable="false">Beta</string>
+    <string name="binaural_gamma" translatable="false">Gamma</string>
+    <string name="binaural_delta_feel">النوم العميق</string>
+    <string name="binaural_theta_feel">التأمل</string>
+    <string name="binaural_alpha_feel">الاسترخاء</string>
+    <string name="binaural_beta_feel">التركيز</string>
+    <string name="binaural_gamma_feel">اليقظة</string>
+
+    <!-- Mix presets -->
+    <string name="mix_cabin">كوخ دافئ</string>
+    <string name="mix_beach">الشاطئ الاستوائي</string>
+    <string name="mix_bar">مكان مزدحم</string>
+
+    <!-- Custom mixes -->
+    <string name="mix_save_chip">احفظ المزيج</string>
+    <string name="mix_save_title">حفظ المزيج الحالي</string>
+    <string name="mix_save_name_hint">الاسم</string>
+    <string name="mix_save_confirm">حفظ</string>
+    <string name="mix_delete_title">حذف المزيج؟</string>
+    <string name="mix_delete_message">“%1$s” سيتم إزالتها.</string>
+    <string name="mix_delete_confirm">حذف</string>
+    <string name="dialog_cancel">إلغاء</string>
+
+    <!-- Noise colors (used in UI labels and default-color picker) -->
+    <string name="color_pink">وردي</string>
+    <string name="color_brown">بني</string>
+    <string name="color_white">أبيض</string>
+    <string name="color_grey">رمادي</string>
+
+    <!-- Notification / lock-screen title per color (full localized phrase, not "%s noise") -->
+    <string name="noise_title_pink">ضوضاء وردية</string>
+    <string name="noise_title_brown">ضوضاء بنية</string>
+    <string name="noise_title_white">ضوضاء بيضاء</string>
+    <string name="noise_title_grey">ضوضاء رمادية</string>
+    <string name="noise_title_idle" translatable="false">Metiq</string>
+
+    <!-- Timer cells + preset chip formatters -->
+    <string name="timer_label">المؤقت</string>
+    <string name="timer_start">بدء المؤقت</string>
+    <string name="timer_stop">إيقاف المؤقت</string>
+    <string name="timer_hours">ساعة</string>
+    <string name="timer_minutes">دقيقة</string>
+    <string name="timer_seconds">ثانية</string>
+    <string name="timer_preset_minutes" translatable="false">%1$dm</string>
+    <string name="timer_preset_hours" translatable="false">%1$dh</string>
+    <string name="timer_preset_hours_minutes" translatable="false">%1$dh %2$dm</string>
+
+    <!-- Settings: top bar -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_back_cd">رجوع</string>
+
+    <!-- Settings: sound section -->
+    <string name="settings_section_sound">الصوت</string>
+    <string name="settings_warmth_label">النعومة</string>
+    <string name="settings_warmth_description">تنعيم الصوت العالي ليخفف من ألوان الضوضاء القاسية. الأصوات المحيطة لن تتأثر.</string>
+    <string name="settings_warmth_bright">برايت</string>
+    <string name="settings_warmth_warm">دافئ</string>
+    <string name="settings_fade_label">تلاشي</string>
+    <string name="settings_fade_description">مدة تتلاشى وبدء الصوت عند بدء أو إيقاف أو تبديل الأصوات.</string>
+    <string name="settings_fade_unit" translatable="false">s</string>
+    <string name="settings_timer_fade_label">مدة التلاشي</string>
+    <string name="settings_timer_fade_description">مدة التلاشي الخاصة بالمؤقت تستخدم عند انتهاء التشغيل.</string>
+    <string name="settings_request_focus_label">طلب تركيز صوتي</string>
+    <string name="settings_request_focus_description">أوقف بعض الأصوات الأخرى مثل الموسيقى أو البودكاست أثناء تشغيل الأصوات.</string>
+
+    <!-- Settings: appearance section -->
+    <string name="settings_section_appearance">المظهر</string>
+    <string name="settings_theme_label">الثيم</string>
+    <string name="settings_theme_system">النطام</string>
+    <string name="settings_theme_light">فاتح</string>
+    <string name="settings_theme_dark">داكن</string>
+    <string name="settings_dynamic_colors_label">الألوان الديناميكية</string>
+    <string name="settings_dynamic_colors_description">قم بتلوين التطبيق بألوان من خلفية الجهاز (Material You)</string>
+    <string name="settings_particles_label">خلفية الجسيمات</string>
+    <string name="settings_particles_description">نقاط متحركة خلف اللون النشط</string>
+    <string name="settings_waves_label">الرسوم المتحركة التموجية</string>
+    <string name="settings_waves_description">الحلقات المتوسعة حول كرة نشغيل الصوت الحالي</string>
+
+    <!-- Settings: language section -->
+    <string name="settings_section_language">اللغة</string>
+    <string name="settings_language_label">Language</string>
+    <string name="settings_language_system">النظام الإفتراضي</string>
+    <string name="settings_language_english" translatable="false">English</string>
+    <string name="settings_language_italian" translatable="false">Italiano</string>
+    <string name="settings_language_spanish" translatable="false">Español</string>
+    <string name="settings_language_french" translatable="false">Français</string>
+    <string name="settings_language_portuguese" translatable="false">Português</string>
+    <string name="settings_language_polish" translatable="false">Polski</string>
+    <string name="settings_language_chinese" translatable="false">简体中文</string>
+
+    <!-- Settings: timer presets section -->
+    <string name="settings_section_timer_presets">الإعدادات المسبقة للمؤقت (دقائق)</string>
+    <string name="settings_timer_unit_min">دقيقة</string>
+    <string name="settings_timer_save">حفظ الإعدادات المسبقة</string>
+
+    <!-- Settings: support section -->
+    <string name="settings_section_support">الدعم</string>
+    <string name="settings_rate_label">قيم Metiq في %1$s</string>
+    <string name="settings_donate_description">Metiq مجاني إلى الأبد. تبرع صغير يحافظ على هذا الحال.</string>
+    <string name="settings_donate_kofi_label">اشتر لنا قهوة على Ko-fi</string>
+    <string name="settings_donate_github_label">راعنا على GitHub</string>
+
+    <!-- Rate prompt (swipeable note) -->
+    <string name="rate_prompt_title">تستمتع بـ Metiq?</string>
+    <string name="rate_prompt_message">قيمنا على %1$s أو تبرع لنا ليبقى مجاني</string>
+    <string name="rate_prompt_cta">Rate</string>
+    <string name="rate_prompt_feedback_cta">التعليقات</string>
+    <string name="rate_prompt_donate_cta">التبرع</string>
+    <string name="rate_prompt_dismiss_cd">تجاهل</string>
+
+    <!-- Settings: about section -->
+    <string name="settings_section_about">عن التطبيق</string>
+    <string name="settings_about_version">الإصدار</string>
+    <string name="settings_about_open_licenses">تراخيص مفتوحة المصدر</string>
+
+    <!-- Licenses screen -->
+    <string name="licenses_title">تراخيص مفتوحة المصدر</string>
+    <string name="licenses_intro">Metiq مبنية على أعمال الآخرين. تراخيصهم تتبع ذلك.</string>
+    <string name="licenses_inter_title" translatable="false">Inter</string>
+    <string name="licenses_inter_body" translatable="false">Variable font by Rasmus Andersson, used as the app\'s display + body typeface. Licensed under the SIL Open Font License 1.1. Full license text: https://openfontlicense.org</string>
+    <string name="licenses_apache2_title" translatable="false">Apache License 2.0</string>
+    <string name="licenses_apache2_body" translatable="false">Used by Jetpack Compose, Material 3, AndroidX Lifecycle, AndroidX DataStore, AndroidX AppCompat and AndroidX Media3. Full license text: https://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="licenses_kotlin_title" translatable="false">Kotlin standard library</string>
+    <string name="licenses_kotlin_body" translatable="false">Apache License 2.0. © JetBrains s.r.o. and Kotlin Programming Language contributors.</string>
+</resources>
