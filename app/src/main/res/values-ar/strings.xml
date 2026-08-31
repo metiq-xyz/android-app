@@ -5,8 +5,8 @@
     <!-- Help modal (opened from the circled question mark on the Noise/Ambient screens) -->
     <string name="help_cd">مساعدة</string>
     <string name="help_title">كيف يعمل؟ </string>
-    <string name="home_helper">اضغط على لون ضوضاء لتشغيله أو إيقافه.\n يمكنك ضبط مؤقت إذا أردت أن ينطفئ تلقائياً.\nهل هو مزعج جداً أم قاسٍ؟ قم بتلطيف وتنعيم الصوت في الإعدادات.\nتفضل بدايات وتوقف للصوت هادئة؟ اضبط تلاشي الصوت في الإعدادات.</string>
-    <string name="ambient_helper">اضغط على الكرة لتشغيلها، ثم اضغط عليها مرة أخرى لإيقافها.\nاضغط على الكرة لبدء الصوت، ثم اسحب المنزل الخاص بها لضبط مستوى الصوت.\nاحفظ المزيج الخاص بك باستخدام "حفظ المزيج"، واستخدم أيقونة النفايات لحذفه.\nتفضل البدايات والتوقف الناعمة؟ اضبط طول التلاشي في الإعدادات.</string>
+    <string name="home_helper">اضغط على لون الضوضاء لتشغيله أو إيقافه.\n يمكنك ضبط مؤقت إذا أردت أن ينطفئ تلقائياً.\nهل الصوت حاد جداً أو قاسٍ؟ قم بتلطيف وتنعيم الصوت في الإعدادات.\nتفضل بدايات وتوقفات هادئة؟ اضبط مدة تلاشي الصوت في الإعدادات.</string>
+    <string name="ambient_helper">اضغط على الإعداد المسبق لتشغيله، واضغط عليه مرة أخرى لإيقافه.\nاضغط على الكرة لبدء الصوت، ثم اسحب المنزلق الخاص بها لضبط مستوى الصوت.\nاحفظ المزيج الخاص بك باستخدام "حفظ المزيج"، واستخدم أيقونة سلة المهملات لحذفه.\nتفضل بدايات وتوقفات ناعمة؟ اضبط مدة التلاشي في الإعدادات.</string>
     <string name="dialog_ok" translatable="false">OK</string>
 
     <!-- Bottom navigation tabs -->
@@ -32,8 +32,8 @@
     <string name="binaural_fab_label">النغمات الثنائية</string>
     <!-- Notification suffix when a binaural beat plays; %1$s is the band's Greek letter -->
     <string name="binaural_noti_label">%1$s نغمة ثنائية</string>
-    <string name="binaural_headphone_notice">Use headphones: each ear needs its own tone for the effect to work.</string>
-    <string name="binaural_volume">Volume</string>
+    <string name="binaural_headphone_notice">استخدم سماعات الرأس: تحتاج كل أُذن إلى نغمة خاصة بها لكي يعمل التأثير.</string>
+    <string name="binaural_volume">مستوى الصوت</string>
     <string name="binaural_delta" translatable="false">Delta</string>
     <string name="binaural_theta" translatable="false">Theta</string>
     <string name="binaural_alpha" translatable="false">Alpha</string>
@@ -56,7 +56,7 @@
     <string name="mix_save_name_hint">الاسم</string>
     <string name="mix_save_confirm">حفظ</string>
     <string name="mix_delete_title">حذف المزيج؟</string>
-    <string name="mix_delete_message">“%1$s” سيتم إزالتها.</string>
+    <string name="mix_delete_message">“%1$s” سيتم حذفه.</string>
     <string name="mix_delete_confirm">حذف</string>
     <string name="dialog_cancel">إلغاء</string>
 
@@ -91,21 +91,21 @@
     <!-- Settings: sound section -->
     <string name="settings_section_sound">الصوت</string>
     <string name="settings_warmth_label">النعومة</string>
-    <string name="settings_warmth_description">تنعيم الصوت العالي ليخفف من ألوان الضوضاء القاسية. الأصوات المحيطة لن تتأثر.</string>
-    <string name="settings_warmth_bright">برايت</string>
+    <string name="settings_warmth_description">يخفف من الترددات العالية لجعل أصوات الضوضاء أقل حدة. الأصوات المحيطة لا تتأثر به.</string>
+    <string name="settings_warmth_bright">ساطع</string>
     <string name="settings_warmth_warm">دافئ</string>
     <string name="settings_fade_label">تلاشي</string>
-    <string name="settings_fade_description">مدة تتلاشى وبدء الصوت عند بدء أو إيقاف أو تبديل الأصوات.</string>
+    <string name="settings_fade_description">المدة التي يستغرقها الصوت في التلاشي التدريجي عند بدء التشغيل أو إيقافه أو التبديل بين الأصوات.</string>
     <string name="settings_fade_unit" translatable="false">s</string>
     <string name="settings_timer_fade_label">مدة التلاشي</string>
     <string name="settings_timer_fade_description">مدة التلاشي الخاصة بالمؤقت تستخدم عند انتهاء التشغيل.</string>
     <string name="settings_request_focus_label">طلب تركيز صوتي</string>
-    <string name="settings_request_focus_description">أوقف بعض الأصوات الأخرى مثل الموسيقى أو البودكاست أثناء تشغيل الأصوات.</string>
+    <string name="settings_request_focus_description">إيقاف الأصوات الأخرى مثل الموسيقى أو البودكاست مؤقتاً أثناء تشغيل أصوات التطبيق.</string>
 
     <!-- Settings: appearance section -->
     <string name="settings_section_appearance">المظهر</string>
     <string name="settings_theme_label">الثيم</string>
-    <string name="settings_theme_system">النطام</string>
+    <string name="settings_theme_system">النظام</string>
     <string name="settings_theme_light">فاتح</string>
     <string name="settings_theme_dark">داكن</string>
     <string name="settings_dynamic_colors_label">الألوان الديناميكية</string>
@@ -113,12 +113,12 @@
     <string name="settings_particles_label">خلفية الجسيمات</string>
     <string name="settings_particles_description">نقاط متحركة خلف اللون النشط</string>
     <string name="settings_waves_label">الرسوم المتحركة التموجية</string>
-    <string name="settings_waves_description">الحلقات المتوسعة حول كرة نشغيل الصوت الحالي</string>
+    <string name="settings_waves_description">الحلقات المتوسعة حول الأصوات المشغّلة.</string>
 
     <!-- Settings: language section -->
     <string name="settings_section_language">اللغة</string>
-    <string name="settings_language_label">Language</string>
-    <string name="settings_language_system">النظام الإفتراضي</string>
+    <string name="settings_language_label">اللغة</string>
+    <string name="settings_language_system">النظام الافتراضي</string>
     <string name="settings_language_english" translatable="false">English</string>
     <string name="settings_language_italian" translatable="false">Italiano</string>
     <string name="settings_language_spanish" translatable="false">Español</string>
@@ -142,7 +142,7 @@
     <!-- Rate prompt (swipeable note) -->
     <string name="rate_prompt_title">تستمتع بـ Metiq?</string>
     <string name="rate_prompt_message">قيمنا على %1$s أو تبرع لنا ليبقى مجاني</string>
-    <string name="rate_prompt_cta">Rate</string>
+    <string name="rate_prompt_cta">تقييم</string>
     <string name="rate_prompt_feedback_cta">التعليقات</string>
     <string name="rate_prompt_donate_cta">التبرع</string>
     <string name="rate_prompt_dismiss_cd">تجاهل</string>
@@ -154,7 +154,7 @@
 
     <!-- Licenses screen -->
     <string name="licenses_title">تراخيص مفتوحة المصدر</string>
-    <string name="licenses_intro">Metiq مبنية على أعمال الآخرين. تراخيصهم تتبع ذلك.</string>
+    <string name="licenses_intro">يعتمد تطبيق Metiq على أعمال الآخرين. وترد تراخيصهم فيما يلي.</string>
     <string name="licenses_inter_title" translatable="false">Inter</string>
     <string name="licenses_inter_body" translatable="false">Variable font by Rasmus Andersson, used as the app\'s display + body typeface. Licensed under the SIL Open Font License 1.1. Full license text: https://openfontlicense.org</string>
     <string name="licenses_apache2_title" translatable="false">Apache License 2.0</string>
