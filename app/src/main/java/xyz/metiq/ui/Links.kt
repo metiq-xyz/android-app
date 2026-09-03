@@ -9,16 +9,18 @@ const val KOFI_URL = "https://ko-fi.com/metiq"
 const val FEEDBACK_URL =
     "https://github.com/metiq-xyz/android-app/issues/new?template=feedback.yml"
 
+private fun viewIntent(url: String): Intent =
+    Intent(Intent.ACTION_VIEW, url.toUri()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
 fun openUrl(context: Context, url: String) {
     runCatching {
-        context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
+        context.startActivity(viewIntent(url))
     }
 }
 
 fun openUrlWithFallback(context: Context, primary: String, fallback: String) {
-    val intent = Intent(Intent.ACTION_VIEW, primary.toUri())
-    val ok = runCatching { context.startActivity(intent) }.isSuccess
-    if (!ok) runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, fallback.toUri())) }
+    val ok = runCatching { context.startActivity(viewIntent(primary)) }.isSuccess
+    if (!ok) runCatching { context.startActivity(viewIntent(fallback)) }
 }
 
 fun openStoreRating(context: Context) {
