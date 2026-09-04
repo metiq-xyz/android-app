@@ -29,7 +29,7 @@ android {
     }
 
     androidResources {
-        localeFilters += listOf("en", "it", "es", "fr", "pt", "pl", "zh")
+        localeFilters += listOf("en", "it", "es", "fr", "pt", "pl", "zh", "ar")
     }
 
     signingConfigs {

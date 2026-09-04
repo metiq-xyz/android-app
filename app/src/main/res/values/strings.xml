@@ -126,6 +126,7 @@
     <string name="settings_language_portuguese" translatable="false">Português</string>
     <string name="settings_language_polish" translatable="false">Polski</string>
     <string name="settings_language_chinese" translatable="false">简体中文</string>
+    <string name="settings_language_arabic" translatable="false">العربية</string>
 
     <!-- Settings: timer presets section -->
     <string name="settings_section_timer_presets">Timer presets (minutes)</string>

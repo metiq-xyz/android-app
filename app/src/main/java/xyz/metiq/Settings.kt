@@ -98,7 +98,7 @@ private fun decodeCustomMixes(encoded: String): List<CustomMix> =
         if (name.isNotEmpty() && layers.isNotEmpty()) CustomMix(name, layers) else null
     }.take(MAX_CUSTOM_MIXES).toList()
 
-val SUPPORTED_LANGUAGE_TAGS: List<String> = listOf("en", "it", "es", "fr", "pt", "pl", "zh")
+val SUPPORTED_LANGUAGE_TAGS: List<String> = listOf("en", "it", "es", "fr", "pt", "pl", "zh", "ar")
 
 // Rate-prompt policy: only nudge once the user has clearly stuck around, and
 // re-nudge sparingly after a swipe-away so it never feels nagging.

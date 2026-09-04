@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- F-Droid flavor: "rating" is starring the GitHub repo. -->
 <resources>
-    <string name="rate_prompt_message">انضموا لنا على GitHub، أخبرنا بما تفتقد، أو تبرع .</string>
+    <string name="rate_prompt_message">ضع لنا نجمة على GitHub، أخبرنا بما ينقصك، أو تبرّع.</string>
     <string name="rate_prompt_cta">نجمة</string>
     <string name="settings_rate_label">اعطِ نجمة لـ Metiq على GitHub</string>
 </resources>
