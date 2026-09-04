@@ -9,7 +9,7 @@ Ruído colorido
 • Ruído cinza — perceptualmente plano, feito para soar uniforme em todo o espectro.
 
 Sons ambientes
-• Ondas do mar, chuva, fogo crepitando, pássaros cantando, ambiente de café e vento.
+• Ondas do mar, chuva, fogo crepitando, pássaros cantando, ambiente de café, vento, grilos e um riacho.
 • Comece por um preset ou combine sons da natureza no seu próprio mix relaxante, ajuste cada nível e salve como preset.
 
 Batidas binaurais
@@ -17,9 +17,10 @@ Batidas binaurais
 • Cada faixa induz um estado mental diferente: sono profundo, meditação, relaxamento, foco, atenção.
 
 Recursos
-• Quatro ruídos coloridos, seis sons ambientes e cinco faixas binaurais, em loop contínuo.
+• Quatro ruídos coloridos, oito sons ambientes e cinco faixas binaurais, em loop contínuo.
 • Sobreponha e misture sons ambientes, com presets rápidos e seus próprios mixes salvos.
 • Timer de sono com presets rápidos e horas/minutos/segundos personalizados.
+• Cores dinâmicas opcionais (Material You): o app se colore com o seu papel de parede (Android 12+).
 • Integração com a sessão de mídia: controle a reprodução pela tela de bloqueio, notificação ou fone Bluetooth.
 • Funciona totalmente offline. O áudio vem incluído — sem streaming, sem conta, sem permissão de internet.
 • Sem anúncios. Sem rastreamento. Sem analytics. Sem SDKs de terceiros.

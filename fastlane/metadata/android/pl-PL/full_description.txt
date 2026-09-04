@@ -9,7 +9,7 @@ Kolorowe szumy
 • Szary szum — percepcyjnie płaski, zaprojektowany tak, by brzmieć równo w całym paśmie.
 
 Dźwięki otoczenia
-• Fale morskie, deszcz, trzask ognia, śpiew ptaków, gwar kawiarni i wiatr.
+• Fale morskie, deszcz, trzask ognia, śpiew ptaków, gwar kawiarni, wiatr, świerszcze i strumień.
 • Zacznij od presetu albo połącz odgłosy natury we własny relaksujący miks, ustaw poziom każdego z nich i zapisz jako preset.
 
 Dudnienia binauralne
@@ -17,9 +17,10 @@ Dudnienia binauralne
 • Każde pasmo sprzyja innemu stanowi umysłu: głęboki sen, medytacja, relaks, skupienie, czujność.
 
 Funkcje
-• Cztery kolorowe szumy, sześć dźwięków otoczenia i pięć pasm binauralnych, zapętlone bezszwowo.
+• Cztery kolorowe szumy, osiem dźwięków otoczenia i pięć pasm binauralnych, zapętlone bezszwowo.
 • Nakładaj i miksuj dźwięki otoczenia — szybkie presety i własne zapisane miksy.
 • Minutnik z szybkimi presetami oraz własnym czasem (godziny/minuty/sekundy).
+• Opcjonalne dynamiczne kolory (Material You): aplikacja przyjmuje barwy tapety (Android 12+).
 • Integracja z sesją multimediów: steruj odtwarzaniem z ekranu blokady, powiadomienia lub słuchawek Bluetooth.
 • Działa w pełni offline. Dźwięki są wbudowane — bez streamingu, bez konta, bez uprawnienia do internetu.
 • Bez reklam. Bez śledzenia. Bez analityki. Bez zewnętrznych SDK.

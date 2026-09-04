@@ -9,7 +9,7 @@ Colored noise
 • Grey noise — perceptually flat, designed to feel even across the spectrum.
 
 Ambient sounds
-• Sea waves, rain, fire crackling, birds chirping, café ambience, and wind.
+• Sea waves, rain, fire crackling, birds chirping, café ambience, wind, crickets, and a water stream.
 • Start from a preset, or blend nature sounds into your own relaxing mix, set each level, and save it as a preset.
 
 Binaural beats
@@ -17,9 +17,10 @@ Binaural beats
 • Each band nudges a different mental state: deep sleep, meditation, relaxation, focus, alertness.
 
 Features
-• Four colored noises, six ambient sounds and five binaural bands, looped seamlessly.
+• Four colored noises, eight ambient sounds and five binaural bands, looped seamlessly.
 • Layer and mix ambient sounds, with quick presets and your own saved mixes.
 • Sleep timer with quick presets and custom hours/minutes/seconds.
+• Optional dynamic colors (Material You): the app takes its palette from your wallpaper (Android 12+).
 • Media-session integration: control playback from your lock screen, notification, or Bluetooth headset.
 • Works fully offline. Audio is bundled — no streaming, no account, no internet permission.
 • No ads. No tracking. No analytics. No third-party SDKs.

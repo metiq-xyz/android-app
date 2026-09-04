@@ -9,7 +9,7 @@ Bruits colorés
 • Bruit gris — perceptuellement plat, conçu pour paraître uniforme sur tout le spectre.
 
 Sons ambiants
-• Vagues de la mer, pluie, feu qui crépite, chants d'oiseaux, ambiance de café et vent.
+• Vagues de la mer, pluie, feu qui crépite, chants d'oiseaux, ambiance de café, vent, chants de grillons et ruisseau.
 • Partez d'un préréglage ou mélangez les sons de la nature en votre propre mix relaxant, réglez chaque niveau et enregistrez-le comme préréglage.
 
 Battements binauraux
@@ -17,9 +17,10 @@ Battements binauraux
 • Chaque bande favorise un état mental différent : sommeil profond, méditation, détente, concentration, vigilance.
 
 Fonctionnalités
-• Quatre bruits colorés, six sons ambiants et cinq bandes binaurales, en boucle sans coupure.
+• Quatre bruits colorés, huit sons ambiants et cinq bandes binaurales, en boucle sans coupure.
 • Superposez et mixez les sons ambiants, avec des préréglages rapides et vos propres mix enregistrés.
 • Minuteur de sommeil avec préréglages rapides et durée personnalisée (heures/minutes/secondes).
+• Couleurs dynamiques en option (Material You) : l'application se teinte selon votre fond d'écran (Android 12+).
 • Intégration à la session multimédia : contrôlez la lecture depuis l'écran de verrouillage, la notification ou votre casque Bluetooth.
 • Fonctionne entièrement hors ligne. L'audio est intégré — pas de streaming, pas de compte, pas d'autorisation Internet.
 • Pas de publicité. Pas de pistage. Pas d'analytique. Pas de SDK tiers.

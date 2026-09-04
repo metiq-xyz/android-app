@@ -9,7 +9,7 @@ Ruido de colores
 • Ruido gris: perceptivamente plano, diseñado para sentirse uniforme en todo el espectro.
 
 Sonidos ambientales
-• Olas del mar, lluvia, fuego crepitando, pájaros cantando, ambiente de cafetería y viento.
+• Olas del mar, lluvia, fuego crepitando, pájaros cantando, ambiente de cafetería, viento, grillos y un arroyo.
 • Empieza con un preajuste o combina sonidos de la naturaleza en tu propia mezcla relajante, ajusta cada nivel y guárdala como preajuste.
 
 Sonidos binaurales
@@ -17,9 +17,10 @@ Sonidos binaurales
 • Cada banda favorece un estado mental distinto: sueño profundo, meditación, relajación, concentración, alerta.
 
 Funciones
-• Cuatro ruidos de colores, seis sonidos ambientales y cinco bandas binaurales, en bucle continuo.
+• Cuatro ruidos de colores, ocho sonidos ambientales y cinco bandas binaurales, en bucle continuo.
 • Superpón y mezcla sonidos ambientales, con preajustes rápidos y tus propias mezclas guardadas.
 • Temporizador de sueño con preajustes rápidos y horas/minutos/segundos personalizados.
+• Colores dinámicos opcionales (Material You): la aplicación se tiñe con los colores de tu fondo de pantalla (Android 12+).
 • Integración con la sesión multimedia: controla la reproducción desde la pantalla de bloqueo, la notificación o tus auriculares Bluetooth.
 • Funciona totalmente sin conexión. El audio va incluido: sin streaming, sin cuenta, sin permiso de Internet.
 • Sin anuncios. Sin rastreo. Sin analíticas. Sin SDK de terceros.

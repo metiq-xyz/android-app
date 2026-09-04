@@ -9,7 +9,7 @@ Rumore colorato
 • Rumore grigio — percettivamente piatto, pensato per suonare uniforme su tutto lo spettro.
 
 Suoni ambient
-• Onde del mare, pioggia, crepitio del fuoco, cinguettio di uccelli, atmosfera da caffè e vento.
+• Onde del mare, pioggia, crepitio del fuoco, cinguettio di uccelli, atmosfera da caffè, vento, grilli e un ruscello.
 • Parti da un preset oppure unisci i suoni della natura nel tuo mix rilassante, regola ogni livello e salvalo come preset.
 
 Battiti binaurali
@@ -17,9 +17,10 @@ Battiti binaurali
 • Ogni banda favorisce uno stato mentale diverso: sonno profondo, meditazione, relax, concentrazione, prontezza.
 
 Funzionalità
-• Quattro rumori colorati, sei suoni ambient e cinque bande binaurali, in loop senza interruzioni.
+• Quattro rumori colorati, otto suoni ambientali e cinque bande binaurali, in loop senza interruzioni.
 • Sovrapponi e mixa i suoni ambient, con preset rapidi e i tuoi mix salvati.
 • Timer di spegnimento con preset rapidi e ore/minuti/secondi personalizzati.
+• Colori dinamici opzionali (Material You): l'app si colora in base allo sfondo del dispositivo (Android 12+).
 • Integrazione con la sessione multimediale: controlla la riproduzione da schermata di blocco, notifica o cuffie Bluetooth.
 • Funziona completamente offline. L'audio è integrato — niente streaming, niente account, nessun permesso Internet.
 • Niente pubblicità. Niente tracciamento. Niente analytics. Nessun SDK di terze parti.
