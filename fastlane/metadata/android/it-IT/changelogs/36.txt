@@ -1,0 +1,2 @@
+• Metiq è ora disponibile in arabo, con layout da destra a sinistra
+• Risolti i link di valutazione, donazione e sponsorizzazione nelle impostazioni che non facevano nulla

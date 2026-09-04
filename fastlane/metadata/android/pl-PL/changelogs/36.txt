@@ -1,0 +1,2 @@
+• Metiq jest teraz dostępny po arabsku, z układem od prawej do lewej
+• Naprawiono linki oceny, wsparcia i sponsorowania w Ustawieniach, które nic nie robiły

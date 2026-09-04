@@ -1,0 +1,2 @@
+• Metiq is now available in arabic, with full right-to-left layout
+• Fixed the rate, donate and sponsor links in settings doing nothing when tapped

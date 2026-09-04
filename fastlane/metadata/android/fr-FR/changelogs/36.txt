@@ -1,0 +1,2 @@
+• Metiq est désormais disponible en arabe, avec une mise en page de droite à gauche
+• Correction des liens de notation, de don et de parrainage dans les réglages qui ne faisaient rien
