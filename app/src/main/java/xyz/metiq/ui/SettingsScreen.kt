@@ -287,9 +287,9 @@ fun SettingsContent(
                 onClick = { openStoreRating(context) },
             )
             LinkRow(
-                label = stringResource(R.string.settings_donate_kofi_label),
+                label = stringResource(R.string.settings_donate_label),
                 description = stringResource(R.string.settings_donate_description),
-                onClick = { openUrl(context, KOFI_URL) },
+                onClick = { openUrl(context, SUPPORT_URL) },
             )
         }
         Section(stringResource(R.string.settings_section_about)) {

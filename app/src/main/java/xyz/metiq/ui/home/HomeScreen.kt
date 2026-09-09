@@ -111,7 +111,7 @@ import xyz.metiq.ThemePreference
 import xyz.metiq.audio.BINAURAL_ID
 import xyz.metiq.audio.PlaybackService
 import xyz.metiq.ui.FEEDBACK_URL
-import xyz.metiq.ui.KOFI_URL
+import xyz.metiq.ui.SUPPORT_URL
 import xyz.metiq.ui.LicensesScreen
 import xyz.metiq.ui.SettingsContent
 import xyz.metiq.ui.openStoreRating
@@ -531,7 +531,7 @@ fun HomeScreen(
                     rateLabel = stringResource(R.string.rate_prompt_cta),
                     onRate = { openStoreRating(context) },
                     onFeedback = { openUrl(context, FEEDBACK_URL) },
-                    onDonate = { openUrl(context, KOFI_URL) },
+                    onDonate = { openUrl(context, SUPPORT_URL) },
                     onDismiss = onRatePromptDismiss,
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 4.dp),
                 )

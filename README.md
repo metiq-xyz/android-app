@@ -19,6 +19,9 @@
 
 <p align="center">
     <a href="https://ko-fi.com/metiq"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-Fi"></a>
+    <a href="https://liberapay.com/metiq/"><img src="https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black" alt="Liberapay"></a>
+</a>
+
 </p>
 
 <p align="center">

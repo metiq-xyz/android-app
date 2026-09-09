@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.core.net.toUri
 import xyz.metiq.BuildConfig
 
-const val KOFI_URL = "https://ko-fi.com/metiq"
+const val SUPPORT_URL = "https://metiq-xyz.github.io/android-app/support.html"
 const val FEEDBACK_URL =
     "https://github.com/metiq-xyz/android-app/issues/new?template=feedback.yml"
 

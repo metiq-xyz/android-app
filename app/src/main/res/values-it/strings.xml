@@ -87,7 +87,7 @@
     <string name="settings_section_support">Supporto</string>
     <string name="settings_rate_label">Valuta Metiq su %1$s</string>
     <string name="settings_donate_description">Metiq è gratis per sempre. Una piccola offerta ci aiuta a mantenerlo così.</string>
-    <string name="settings_donate_kofi_label">Offrici un caffè su Ko-fi</string>
+    <string name="settings_donate_label">Sostieni Metiq</string>
 
     <string name="rate_prompt_title">Ti piace Metiq?</string>
     <string name="rate_prompt_message">Valuta su %1$s o dona per mantenerlo gratis.</string>

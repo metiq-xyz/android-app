@@ -88,7 +88,7 @@
     <string name="settings_section_support">支持</string>
     <string name="settings_rate_label">在%1$s上给Metiq打分</string>
     <string name="settings_donate_description">Metiq永远免费。小小打赏，让免费一直持续。</string>
-    <string name="settings_donate_kofi_label">在Ko-fi上给我们买杯咖啡</string>
+    <string name="settings_donate_label">支持 Metiq</string>
     <string name="settings_donate_github_label">在GitHub上赞助我们</string>
 
     <string name="rate_prompt_title">喜欢Metiq？</string>
