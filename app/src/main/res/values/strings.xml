@@ -138,7 +138,6 @@
     <string name="settings_rate_label">Rate Metiq on %1$s</string>
     <string name="settings_donate_description">Metiq is free forever. A small tip keeps it that way.</string>
     <string name="settings_donate_kofi_label">Buy us a coffee on Ko-fi</string>
-    <string name="settings_donate_github_label">Sponsor us on GitHub</string>
 
     <!-- Rate prompt (swipeable note) -->
     <string name="rate_prompt_title">Enjoying Metiq?</string>

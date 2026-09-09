@@ -108,8 +108,6 @@ private val LANGUAGE_OPTIONS = listOf(
     LanguageOption("ar", R.string.settings_language_arabic),
 )
 
-private const val GH_SPONSORS_URL = "https://github.com/sponsors/metiq-xyz"
-
 private fun themeLabelRes(preference: ThemePreference): Int = when (preference) {
     ThemePreference.SYSTEM -> R.string.settings_theme_system
     ThemePreference.LIGHT -> R.string.settings_theme_light
@@ -292,10 +290,6 @@ fun SettingsContent(
                 label = stringResource(R.string.settings_donate_kofi_label),
                 description = stringResource(R.string.settings_donate_description),
                 onClick = { openUrl(context, KOFI_URL) },
-            )
-            LinkRow(
-                label = stringResource(R.string.settings_donate_github_label),
-                onClick = { openUrl(context, GH_SPONSORS_URL) },
             )
         }
         Section(stringResource(R.string.settings_section_about)) {

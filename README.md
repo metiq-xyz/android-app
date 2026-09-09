@@ -19,7 +19,6 @@
 
 <p align="center">
     <a href="https://ko-fi.com/metiq"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-Fi"></a>
-    <a href="https://github.com/sponsors/metiq-xyz"><img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA" alt="GH sponsor"></a>
 </p>
 
 <p align="center">
@@ -54,8 +53,7 @@ non-negotiables: simplicity and battery efficiency.
 - **Five languages out of the box** — English, Italian, Spanish, French,
   Portuguese.
 - **Free, forever** — Metiq is free and will stay free. If you'd like to support
-  the project, you can [buy us a coffee on Ko-fi](https://ko-fi.com/metiq) or
-  [sponsor us on GitHub](https://github.com/sponsors/metiq-xyz).
+  the project, you can [buy us a coffee on Ko-fi](https://ko-fi.com/metiq)
 
 ## Where to get it
 
