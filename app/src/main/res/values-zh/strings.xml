@@ -89,7 +89,6 @@
     <string name="settings_rate_label">在%1$s上给Metiq打分</string>
     <string name="settings_donate_description">Metiq永远免费。小小打赏，让免费一直持续。</string>
     <string name="settings_donate_label">支持 Metiq</string>
-    <string name="settings_donate_github_label">在GitHub上赞助我们</string>
 
     <string name="rate_prompt_title">喜欢Metiq？</string>
     <string name="rate_prompt_message">在%1$s上评分，或捐赠帮助app保持免费。</string>

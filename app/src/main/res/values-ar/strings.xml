@@ -118,7 +118,6 @@
     <string name="settings_rate_label">قيم Metiq في %1$s</string>
     <string name="settings_donate_description">Metiq مجاني إلى الأبد. تبرع صغير يحافظ على هذا الحال.</string>
     <string name="settings_donate_label">ادعم Metiq</string>
-    <string name="settings_donate_github_label">راعنا على GitHub</string>
 
     <!-- Rate prompt (swipeable note) -->
     <string name="rate_prompt_title">تستمتع بـ Metiq؟</string>

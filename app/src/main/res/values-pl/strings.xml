@@ -88,7 +88,6 @@
     <string name="settings_rate_label">Oceń Metiq w serwisie %1$s</string>
     <string name="settings_donate_description">Metiq jest bezpłatny na zawsze. Wystarczy niewielka darowizna, by tak pozostało.</string>
     <string name="settings_donate_label">Wesprzyj Metiq</string>
-    <string name="settings_donate_github_label">Wesprzyj nas na GitHub</string>
 
     <string name="rate_prompt_title">Podoba Ci się Metiq?</string>
     <string name="rate_prompt_message">Oceń w serwisie %1$s lub przekaż darowiznę, aby aplikacja pozostała bezpłatna.</string>
