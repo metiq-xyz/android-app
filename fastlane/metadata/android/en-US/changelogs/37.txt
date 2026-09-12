@@ -1,0 +1,3 @@
+• Added Liberapay as a donation option, plus a single "support Metiq" link with every way to help
+• New setting to pick which screen (noise or ambient) opens by default
+• Fixed language switching not working for spanish, french, portuguese, polish, chinese and arabic on Google Play

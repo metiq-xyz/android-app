@@ -1,0 +1,3 @@
+• Ajout de Liberapay comme option de don, ainsi qu'un lien unique "soutenez Metiq" regroupant tous les moyens d'aider
+• Nouveau réglage pour choisir l'écran (bruit ou ambiance) qui s'ouvre par défaut
+• Correction du changement de langue qui ne fonctionnait pas pour l'espagnol, le français, le portugais, le polonais, le chinois et l'arabe sur Google Play

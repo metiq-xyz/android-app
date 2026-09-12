@@ -1,0 +1,3 @@
+• Dodano Liberapay jako opcję wsparcia, a także jeden link "wesprzyj Metiq" ze wszystkimi sposobami pomocy
+• Nowe ustawienie wyboru ekranu (szum lub otoczenie), który otwiera się domyślnie
+• Naprawiono zmianę języka, która nie działała dla hiszpańskiego, francuskiego, portugalskiego, polskiego, chińskiego i arabskiego w Google Play
