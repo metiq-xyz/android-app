@@ -93,6 +93,7 @@
     <!-- Settings: appearance section -->
     <string name="settings_section_appearance">المظهر</string>
     <string name="settings_theme_label">الثيم</string>
+    <string name="settings_default_tab_label">شاشة البدء</string>
     <string name="settings_theme_system">النظام</string>
     <string name="settings_theme_light">فاتح</string>
     <string name="settings_theme_dark">داكن</string>

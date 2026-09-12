@@ -24,6 +24,8 @@ data class CustomMix(
 
 enum class ThemePreference { SYSTEM, LIGHT, DARK }
 
+enum class HomeTabPreference { NOISE, AMBIENT }
+
 data class Settings(
     val particlesEnabled: Boolean,
     val wavesEnabled: Boolean,
@@ -38,6 +40,7 @@ data class Settings(
     val themePreference: ThemePreference,
     val binauralVolume: Float,
     val binauralBand: String?,
+    val defaultTab: HomeTabPreference,
 )
 
 val DEFAULT_SETTINGS = Settings(
@@ -56,6 +59,7 @@ val DEFAULT_SETTINGS = Settings(
     themePreference = ThemePreference.SYSTEM,
     binauralVolume = 0.5f,
     binauralBand = null,
+    defaultTab = HomeTabPreference.NOISE,
 )
 
 const val MAX_TIMER_PRESETS = 4
@@ -117,6 +121,7 @@ private object Keys {
     val TIMER_FADE_SECONDS = floatPreferencesKey("timer_fade_seconds")
     val REQUEST_AUDIO_FOCUS = booleanPreferencesKey("request_audio_focus")
     val THEME_PREFERENCE = stringPreferencesKey("theme_preference")
+    val DEFAULT_TAB = stringPreferencesKey("default_tab")
     val BINAURAL_VOLUME = floatPreferencesKey("binaural_volume")
     val BINAURAL_BAND = stringPreferencesKey("binaural_band")
     val TIMER_PRESETS = stringPreferencesKey("timer_presets")
@@ -164,6 +169,10 @@ class SettingsRepository(context: Context) {
 
     suspend fun setThemePreference(preference: ThemePreference) {
         store.edit { it[Keys.THEME_PREFERENCE] = preference.name }
+    }
+
+    suspend fun setDefaultTab(preference: HomeTabPreference) {
+        store.edit { it[Keys.DEFAULT_TAB] = preference.name }
     }
 
     suspend fun setBinauralVolume(volume: Float) {
@@ -246,6 +255,9 @@ class SettingsRepository(context: Context) {
         val binauralVolume = (this[Keys.BINAURAL_VOLUME] ?: DEFAULT_SETTINGS.binauralVolume)
             .coerceIn(0f, 1f)
         val binauralBand = this[Keys.BINAURAL_BAND]
+        val defaultTab = this[Keys.DEFAULT_TAB]
+            ?.let { runCatching { HomeTabPreference.valueOf(it) }.getOrNull() }
+            ?: DEFAULT_SETTINGS.defaultTab
         return Settings(
             particlesEnabled = particles,
             wavesEnabled = waves,
@@ -260,6 +272,7 @@ class SettingsRepository(context: Context) {
             themePreference = themePreference,
             binauralVolume = binauralVolume,
             binauralBand = binauralBand,
+            defaultTab = defaultTab,
         )
     }
 }

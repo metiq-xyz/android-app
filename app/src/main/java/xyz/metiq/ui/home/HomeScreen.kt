@@ -104,6 +104,7 @@ import kotlinx.coroutines.launch
 import xyz.metiq.BuildConfig
 import xyz.metiq.CustomMix
 import xyz.metiq.DEFAULT_SETTINGS
+import xyz.metiq.HomeTabPreference
 import xyz.metiq.MAX_CUSTOM_MIXES
 import xyz.metiq.R
 import xyz.metiq.Settings
@@ -141,6 +142,7 @@ fun HomeScreen(
     onTimerFadeSeconds: (Float) -> Unit,
     onRequestAudioFocus: (Boolean) -> Unit,
     onThemePreference: (ThemePreference) -> Unit,
+    onDefaultTab: (HomeTabPreference) -> Unit,
     onBinauralVolume: (Float) -> Unit,
     onBinauralBand: (String?) -> Unit,
     onTimerPresets: (List<Long>) -> Unit,
@@ -158,7 +160,11 @@ fun HomeScreen(
     var activeId by remember { mutableStateOf<String?>(null) }
     var playing by remember { mutableStateOf(false) }
     var startJob by remember { mutableStateOf<Job?>(null) }
-    val pagerState = rememberPagerState(initialPage = HomeTab.NOISE.ordinal, pageCount = { HomeTab.entries.size })
+    val initialTab = when (settings.defaultTab) {
+        HomeTabPreference.AMBIENT -> HomeTab.AMBIENT
+        HomeTabPreference.NOISE -> HomeTab.NOISE
+    }
+    val pagerState = rememberPagerState(initialPage = initialTab.ordinal, pageCount = { HomeTab.entries.size })
     val tab = HomeTab.entries[pagerState.currentPage]
     val ambientLevels = remember { mutableStateMapOf<String, Float>() }
     var binauralBandId by remember { mutableStateOf<String?>(null) }
@@ -671,6 +677,7 @@ fun HomeScreen(
                             onTimerFadeSeconds = onTimerFadeSeconds,
                             onRequestAudioFocus = onRequestAudioFocus,
                             onThemePreference = onThemePreference,
+                            onDefaultTab = onDefaultTab,
                             onTimerPresets = onTimerPresets,
                             onLanguageTag = onLanguageTag,
                             onOpenLicenses = { showLicenses = true },
@@ -907,6 +914,7 @@ private fun HomeScreenPreview() {
             onTimerFadeSeconds = {},
             onRequestAudioFocus = {},
             onThemePreference = {},
+            onDefaultTab = {},
             onBinauralVolume = {},
             onBinauralBand = {},
             onTimerPresets = {},

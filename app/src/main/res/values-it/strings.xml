@@ -66,6 +66,7 @@
 
     <string name="settings_section_appearance">Aspetto</string>
     <string name="settings_theme_label">Tema</string>
+    <string name="settings_default_tab_label">Schermata iniziale</string>
     <string name="settings_theme_system">Sistema</string>
     <string name="settings_theme_light">Chiaro</string>
     <string name="settings_theme_dark">Scuro</string>

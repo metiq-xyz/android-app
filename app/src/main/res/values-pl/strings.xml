@@ -66,6 +66,7 @@
 
     <string name="settings_section_appearance">Wygląd</string>
     <string name="settings_theme_label">Motyw</string>
+    <string name="settings_default_tab_label">Ekran startowy</string>
     <string name="settings_theme_system">Systemowy</string>
     <string name="settings_theme_light">Jasny</string>
     <string name="settings_theme_dark">Ciemny</string>

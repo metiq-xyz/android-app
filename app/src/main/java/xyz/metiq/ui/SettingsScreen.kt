@@ -72,6 +72,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import xyz.metiq.BuildConfig
 import xyz.metiq.DEFAULT_SETTINGS
+import xyz.metiq.HomeTabPreference
 import xyz.metiq.MAX_TIMER_PRESETS
 import xyz.metiq.R
 import xyz.metiq.Settings
@@ -114,6 +115,11 @@ private fun themeLabelRes(preference: ThemePreference): Int = when (preference) 
     ThemePreference.DARK -> R.string.settings_theme_dark
 }
 
+private fun defaultTabLabelRes(preference: HomeTabPreference): Int = when (preference) {
+    HomeTabPreference.NOISE -> R.string.tab_noise
+    HomeTabPreference.AMBIENT -> R.string.tab_ambient
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
@@ -127,6 +133,7 @@ fun SettingsScreen(
     onTimerFadeSeconds: (Float) -> Unit = {},
     onRequestAudioFocus: (Boolean) -> Unit = {},
     onThemePreference: (ThemePreference) -> Unit = {},
+    onDefaultTab: (HomeTabPreference) -> Unit = {},
     onTimerPresets: (List<Long>) -> Unit,
     onLanguageTag: (String?) -> Unit,
     onBack: () -> Unit,
@@ -174,6 +181,7 @@ fun SettingsScreen(
             onTimerFadeSeconds = onTimerFadeSeconds,
             onRequestAudioFocus = onRequestAudioFocus,
             onThemePreference = onThemePreference,
+            onDefaultTab = onDefaultTab,
             onTimerPresets = onTimerPresets,
             onLanguageTag = onLanguageTag,
             onOpenLicenses = onOpenLicenses,
@@ -197,6 +205,7 @@ fun SettingsContent(
     onTimerFadeSeconds: (Float) -> Unit = {},
     onRequestAudioFocus: (Boolean) -> Unit = {},
     onThemePreference: (ThemePreference) -> Unit = {},
+    onDefaultTab: (HomeTabPreference) -> Unit = {},
     onDynamicColors: (Boolean) -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -244,6 +253,13 @@ fun SettingsContent(
                 current = settings.themePreference,
                 labelFor = { stringResource(themeLabelRes(it)) },
                 onPick = onThemePreference,
+            )
+            DropdownPickerRow(
+                label = stringResource(R.string.settings_default_tab_label),
+                options = HomeTabPreference.entries,
+                current = settings.defaultTab,
+                labelFor = { stringResource(defaultTabLabelRes(it)) },
+                onPick = onDefaultTab,
             )
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 ToggleRow(

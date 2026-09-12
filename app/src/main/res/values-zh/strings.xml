@@ -67,6 +67,7 @@
 
     <string name="settings_section_appearance">外观</string>
     <string name="settings_theme_label">主题</string>
+    <string name="settings_default_tab_label">启动画面</string>
     <string name="settings_theme_system">跟随系统</string>
     <string name="settings_theme_light">亮</string>
     <string name="settings_theme_dark">暗</string>

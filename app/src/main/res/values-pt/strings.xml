@@ -66,6 +66,7 @@
 
     <string name="settings_section_appearance">Aparência</string>
     <string name="settings_theme_label">Tema</string>
+    <string name="settings_default_tab_label">Ecrã inicial</string>
     <string name="settings_theme_system">Sistema</string>
     <string name="settings_theme_light">Claro</string>
     <string name="settings_theme_dark">Escuro</string>
