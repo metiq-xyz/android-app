@@ -32,6 +32,17 @@ android {
         localeFilters += listOf("en", "it", "es", "fr", "pt", "pl", "zh", "ar")
     }
 
+    // Metiq switches locales in-app at runtime (see MainActivity's languageTag handling)
+    // without using the Play Core on-demand language API, so the Play App Bundle must not
+    // split resources by locale — otherwise a device only gets the locales matching its own
+    // system language list, and picking any other in-app language silently falls back to
+    // English text (lint: AppBundleLocaleChanges).
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
     signingConfigs {
         create("release") {
             if (keystoreProps.isNotEmpty()) {
