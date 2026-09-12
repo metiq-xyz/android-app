@@ -164,7 +164,10 @@ fun HomeScreen(
         HomeTabPreference.AMBIENT -> HomeTab.AMBIENT
         HomeTabPreference.NOISE -> HomeTab.NOISE
     }
-    val pagerState = rememberPagerState(initialPage = initialTab.ordinal, pageCount = { HomeTab.entries.size })
+    val pagerState = rememberPagerState(
+        initialPage = initialTab.ordinal,
+        pageCount = { HomeTab.entries.size },
+    )
     val tab = HomeTab.entries[pagerState.currentPage]
     val ambientLevels = remember { mutableStateMapOf<String, Float>() }
     var binauralBandId by remember { mutableStateOf<String?>(null) }
