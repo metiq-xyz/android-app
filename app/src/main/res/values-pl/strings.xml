@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="help_cd">Pomoc</string>
-    <string name="help_title">Jak to działa</string>
-    <string name="home_helper">Dotknij koloru szumu, aby go odtworzyć lub zatrzymać.\nUstaw minutnik, jeśli chcesz, aby wyłączał się automatycznie.\nZbyt jasny lub ostry? Złagodź go ciepłem w ustawieniach.\nWolisz łagodniejsze początki i zakończenia? Ustaw długość przejścia w ustawieniach.</string>
-    <string name="ambient_helper">Dotknij zestaw, aby go odtworzyć, dotknij ponownie, aby zatrzymać.\nDotknij kuli, aby uruchomić dźwięk, a następnie przeciągnij suwak, aby ustawić głośność.\nZapisz własny miks za pomocą „Zapisz miks” i użyj ikony kosza, aby go usunąć.\nWolisz łagodniejsze rozpoczęcie i zakończenie? Ustaw długość przejścia w ustawieniach</string>
 
-    <string name="tab_noise">Szum</string>
-    <string name="tab_ambient">Otoczenie</string>
-    <string name="tab_settings">Ustawienia</string>
+    <string name="category_noise">Szum</string>
+    <string name="category_ambient">Otoczenie</string>
 
     <string name="ambient_off">Wyłączony</string>
-    <string name="ambient_now_playing">Miks otoczenia</string>
     <string name="ambient_seawaves">Fale morskie</string>
     <string name="ambient_rain">Deszcz</string>
     <string name="ambient_fire">Trzask ognia</string>
@@ -20,11 +14,9 @@
     <string name="ambient_crickets">Świerszcze</string>
     <string name="ambient_stream">Strumień</string>
 
-    <string name="binaural_now_playing">Dudnienie binauralne</string>
-    <string name="binaural_fab_label">Binauralne</string>
+    <string name="category_binaural">Binauralne</string>
     <string name="binaural_noti_label">%1$s binauralne</string>
     <string name="binaural_headphone_notice">Użyj słuchawek: aby efekt zadziałał, każde ucho musi odbierać osobny ton.</string>
-    <string name="binaural_volume">Głośność</string>
     <string name="binaural_delta_feel">Głęboki sen</string>
     <string name="binaural_theta_feel">Medytacja</string>
     <string name="binaural_alpha_feel">Relaks</string>
@@ -66,16 +58,11 @@
 
     <string name="settings_section_appearance">Wygląd</string>
     <string name="settings_theme_label">Motyw</string>
-    <string name="settings_default_tab_label">Ekran startowy</string>
     <string name="settings_theme_system">Systemowy</string>
     <string name="settings_theme_light">Jasny</string>
     <string name="settings_theme_dark">Ciemny</string>
     <string name="settings_dynamic_colors_label">Dynamiczne kolory</string>
     <string name="settings_dynamic_colors_description">Barwi aplikację kolorami tapety (Material You)</string>
-    <string name="settings_particles_label">Cząsteczki tła</string>
-    <string name="settings_particles_description">Animowane kropki za aktywnym kolorem</string>
-    <string name="settings_waves_label">Animacja fal</string>
-    <string name="settings_waves_description">Rozchodzące się pierścienie wokół odtwarzanych dźwięków</string>
 
     <string name="settings_section_language">Język</string>
     <string name="settings_language_label">Język</string>
@@ -116,4 +103,29 @@
     <string name="mix_delete_message">„%1$s” zostanie usunięty.</string>
     <string name="mix_delete_confirm">Usuń</string>
     <string name="dialog_cancel">Anuluj</string>
+
+    <!-- Home: mix builder -->
+    <string name="mix_panel_empty_title">Tu zaczyna się Twój miks</string>
+    <string name="mix_panel_empty_subtitle">Nie wybrano dźwięków</string>
+    <string name="mix_panel_quick_mixes">Szybkie miksy</string>
+    <string name="mix_panel_play_cd">Odtwórz</string>
+    <string name="mix_panel_open_cd">Otwórz miks</string>
+    <string name="sheet_title_ambient">Dźwięki otoczenia</string>
+    <string name="sheet_count_in_mix">%1$d z %2$d w Twoim miksie</string>
+    <string name="sheet_binaural_single">Możesz wybrać tylko jeden.</string>
+    <string name="sheet_close_cd">Zamknij</string>
+    <string name="mix_now_playing">Twój miks</string>
+    <string name="mix_panel_pause_cd">Wstrzymaj</string>
+    <plurals name="category_active_count">
+        <item quantity="one">%1$d aktywny</item>
+        <item quantity="few">%1$d aktywne</item>
+        <item quantity="many">%1$d aktywnych</item>
+        <item quantity="other">%1$d aktywnych</item>
+    </plurals>
+    <plurals name="mix_sheet_count">
+        <item quantity="one">%1$d dźwięk w Twoim miksie</item>
+        <item quantity="few">%1$d dźwięki w Twoim miksie</item>
+        <item quantity="many">%1$d dźwięków w Twoim miksie</item>
+        <item quantity="other">%1$d dźwięku w Twoim miksie</item>
+    </plurals>
 </resources>

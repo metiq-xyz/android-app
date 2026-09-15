@@ -2,21 +2,12 @@
 <resources>
     <string name="app_name" translatable="false">Metiq</string>
 
-    <!-- Help modal (opened from the circled question mark on the Noise/Ambient screens) -->
-    <string name="help_cd">Help</string>
-    <string name="help_title">How it works</string>
-    <string name="home_helper">Tap a noise color to play or stop it.\nSet a timer if you want it to turn off automatically.\nToo bright or harsh? Soften it with warmth in settings.\nPrefer softer starts and stops? Set the fade length in settings.</string>
-    <string name="ambient_helper">Tap a preset to play it, tap it again to stop it.\nTap an orb to start a sound, then drag its slider to set the level.\nSave your own mix with “Save mix”, and use the trash icon to delete it.\nPrefer softer starts and stops? Set the fade length in settings.</string>
-    <string name="dialog_ok" translatable="false">OK</string>
 
-    <!-- Bottom navigation tabs -->
-    <string name="tab_noise">Noise</string>
-    <string name="tab_ambient">Ambient</string>
-    <string name="tab_settings">Settings</string>
+    <string name="category_noise">Noise</string>
+    <string name="category_ambient">Ambient</string>
 
     <!-- Ambient mixer -->
     <string name="ambient_off">Off</string>
-    <string name="ambient_now_playing">Ambient mix</string>
     <string name="ambient_seawaves">Sea waves</string>
     <string name="ambient_rain">Rain</string>
     <string name="ambient_fire">Fire crackling</string>
@@ -28,12 +19,10 @@
 
     <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
          under each hints at the mental state it nudges toward. -->
-    <string name="binaural_now_playing">Binaural beats</string>
-    <string name="binaural_fab_label">Binaurals</string>
+    <string name="category_binaural">Binaurals</string>
     <!-- Notification suffix when a binaural beat plays; %1$s is the band's Greek letter -->
     <string name="binaural_noti_label">%1$s binaural</string>
     <string name="binaural_headphone_notice">Use headphones: each ear needs its own tone for the effect to work.</string>
-    <string name="binaural_volume">Volume</string>
     <string name="binaural_delta" translatable="false">Delta</string>
     <string name="binaural_theta" translatable="false">Theta</string>
     <string name="binaural_alpha" translatable="false">Alpha</string>
@@ -71,7 +60,6 @@
     <string name="noise_title_brown">Brown noise</string>
     <string name="noise_title_white">White noise</string>
     <string name="noise_title_grey">Grey noise</string>
-    <string name="noise_title_idle" translatable="false">Metiq</string>
 
     <!-- Timer cells + preset chip formatters -->
     <string name="timer_label">Timer</string>
@@ -105,16 +93,11 @@
     <!-- Settings: appearance section -->
     <string name="settings_section_appearance">Appearance</string>
     <string name="settings_theme_label">Theme</string>
-    <string name="settings_default_tab_label">Startup screen</string>
     <string name="settings_theme_system">System</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_theme_dark">Dark</string>
     <string name="settings_dynamic_colors_label">Dynamic colors</string>
     <string name="settings_dynamic_colors_description">Tint the app with colors from your wallpaper (Material You)</string>
-    <string name="settings_particles_label">Background particles</string>
-    <string name="settings_particles_description">Animated dots behind the active color</string>
-    <string name="settings_waves_label">Ripple animation</string>
-    <string name="settings_waves_description">Expanding rings around playing sounds</string>
 
     <!-- Settings: language section -->
     <string name="settings_section_language">Language</string>
@@ -162,4 +145,26 @@
     <string name="licenses_apache2_body" translatable="false">Used by Jetpack Compose, Material 3, AndroidX Lifecycle, AndroidX DataStore, AndroidX AppCompat and AndroidX Media3. Full license text: https://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="licenses_kotlin_title" translatable="false">Kotlin standard library</string>
     <string name="licenses_kotlin_body" translatable="false">Apache License 2.0. © JetBrains s.r.o. and Kotlin Programming Language contributors.</string>
+
+    <!-- Home: mix builder -->
+    <string name="mix_panel_empty_title">Your mix starts here</string>
+    <string name="mix_panel_empty_subtitle">No sounds selected</string>
+    <string name="mix_panel_quick_mixes">Quick mixes</string>
+    <string name="mix_panel_play_cd">Play</string>
+    <string name="mix_panel_open_cd">Open mix</string>
+    <string name="sheet_title_ambient">Ambient sounds</string>
+    <string name="sheet_count_in_mix">%1$d of %2$d in your mix</string>
+    <string name="sheet_binaural_single">You can only pick one.</string>
+    <string name="sheet_close_cd">Close</string>
+    <string name="sound_level_percent" translatable="false">%1$d%%</string>
+    <string name="mix_now_playing">Your mix</string>
+    <string name="mix_panel_pause_cd">Pause</string>
+    <plurals name="category_active_count">
+        <item quantity="one">%1$d on</item>
+        <item quantity="other">%1$d on</item>
+    </plurals>
+    <plurals name="mix_sheet_count">
+        <item quantity="one">%1$d sound in your mix</item>
+        <item quantity="other">%1$d sounds in your mix</item>
+    </plurals>
 </resources>

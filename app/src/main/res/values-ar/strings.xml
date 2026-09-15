@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Help modal (opened from the circled question mark on the Noise/Ambient screens) -->
-    <string name="help_cd">مساعدة</string>
-    <string name="help_title">كيف يعمل؟</string>
-    <string name="home_helper">اضغط على لون الضوضاء لتشغيله أو إيقافه.\n يمكنك ضبط مؤقت إذا أردت أن ينطفئ تلقائياً.\nهل الصوت حاد جداً أو قاسٍ؟ قم بتلطيف وتنعيم الصوت في الإعدادات.\nتفضل بدايات وتوقفات هادئة؟ اضبط مدة تلاشي الصوت في الإعدادات.</string>
-    <string name="ambient_helper">اضغط على الإعداد المسبق لتشغيله، واضغط عليه مرة أخرى لإيقافه.\nاضغط على الكرة لبدء الصوت، ثم اسحب المنزلق الخاص بها لضبط مستوى الصوت.\nاحفظ المزيج الخاص بك باستخدام “حفظ المزيج”، واستخدم أيقونة سلة المهملات لحذفه.\nتفضل بدايات وتوقفات ناعمة؟ اضبط مدة التلاشي في الإعدادات.</string>
 
-    <!-- Bottom navigation tabs -->
-    <string name="tab_noise">الضوضاء</string>
-    <string name="tab_ambient">الأجواء</string>
-    <string name="tab_settings">الإعدادات</string>
+    <string name="category_noise">الضوضاء</string>
+    <string name="category_ambient">الأجواء</string>
 
     <!-- Ambient mixer -->
     <string name="ambient_off">متوقف</string>
-    <string name="ambient_now_playing">مزيج محيطي</string>
     <string name="ambient_seawaves">أمواج البحر</string>
     <string name="ambient_rain">المطر</string>
     <string name="ambient_fire">فرقعة النار</string>
@@ -26,12 +18,10 @@
 
     <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
          under each hints at the mental state it nudges toward. -->
-    <string name="binaural_now_playing">النبضات الثنائية</string>
-    <string name="binaural_fab_label">النغمات الثنائية</string>
+    <string name="category_binaural">النغمات الثنائية</string>
     <!-- Notification suffix when a binaural beat plays; %1$s is the band's Greek letter -->
     <string name="binaural_noti_label">%1$s نغمة ثنائية</string>
     <string name="binaural_headphone_notice">استخدم سماعات الرأس: تحتاج كل أُذن إلى نغمة خاصة بها لكي يعمل التأثير.</string>
-    <string name="binaural_volume">مستوى الصوت</string>
     <string name="binaural_delta_feel">النوم العميق</string>
     <string name="binaural_theta_feel">التأمل</string>
     <string name="binaural_alpha_feel">الاسترخاء</string>
@@ -93,16 +83,11 @@
     <!-- Settings: appearance section -->
     <string name="settings_section_appearance">المظهر</string>
     <string name="settings_theme_label">الثيم</string>
-    <string name="settings_default_tab_label">شاشة البدء</string>
     <string name="settings_theme_system">النظام</string>
     <string name="settings_theme_light">فاتح</string>
     <string name="settings_theme_dark">داكن</string>
     <string name="settings_dynamic_colors_label">الألوان الديناميكية</string>
     <string name="settings_dynamic_colors_description">قم بتلوين التطبيق بألوان من خلفية الجهاز (Material You)</string>
-    <string name="settings_particles_label">جسيمات الخلفية</string>
-    <string name="settings_particles_description">نقاط متحركة خلف اللون النشط</string>
-    <string name="settings_waves_label">الرسوم المتحركة التموجية</string>
-    <string name="settings_waves_description">الحلقات المتوسعة حول الأصوات المشغّلة.</string>
 
     <!-- Settings: language section -->
     <string name="settings_section_language">اللغة</string>
@@ -136,4 +121,33 @@
     <!-- Licenses screen -->
     <string name="licenses_title">تراخيص مفتوحة المصدر</string>
     <string name="licenses_intro">يعتمد تطبيق Metiq على أعمال الآخرين. وترد تراخيصهم فيما يلي.</string>
+
+    <!-- Home: mix builder -->
+    <string name="mix_panel_empty_title">مزيجك يبدأ من هنا</string>
+    <string name="mix_panel_empty_subtitle">لم يتم اختيار أي صوت</string>
+    <string name="mix_panel_quick_mixes">مزيجات سريعة</string>
+    <string name="mix_panel_play_cd">تشغيل</string>
+    <string name="mix_panel_open_cd">فتح المزيج</string>
+    <string name="sheet_title_ambient">أصوات محيطية</string>
+    <string name="sheet_count_in_mix">%1$d من %2$d في مزيجك</string>
+    <string name="sheet_binaural_single">يمكنك اختيار واحد فقط.</string>
+    <string name="sheet_close_cd">إغلاق</string>
+    <string name="mix_now_playing">مزيجك</string>
+    <string name="mix_panel_pause_cd">إيقاف مؤقت</string>
+    <plurals name="category_active_count">
+        <item quantity="zero">مفعّل: %1$d</item>
+        <item quantity="one">مفعّل: %1$d</item>
+        <item quantity="two">مفعّل: %1$d</item>
+        <item quantity="few">مفعّل: %1$d</item>
+        <item quantity="many">مفعّل: %1$d</item>
+        <item quantity="other">مفعّل: %1$d</item>
+    </plurals>
+    <plurals name="mix_sheet_count">
+        <item quantity="zero">عدد الأصوات في مزيجك: %1$d</item>
+        <item quantity="one">عدد الأصوات في مزيجك: %1$d</item>
+        <item quantity="two">عدد الأصوات في مزيجك: %1$d</item>
+        <item quantity="few">عدد الأصوات في مزيجك: %1$d</item>
+        <item quantity="many">عدد الأصوات في مزيجك: %1$d</item>
+        <item quantity="other">عدد الأصوات في مزيجك: %1$d</item>
+    </plurals>
 </resources>

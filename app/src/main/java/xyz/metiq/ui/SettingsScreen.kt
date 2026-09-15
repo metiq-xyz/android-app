@@ -72,7 +72,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import xyz.metiq.BuildConfig
 import xyz.metiq.DEFAULT_SETTINGS
-import xyz.metiq.HomeTabPreference
 import xyz.metiq.MAX_TIMER_PRESETS
 import xyz.metiq.R
 import xyz.metiq.Settings
@@ -115,17 +114,10 @@ private fun themeLabelRes(preference: ThemePreference): Int = when (preference) 
     ThemePreference.DARK -> R.string.settings_theme_dark
 }
 
-private fun defaultTabLabelRes(preference: HomeTabPreference): Int = when (preference) {
-    HomeTabPreference.NOISE -> R.string.tab_noise
-    HomeTabPreference.AMBIENT -> R.string.tab_ambient
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     settings: Settings,
-    onParticlesEnabled: (Boolean) -> Unit,
-    onWavesEnabled: (Boolean) -> Unit = {},
     onDynamicColors: (Boolean) -> Unit = {},
     onWarmth: (Float) -> Unit,
     onWarmthPreview: (Float) -> Unit = {},
@@ -133,7 +125,6 @@ fun SettingsScreen(
     onTimerFadeSeconds: (Float) -> Unit = {},
     onRequestAudioFocus: (Boolean) -> Unit = {},
     onThemePreference: (ThemePreference) -> Unit = {},
-    onDefaultTab: (HomeTabPreference) -> Unit = {},
     onTimerPresets: (List<Long>) -> Unit,
     onLanguageTag: (String?) -> Unit,
     onBack: () -> Unit,
@@ -172,8 +163,6 @@ fun SettingsScreen(
     ) { padding ->
         SettingsContent(
             settings = settings,
-            onParticlesEnabled = onParticlesEnabled,
-            onWavesEnabled = onWavesEnabled,
             onDynamicColors = onDynamicColors,
             onWarmth = onWarmth,
             onWarmthPreview = onWarmthPreview,
@@ -181,7 +170,6 @@ fun SettingsScreen(
             onTimerFadeSeconds = onTimerFadeSeconds,
             onRequestAudioFocus = onRequestAudioFocus,
             onThemePreference = onThemePreference,
-            onDefaultTab = onDefaultTab,
             onTimerPresets = onTimerPresets,
             onLanguageTag = onLanguageTag,
             onOpenLicenses = onOpenLicenses,
@@ -193,8 +181,6 @@ fun SettingsScreen(
 @Composable
 fun SettingsContent(
     settings: Settings,
-    onParticlesEnabled: (Boolean) -> Unit,
-    onWavesEnabled: (Boolean) -> Unit = {},
     onWarmth: (Float) -> Unit,
     onTimerPresets: (List<Long>) -> Unit,
     onLanguageTag: (String?) -> Unit,
@@ -205,7 +191,6 @@ fun SettingsContent(
     onTimerFadeSeconds: (Float) -> Unit = {},
     onRequestAudioFocus: (Boolean) -> Unit = {},
     onThemePreference: (ThemePreference) -> Unit = {},
-    onDefaultTab: (HomeTabPreference) -> Unit = {},
     onDynamicColors: (Boolean) -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -254,13 +239,6 @@ fun SettingsContent(
                 labelFor = { stringResource(themeLabelRes(it)) },
                 onPick = onThemePreference,
             )
-            DropdownPickerRow(
-                label = stringResource(R.string.settings_default_tab_label),
-                options = HomeTabPreference.entries,
-                current = settings.defaultTab,
-                labelFor = { stringResource(defaultTabLabelRes(it)) },
-                onPick = onDefaultTab,
-            )
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 ToggleRow(
                     label = stringResource(R.string.settings_dynamic_colors_label),
@@ -269,18 +247,6 @@ fun SettingsContent(
                     onToggle = onDynamicColors,
                 )
             }
-            ToggleRow(
-                label = stringResource(R.string.settings_particles_label),
-                description = stringResource(R.string.settings_particles_description),
-                checked = settings.particlesEnabled,
-                onToggle = onParticlesEnabled,
-            )
-            ToggleRow(
-                label = stringResource(R.string.settings_waves_label),
-                description = stringResource(R.string.settings_waves_description),
-                checked = settings.wavesEnabled,
-                onToggle = onWavesEnabled,
-            )
         }
         Section(stringResource(R.string.settings_section_language)) {
             DropdownPickerRow(
@@ -809,7 +775,6 @@ private fun SettingsScreenPreview() {
     MetiqTheme(darkTheme = isSystemInDarkTheme()) {
         SettingsScreen(
             settings = DEFAULT_SETTINGS,
-            onParticlesEnabled = {},
             onWarmth = {},
             onTimerPresets = {},
             onLanguageTag = {},

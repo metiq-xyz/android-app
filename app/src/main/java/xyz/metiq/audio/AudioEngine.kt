@@ -278,8 +278,6 @@ class AudioEngine(private val context: Context) {
         startJobs[id] = job
     }
 
-    fun stopBinaural() = stopLayer(BINAURAL_ID)
-
     private fun buildSynthTrack(): AudioTrack {
         val minBuf = AudioTrack.getMinBufferSize(
             SYNTH_SAMPLE_RATE, AudioFormat.CHANNEL_OUT_STEREO, AudioFormat.ENCODING_PCM_16BIT,
@@ -435,19 +433,6 @@ class AudioEngine(private val context: Context) {
     fun activeLayerIds(): Set<String> = layers.keys.toSet()
 
     fun layerVolume(id: String): Float? = layers[id]?.volume
-
-    suspend fun switchTo(newId: String, newAssetPath: String) {
-        layers.keys.filter { it != newId && it != BINAURAL_ID }.forEach { stopLayer(it) }
-        if (!layers.containsKey(newId)) {
-            startLayer(newId, newAssetPath, volume = 1f, warmthEligible = true)
-        } else {
-            setLayerVolume(newId, 1f)
-        }
-    }
-
-    fun stopAll() {
-        layers.keys.toList().forEach { stopLayer(it) }
-    }
 
     fun stopAllTimerFade() {
         layers.keys.toList().forEach { stopLayer(it, timerFadeMillis) }

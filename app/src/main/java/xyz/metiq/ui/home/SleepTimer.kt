@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -165,7 +164,7 @@ fun SleepTimer(
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             presetsSeconds.forEach { seconds ->
@@ -179,9 +178,13 @@ fun SleepTimer(
                 )
             }
         }
-        Spacer(Modifier.height(12.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Spacer(Modifier.height(24.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
             TimerCell(
+                modifier = Modifier.weight(1f),
                 label = stringResource(R.string.timer_hours),
                 liveValue = hoursFor(state.remainingSeconds),
                 isEditing = state.editField == TimerField.HOURS,
@@ -192,6 +195,7 @@ fun SleepTimer(
                 enabled = !state.running,
             )
             TimerCell(
+                modifier = Modifier.weight(1f),
                 label = stringResource(R.string.timer_minutes),
                 liveValue = minutesFor(state.remainingSeconds),
                 isEditing = state.editField == TimerField.MINUTES,
@@ -202,6 +206,7 @@ fun SleepTimer(
                 enabled = !state.running,
             )
             TimerCell(
+                modifier = Modifier.weight(1f),
                 label = stringResource(R.string.timer_seconds),
                 liveValue = secondsFor(state.remainingSeconds),
                 isEditing = state.editField == TimerField.SECONDS,
@@ -212,12 +217,6 @@ fun SleepTimer(
                 enabled = !state.running,
             )
         }
-        Spacer(Modifier.height(16.dp))
-        StartStopButton(
-            running = state.running,
-            enabled = state.running || state.remainingSeconds > 0L,
-            onClick = state::toggleRunning,
-        )
     }
 }
 
@@ -234,20 +233,24 @@ private fun presetLabel(seconds: Long): String {
 }
 
 @Composable
-private fun StartStopButton(running: Boolean, enabled: Boolean, onClick: () -> Unit) {
+internal fun TimerStartStopButton(state: SleepTimerState, modifier: Modifier = Modifier) {
     val tokens = LocalMetiqColors.current
+    val running = state.running
+    val enabled = running || state.remainingSeconds > 0L
     val buttonAlpha by animateFloatAsState(
         targetValue = if (enabled) 1f else tokens.disabledAlpha,
         animationSpec = tween(durationMillis = ALPHA_ANIM_MS),
         label = "startStopAlpha",
     )
     Box(
-        modifier = Modifier
-            .clip(RoundedCornerShape(100.dp))
+        modifier = modifier
+            .fillMaxWidth()
+            .height(48.dp)
             .alpha(buttonAlpha)
+            .clip(RoundedCornerShape(100.dp))
             .background(tokens.textPrimary)
-            .clickable(enabled = enabled, onClick = onClick)
-            .padding(horizontal = 20.dp, vertical = 16.dp),
+            .clickable(enabled = enabled, onClick = state::toggleRunning),
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = stringResource(if (running) R.string.timer_stop else R.string.timer_start),
@@ -273,11 +276,8 @@ private fun TimerCell(
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             modifier = Modifier
-                // Cap must precede fillMaxWidth: size modifiers respect incoming
-                // constraints, so the reverse order silently drops the cap.
-                .widthIn(max = 96.dp)
                 .fillMaxWidth()
-                .height(64.dp)
+                .height(72.dp)
                 .clip(RoundedCornerShape(16.dp))
                 .background(tokens.cellBackground)
                 .clickable(enabled = enabled && !isEditing) { onBeginEdit() },
@@ -303,8 +303,8 @@ private fun TimerCell(
                     singleLine = true,
                     textStyle = TextStyle(
                         fontFamily = Inter,
-                        fontSize = 32.sp,
-                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 44.sp,
+                        fontWeight = FontWeight.Medium,
                         color = tokens.textPrimary,
                         textAlign = TextAlign.Center,
                     ),
@@ -326,17 +326,17 @@ private fun TimerCell(
                     color = tokens.textPrimary,
                     style = TextStyle(
                         fontFamily = Inter,
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 44.sp,
+                        fontWeight = FontWeight.Medium,
                     ),
                 )
             }
         }
-        Spacer(Modifier.height(4.dp))
+        Spacer(Modifier.height(8.dp))
         Text(
             text = label,
             color = tokens.textSecondary,
-            style = TextStyle(fontFamily = Inter, fontSize = 14.sp),
+            style = TextStyle(fontFamily = Inter, fontSize = 15.sp),
         )
     }
 }
@@ -351,17 +351,18 @@ private fun PresetChip(modifier: Modifier = Modifier, label: String, enabled: Bo
     )
     Box(
         modifier = modifier
+            .height(32.dp)
             .alpha(chipAlpha)
             .clip(RoundedCornerShape(100.dp))
-            .background(tokens.cellBackground)
+            .background(tokens.subtleFill)
             .clickable(enabled = enabled, onClick = onClick)
-            .padding(horizontal = 12.dp, vertical = 8.dp),
+            .padding(horizontal = 14.dp),
         contentAlignment = Alignment.Center,
     ) {
         Text(
             text = label,
             color = tokens.textPrimary,
-            style = TextStyle(fontFamily = Inter, fontSize = 14.sp),
+            style = TextStyle(fontFamily = Inter, fontSize = 16.sp),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             softWrap = false,

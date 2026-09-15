@@ -92,15 +92,12 @@ class MainActivity : AppCompatActivity() {
                     MetiqTheme(darkTheme = darkTheme, dynamicColors = settings.dynamicColorsEnabled) {
                         HomeScreen(
                             settings = settings,
-                            onParticlesEnabled = { scope.launch { repo.setParticlesEnabled(it) } },
-                            onWavesEnabled = { scope.launch { repo.setWavesEnabled(it) } },
                             onDynamicColors = { scope.launch { repo.setDynamicColorsEnabled(it) } },
                             onWarmth = { scope.launch { repo.setWarmth(it) } },
                             onFadeSeconds = { scope.launch { repo.setFadeSeconds(it) } },
                             onTimerFadeSeconds = { scope.launch { repo.setTimerFadeSeconds(it) } },
                             onRequestAudioFocus = { scope.launch { repo.setRequestAudioFocus(it) } },
                             onThemePreference = { scope.launch { repo.setThemePreference(it) } },
-                            onDefaultTab = { scope.launch { repo.setDefaultTab(it) } },
                             onBinauralVolume = { scope.launch { repo.setBinauralVolume(it) } },
                             onBinauralBand = { scope.launch { repo.setBinauralBand(it) } },
                             onTimerPresets = { scope.launch { repo.setTimerPresetsSeconds(it) } },

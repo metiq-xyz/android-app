@@ -2,8 +2,6 @@ package xyz.metiq.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-data class NoisePalette(val fill: Color, val onFill: Color, val wave: Color)
-
 data class MetiqColorTokens(
     val background: Color,
     val foreground: Color,
@@ -20,13 +18,10 @@ data class MetiqColorTokens(
     val accentShade: Color,
     val disabledAlpha: Float,
     val accentIconAlpha: Float,
-    val waveMaxAlpha: Float,
-    val particleBaseAlpha: Float,
-    val particleAlphaJitter: Float,
-    val noisePink: NoisePalette,
-    val noiseBrown: NoisePalette,
-    val noiseWhite: NoisePalette,
-    val noiseGrey: NoisePalette,
+    val noisePink: Color,
+    val noiseBrown: Color,
+    val noiseWhite: Color,
+    val noiseGrey: Color,
     val binauralDelta: Color,
     val binauralTheta: Color,
     val binauralAlpha: Color,
@@ -40,12 +35,16 @@ data class MetiqColorTokens(
     val ambientWind: Color,
     val ambientCrickets: Color,
     val ambientStream: Color,
+    val categoryNoise: Color,
+    val categoryAmbient: Color,
+    val categoryBinaural: Color,
 )
 
 object MetiqColors {
     private val PinkFill = Color(0xFFFFC6F2)
     private val BrownFill = Color(0xFFA34E08)
-    private val GreyFill = Color(0xFF565656)
+    private val GreyFillDark = Color(0xFF9A9A9A)
+    private val GreyFillLight = Color(0xFF6E6E6E)
 
     private val AmbientSeawaves = Color(0xFF3A7BD5)
     private val AmbientRain = Color(0xFF6C5CE7)
@@ -55,6 +54,10 @@ object MetiqColors {
     private val AmbientWind = Color(0xFF3AA6B9)
     private val AmbientCrickets = Color(0xFF8FAE3C)
     private val AmbientStream = Color(0xFF4FC3E8)
+
+    private val CategoryNoise = Color(0xFFCAE7F3)
+    private val CategoryAmbient = Color(0xFFDBF1B3)
+    private val CategoryBinaural = Color(0xFFABAAFE)
 
     private val BinauralDelta = Color(0xFF7B6CF6)
     private val BinauralTheta = Color(0xFF4C7BE8)
@@ -78,13 +81,10 @@ object MetiqColors {
         accentShade = Color.Black,
         disabledAlpha = 0.5f,
         accentIconAlpha = 0.7f,
-        waveMaxAlpha = 0.9f,
-        particleBaseAlpha = 0.2f,
-        particleAlphaJitter = 0.4f,
-        noisePink = NoisePalette(PinkFill, Color.Black, wave = PinkFill),
-        noiseBrown = NoisePalette(BrownFill, Color.White, wave = BrownFill),
-        noiseWhite = NoisePalette(Color.White, Color.Black, wave = Color.White),
-        noiseGrey = NoisePalette(GreyFill, Color.White, wave = GreyFill),
+        noisePink = PinkFill,
+        noiseBrown = BrownFill,
+        noiseWhite = Color.White,
+        noiseGrey = GreyFillDark,
         binauralDelta = BinauralDelta,
         binauralTheta = BinauralTheta,
         binauralAlpha = BinauralAlpha,
@@ -98,6 +98,9 @@ object MetiqColors {
         ambientWind = AmbientWind,
         ambientCrickets = AmbientCrickets,
         ambientStream = AmbientStream,
+        categoryNoise = CategoryNoise,
+        categoryAmbient = CategoryAmbient,
+        categoryBinaural = CategoryBinaural,
     )
 
     val Light = MetiqColorTokens(
@@ -116,13 +119,10 @@ object MetiqColors {
         accentShade = Color.Black,
         disabledAlpha = 0.5f,
         accentIconAlpha = 0.7f,
-        waveMaxAlpha = 0.9f,
-        particleBaseAlpha = 0.2f,
-        particleAlphaJitter = 0.4f,
-        noisePink = NoisePalette(PinkFill, Color.Black, wave = PinkFill),
-        noiseBrown = NoisePalette(BrownFill, Color.White, wave = BrownFill),
-        noiseWhite = NoisePalette(Color.White, Color.Black, wave = Color(0xFFDCDFE7)),
-        noiseGrey = NoisePalette(GreyFill, Color.White, wave = GreyFill),
+        noisePink = PinkFill,
+        noiseBrown = BrownFill,
+        noiseWhite = Color.White,
+        noiseGrey = GreyFillLight,
         binauralDelta = BinauralDelta,
         binauralTheta = BinauralTheta,
         binauralAlpha = BinauralAlpha,
@@ -136,5 +136,8 @@ object MetiqColors {
         ambientWind = AmbientWind,
         ambientCrickets = AmbientCrickets,
         ambientStream = AmbientStream,
+        categoryNoise = CategoryNoise,
+        categoryAmbient = CategoryAmbient,
+        categoryBinaural = CategoryBinaural,
     )
 }

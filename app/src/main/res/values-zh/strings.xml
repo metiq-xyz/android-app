@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="help_cd">帮助</string>
-    <string name="help_title">使用方法</string>
-    <string name="home_helper">点击噪音颜色播放或停止。\n想要自动停止的话，设置计时。\n太明亮/刺耳？在设置里用暖度柔化。\n想要开始和停止播放时更缓和？在设置里设置渐变时长。</string>
-    <string name="ambient_helper">点击预设播放，再次点击停止。\n点击圆形播放一个声音，滑动滑条设置音量。\n用“保存搭配”保存你的搭配，用垃圾箱图标删除搭配。\n想要开始和停止播放时更缓和？在设置里设置渐变时长。</string>
 
-    <string name="tab_noise">噪音</string>
-    <string name="tab_ambient">环境音</string>
-    <string name="tab_settings">设置</string>
+    <string name="category_noise">噪音</string>
+    <string name="category_ambient">环境音</string>
 
     <string name="ambient_off">关</string>
-    <string name="ambient_now_playing">环境音搭配</string>
     <string name="ambient_seawaves">海浪</string>
     <string name="ambient_rain">雨</string>
     <string name="ambient_fire">火焰</string>
@@ -20,12 +14,10 @@
     <string name="ambient_crickets">蟋蟀</string>
     <string name="ambient_stream">溪流</string>
 
-    <string name="binaural_now_playing">双耳差频</string>
     <!-- Button label: -->
-    <string name="binaural_fab_label">双耳差频</string>
+    <string name="category_binaural">双耳差频</string>
     <string name="binaural_noti_label">%1$s双耳差频</string>
     <string name="binaural_headphone_notice">请佩戴耳机：要产生双耳差频效果，每只耳朵需要听到不同的音调。</string>
-    <string name="binaural_volume">音量</string>
     <string name="binaural_delta_feel">深睡</string>
     <string name="binaural_theta_feel">冥想</string>
     <string name="binaural_alpha_feel">放松</string>
@@ -67,16 +59,11 @@
 
     <string name="settings_section_appearance">外观</string>
     <string name="settings_theme_label">主题</string>
-    <string name="settings_default_tab_label">启动画面</string>
     <string name="settings_theme_system">跟随系统</string>
     <string name="settings_theme_light">亮</string>
     <string name="settings_theme_dark">暗</string>
     <string name="settings_dynamic_colors_label">动态取色</string>
     <string name="settings_dynamic_colors_description">根据壁纸为应用着色（Material You）</string>
-    <string name="settings_particles_label">背景粒子</string>
-    <string name="settings_particles_description">显示与播放中声音的颜色同色的颗粒动画</string>
-    <string name="settings_waves_label">波纹动画</string>
-    <string name="settings_waves_description">播放中的声音周围扩散的圆环</string>
 
     <string name="settings_section_language">语言</string>
     <string name="settings_language_label">语言</string>
@@ -117,4 +104,23 @@
     <string name="mix_delete_message">“%1$s” 将被移除。</string>
     <string name="mix_delete_confirm">删除</string>
     <string name="dialog_cancel">取消</string>
+
+    <!-- Home: mix builder -->
+    <string name="mix_panel_empty_title">你的搭配从这里开始</string>
+    <string name="mix_panel_empty_subtitle">未选择声音</string>
+    <string name="mix_panel_quick_mixes">快速搭配</string>
+    <string name="mix_panel_play_cd">播放</string>
+    <string name="mix_panel_open_cd">打开搭配</string>
+    <string name="sheet_title_ambient">环境音</string>
+    <string name="sheet_count_in_mix">已选 %1$d / %2$d</string>
+    <string name="sheet_binaural_single">只能选择一个。</string>
+    <string name="sheet_close_cd">关闭</string>
+    <string name="mix_now_playing">你的搭配</string>
+    <string name="mix_panel_pause_cd">暂停</string>
+    <plurals name="category_active_count">
+        <item quantity="other">已开 %1$d</item>
+    </plurals>
+    <plurals name="mix_sheet_count">
+        <item quantity="other">搭配中有 %1$d 个声音</item>
+    </plurals>
 </resources>

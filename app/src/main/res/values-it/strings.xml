@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="help_cd">Aiuto</string>
-    <string name="help_title">Come funziona</string>
-    <string name="home_helper">Tocca un colore di rumore per riprodurlo o fermarlo.\nImposta un timer se vuoi che si spenga automaticamente.\nTroppo brillante o gracchiante? Ammorbidiscilo con calore nelle impostazioni.\nPreferisci avvii e interruzioni più morbidi? Regola la durata della dissolvenza nelle impostazioni.</string>
-    <string name="ambient_helper">Tocca un preset per riprodurlo, toccalo di nuovo per fermarlo.\nTocca un orbe per avviare un suono, poi trascina il cursore per regolare il livello.\nSalva il tuo mix con “Salva mix” e usa l\'icona del cestino per eliminarlo.\nPreferisci avvii e interruzioni più morbidi? Regola la durata della dissolvenza nelle impostazioni.</string>
 
-    <string name="tab_noise">Rumore</string>
-    <string name="tab_ambient">Ambiente</string>
-    <string name="tab_settings">Impostazioni</string>
+    <string name="category_noise">Rumore</string>
+    <string name="category_ambient">Ambiente</string>
 
     <string name="ambient_off">Spento</string>
-    <string name="ambient_now_playing">Mix ambientale</string>
     <string name="ambient_seawaves">Onde del mare</string>
     <string name="ambient_rain">Pioggia</string>
     <string name="ambient_fire">Crepitio del fuoco</string>
@@ -20,11 +14,9 @@
     <string name="ambient_crickets">Grilli</string>
     <string name="ambient_stream">Ruscello</string>
 
-    <string name="binaural_now_playing">Battiti binaurali</string>
-    <string name="binaural_fab_label">Binaurali</string>
+    <string name="category_binaural">Binaurali</string>
     <string name="binaural_noti_label">%1$s binaurale</string>
     <string name="binaural_headphone_notice">Usa le cuffie: ogni orecchio riceve un tono diverso perché l\'effetto funzioni.</string>
-    <string name="binaural_volume">Volume</string>
     <string name="binaural_delta_feel">Sonno profondo</string>
     <string name="binaural_theta_feel">Meditazione</string>
     <string name="binaural_alpha_feel">Relax</string>
@@ -66,16 +58,11 @@
 
     <string name="settings_section_appearance">Aspetto</string>
     <string name="settings_theme_label">Tema</string>
-    <string name="settings_default_tab_label">Schermata iniziale</string>
     <string name="settings_theme_system">Sistema</string>
     <string name="settings_theme_light">Chiaro</string>
     <string name="settings_theme_dark">Scuro</string>
     <string name="settings_dynamic_colors_label">Colori dinamici</string>
     <string name="settings_dynamic_colors_description">Colora l\'app con i colori dello sfondo (Material You)</string>
-    <string name="settings_particles_label">Particelle di sfondo</string>
-    <string name="settings_particles_description">Puntini animati dietro al colore attivo</string>
-    <string name="settings_waves_label">Animazione a onde</string>
-    <string name="settings_waves_description">Anelli che si espandono attorno ai suoni in riproduzione</string>
 
     <string name="settings_section_language">Lingua</string>
     <string name="settings_language_label">Lingua</string>
@@ -116,4 +103,27 @@
     <string name="mix_delete_message">“%1$s” verrà rimosso.</string>
     <string name="mix_delete_confirm">Elimina</string>
     <string name="dialog_cancel">Annulla</string>
+
+    <!-- Home: mix builder -->
+    <string name="mix_panel_empty_title">Il tuo mix inizia qui</string>
+    <string name="mix_panel_empty_subtitle">Nessun suono selezionato</string>
+    <string name="mix_panel_quick_mixes">Mix rapidi</string>
+    <string name="mix_panel_play_cd">Riproduci</string>
+    <string name="mix_panel_open_cd">Apri mix</string>
+    <string name="sheet_title_ambient">Suoni ambientali</string>
+    <string name="sheet_count_in_mix">%1$d di %2$d nel tuo mix</string>
+    <string name="sheet_binaural_single">Puoi sceglierne solo uno.</string>
+    <string name="sheet_close_cd">Chiudi</string>
+    <string name="mix_now_playing">Il tuo mix</string>
+    <string name="mix_panel_pause_cd">Pausa</string>
+    <plurals name="category_active_count">
+        <item quantity="one">%1$d attivo</item>
+        <item quantity="many">%1$d attivi</item>
+        <item quantity="other">%1$d attivi</item>
+    </plurals>
+    <plurals name="mix_sheet_count">
+        <item quantity="one">%1$d suono nel tuo mix</item>
+        <item quantity="many">%1$d suoni nel tuo mix</item>
+        <item quantity="other">%1$d suoni nel tuo mix</item>
+    </plurals>
 </resources>
