@@ -221,6 +221,7 @@ private fun SoundRow(
             onLevelSettled = { onLevelSettled(id) },
             dimmed = dimmed,
             showBadge = showBadge,
+            orbBorder = if (noise.id == "white") tokens.subtleFill else null,
         )
         return
     }

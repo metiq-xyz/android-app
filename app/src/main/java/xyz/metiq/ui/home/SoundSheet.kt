@@ -96,6 +96,7 @@ private val SLIDER_TRACK_HEIGHT: Dp = 8.dp
 private val SLIDER_THUMB_SIZE: Dp = 20.dp
 private val SLIDER_THUMB_BORDER: Dp = 2.dp
 private val ORB_RING_WIDTH: Dp = 1.5.dp
+private val ORB_BORDER_WIDTH: Dp = 1.dp
 private const val ACTIVATE_ANIM_MS = 250
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -246,6 +247,7 @@ internal fun SoundLevelRow(
     detail: String? = null,
     dimmed: Boolean = false,
     showBadge: Boolean = true,
+    orbBorder: Color? = null,
     icon: (@Composable (tint: Color) -> Unit)? = null,
 ) {
     val tokens = LocalMetiqColors.current
@@ -292,6 +294,13 @@ internal fun SoundLevelRow(
                     .size(ORB_SIZE)
                     .clip(CircleShape)
                     .background(orbColor)
+                    .then(
+                        if (orbBorder != null) {
+                            Modifier.border(ORB_BORDER_WIDTH, orbBorder, CircleShape)
+                        } else {
+                            Modifier
+                        },
+                    )
                     .toggleable(
                         value = active,
                         enabled = active || !dimmed,
