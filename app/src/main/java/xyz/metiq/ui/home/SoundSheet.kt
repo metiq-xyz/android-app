@@ -60,6 +60,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -78,6 +79,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.math.abs
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 import xyz.metiq.R
@@ -91,9 +93,6 @@ private val SHEET_DIVIDER_TOP_PADDING: Dp = 24.dp
 private val SHEET_LIST_TOP_PADDING: Dp = 20.dp
 private val SHEET_ROW_SPACING: Dp = 12.dp
 private val ORB_BOX_SIZE: Dp = 60.dp
-private const val SHEET_MAX_VISIBLE_ROWS = 5.5f
-private val SHEET_BODY_MAX_HEIGHT: Dp = SHEET_DIVIDER_TOP_PADDING + DividerDefaults.Thickness +
-    SHEET_LIST_TOP_PADDING + (ORB_BOX_SIZE + SHEET_ROW_SPACING) * SHEET_MAX_VISIBLE_ROWS
 private val ORB_SIZE: Dp = 54.dp
 private val BADGE_SIZE: Dp = 24.dp
 private val BADGE_RING: Dp = 2.dp
@@ -103,6 +102,7 @@ private val SLIDER_THUMB_BORDER: Dp = 2.dp
 private val ORB_RING_WIDTH: Dp = 1.5.dp
 private val ORB_BORDER_WIDTH: Dp = 1.dp
 private const val ACTIVATE_ANIM_MS = 250
+private const val MIN_VALUE_LUMINANCE_GAP = 0.15f
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -169,9 +169,7 @@ internal fun SoundSheet(
             }
         }
         Column(
-            modifier = Modifier
-                .weight(1f, fill = false)
-                .heightIn(max = SHEET_BODY_MAX_HEIGHT),
+            modifier = Modifier.weight(1f, fill = false)
         ) {
             if (notice != null) {
                 Box(
@@ -261,8 +259,13 @@ internal fun SoundLevelRow(
         animationSpec = tween(ACTIVATE_ANIM_MS, easing = FastOutSlowInEasing),
         label = "soundRing",
     )
+    val activeValueColor = if (abs(orbColor.luminance() - tokens.foreground.luminance()) < MIN_VALUE_LUMINANCE_GAP) {
+        tokens.textPrimary
+    } else {
+        orbColor
+    }
     val valueColor by animateColorAsState(
-        targetValue = if (active) orbColor else tokens.textSecondary,
+        targetValue = if (active) activeValueColor else tokens.textSecondary,
         animationSpec = tween(ACTIVATE_ANIM_MS),
         label = "soundValueColor",
     )
