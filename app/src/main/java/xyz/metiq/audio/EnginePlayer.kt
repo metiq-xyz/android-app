@@ -1,9 +1,7 @@
 package xyz.metiq.audio
 
-import android.graphics.Bitmap
 import android.os.Looper
 import androidx.annotation.OptIn
-import androidx.core.graphics.createBitmap
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
@@ -12,25 +10,21 @@ import androidx.media3.common.SimpleBasePlayer
 import androidx.media3.common.util.UnstableApi
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import java.io.ByteArrayOutputStream
-
-private const val ARTWORK_SIZE_PX = 192
 
 @OptIn(markerClass = [UnstableApi::class])
 class EnginePlayer(
     private val engine: AudioEngine,
     looper: Looper,
+    private val artwork: ByteArray,
 ) : SimpleBasePlayer(looper) {
 
     private var playing = false
     private var stopped = true
     private var currentVolume = 1f
     private var activeLabel: String? = null
-    private var activeArtwork: ByteArray? = null
 
-    fun setActiveColor(label: String?, tintArgb: Int?) {
+    fun setActiveLabel(label: String?) {
         activeLabel = label
-        activeArtwork = tintArgb?.let(::makeColorTile)
         invalidateState()
     }
 
@@ -51,17 +45,16 @@ class EnginePlayer(
 
     override fun getState(): State {
         val title = activeLabel ?: "Metiq"
-        val metadataBuilder = MediaMetadata.Builder()
+        val metadata = MediaMetadata.Builder()
             .setTitle(title)
             .setArtist("Metiq")
-        activeArtwork?.let {
-            metadataBuilder.setArtworkData(it, MediaMetadata.PICTURE_TYPE_FRONT_COVER)
-        }
+            .setArtworkData(artwork, MediaMetadata.PICTURE_TYPE_FRONT_COVER)
+            .build()
         val item = MediaItemData.Builder("metiq")
             .setMediaItem(
                 MediaItem.Builder()
                     .setMediaId("metiq")
-                    .setMediaMetadata(metadataBuilder.build())
+                    .setMediaMetadata(metadata)
                     .build()
             )
             .setDurationUs(C.TIME_UNSET)
@@ -119,14 +112,5 @@ class EnginePlayer(
     override fun handleRelease(): ListenableFuture<*> {
         engine.release()
         return Futures.immediateVoidFuture()
-    }
-
-    private fun makeColorTile(argb: Int): ByteArray {
-        val bmp = createBitmap(ARTWORK_SIZE_PX, ARTWORK_SIZE_PX)
-        bmp.eraseColor(argb)
-        val out = ByteArrayOutputStream()
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, out)
-        bmp.recycle()
-        return out.toByteArray()
     }
 }

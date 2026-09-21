@@ -39,7 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -59,6 +58,7 @@ import xyz.metiq.DEFAULT_SETTINGS
 import xyz.metiq.MAX_CUSTOM_MIXES
 import xyz.metiq.R
 import xyz.metiq.Settings
+import xyz.metiq.StartupScreen
 import xyz.metiq.ThemePreference
 import xyz.metiq.ui.FEEDBACK_URL
 import xyz.metiq.ui.LicensesScreen
@@ -84,6 +84,7 @@ fun HomeScreen(
     onTimerFadeSeconds: (Float) -> Unit,
     onRequestAudioFocus: (Boolean) -> Unit,
     onThemePreference: (ThemePreference) -> Unit,
+    onStartupScreen: (StartupScreen) -> Unit,
     onBinauralVolume: (Float) -> Unit,
     onBinauralBand: (String?) -> Unit,
     onTimerPresets: (List<Long>) -> Unit,
@@ -97,7 +98,16 @@ fun HomeScreen(
     val tokens = LocalMetiqColors.current
     var showSettings by remember { mutableStateOf(false) }
     var showLicenses by remember { mutableStateOf(false) }
-    var openCategory by remember { mutableStateOf<SoundCategory?>(null) }
+    var openCategory by remember {
+        mutableStateOf(
+            when (settings.startupScreen) {
+                StartupScreen.HOME -> null
+                StartupScreen.NOISE -> SoundCategory.NOISE
+                StartupScreen.AMBIENT -> SoundCategory.AMBIENT
+                StartupScreen.BINAURAL -> SoundCategory.BINAURAL
+            }
+        )
+    }
     var showMixSheet by remember { mutableStateOf(false) }
     var showSaveMixDialog by remember { mutableStateOf(false) }
     var pendingMixDelete by remember { mutableStateOf<CustomMix?>(null) }
@@ -163,10 +173,9 @@ fun HomeScreen(
     
     val mixTitle = activeQuickMixes.minOrNull()?.let { quickMixes[it] }
     val nowPlaying = mixLabel(playback.levels, mixTitle)
-    val nowPlayingArgb = mixTint(playback.levels)?.toArgb()
     
-    LaunchedEffect(binder, nowPlaying, nowPlayingArgb) {
-        binder?.setActiveColor(nowPlaying, nowPlayingArgb)
+    LaunchedEffect(binder, nowPlaying) {
+        binder?.setActiveLabel(nowPlaying)
     }
 
     BackHandler(enabled = showLicenses) { showLicenses = false }
@@ -290,6 +299,7 @@ fun HomeScreen(
                 onTimerFadeSeconds = onTimerFadeSeconds,
                 onRequestAudioFocus = onRequestAudioFocus,
                 onThemePreference = onThemePreference,
+                onStartupScreen = onStartupScreen,
                 onTimerPresets = onTimerPresets,
                 onLanguageTag = onLanguageTag,
                 onBack = { showSettings = false },
@@ -421,6 +431,7 @@ private fun HomeScreenPreview() {
             onTimerFadeSeconds = {},
             onRequestAudioFocus = {},
             onThemePreference = {},
+            onStartupScreen = {},
             onBinauralVolume = {},
             onBinauralBand = {},
             onTimerPresets = {},

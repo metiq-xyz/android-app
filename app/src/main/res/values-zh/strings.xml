@@ -62,6 +62,8 @@
     <string name="settings_theme_system">跟随系统</string>
     <string name="settings_theme_light">亮</string>
     <string name="settings_theme_dark">暗</string>
+    <string name="settings_startup_screen_label">启动画面</string>
+    <string name="settings_startup_screen_home">首页</string>
     <string name="settings_dynamic_colors_label">动态取色</string>
     <string name="settings_dynamic_colors_description">根据壁纸为应用着色（Material You）</string>
 

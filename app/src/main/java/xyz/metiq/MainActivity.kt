@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
                             onTimerFadeSeconds = { scope.launch { repo.setTimerFadeSeconds(it) } },
                             onRequestAudioFocus = { scope.launch { repo.setRequestAudioFocus(it) } },
                             onThemePreference = { scope.launch { repo.setThemePreference(it) } },
+                            onStartupScreen = { scope.launch { repo.setStartupScreen(it) } },
                             onBinauralVolume = { scope.launch { repo.setBinauralVolume(it) } },
                             onBinauralBand = { scope.launch { repo.setBinauralBand(it) } },
                             onTimerPresets = { scope.launch { repo.setTimerPresetsSeconds(it) } },

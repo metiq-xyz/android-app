@@ -36,6 +36,7 @@ import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.BottomSheetDefaults
+import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -86,9 +87,13 @@ import xyz.metiq.ui.theme.LocalMetiqColors
 private val SHEET_HEADER_PADDING: Dp = 20.dp
 private val SHEET_ROW_START_PADDING: Dp = 20.dp
 private val SHEET_ROW_END_PADDING: Dp = 24.dp
+private val SHEET_DIVIDER_TOP_PADDING: Dp = 24.dp
 private val SHEET_LIST_TOP_PADDING: Dp = 20.dp
 private val SHEET_ROW_SPACING: Dp = 12.dp
 private val ORB_BOX_SIZE: Dp = 60.dp
+private const val SHEET_MAX_VISIBLE_ROWS = 5.5f
+private val SHEET_BODY_MAX_HEIGHT: Dp = SHEET_DIVIDER_TOP_PADDING + DividerDefaults.Thickness +
+    SHEET_LIST_TOP_PADDING + (ORB_BOX_SIZE + SHEET_ROW_SPACING) * SHEET_MAX_VISIBLE_ROWS
 private val ORB_SIZE: Dp = 54.dp
 private val BADGE_SIZE: Dp = 24.dp
 private val BADGE_RING: Dp = 2.dp
@@ -106,7 +111,6 @@ internal fun SoundSheet(
     subtitle: String?,
     onDismiss: () -> Unit,
     notice: (@Composable () -> Unit)? = null,
-    maxVisibleRows: Float? = null,
     footer: (@Composable () -> Unit)? = null,
     contentEndPadding: Dp = SHEET_ROW_END_PADDING,
     content: @Composable ColumnScope.() -> Unit,
@@ -164,44 +168,39 @@ internal fun SoundSheet(
                 )
             }
         }
-        if (notice != null) {
-            Box(
-                modifier = Modifier
-                    .padding(start = SHEET_ROW_START_PADDING, end = SHEET_ROW_START_PADDING, top = 24.dp),
-            ) {
-                notice()
-            }
-        }
-        HorizontalDivider(
-            color = tokens.divider,
-            modifier = Modifier.padding(top = 24.dp),
-        )
         Column(
             modifier = Modifier
                 .weight(1f, fill = false)
-                .fillMaxWidth()
-                .then(
-                    // Cap the viewport at a fractional row count so a partially visible
-                    // row hints that the list scrolls.
-                    if (maxVisibleRows != null) {
-                        Modifier.heightIn(
-                            max = SHEET_LIST_TOP_PADDING + (ORB_BOX_SIZE + SHEET_ROW_SPACING) * maxVisibleRows,
-                        )
-                    } else {
-                        Modifier
-                    }
-                )
-                .verticalScroll(rememberScrollState())
-                .padding(
-                    start = SHEET_ROW_START_PADDING,
-                    end = contentEndPadding,
-                    top = SHEET_LIST_TOP_PADDING,
-                    bottom = 24.dp,
-                ),
-            verticalArrangement = Arrangement.spacedBy(SHEET_ROW_SPACING),
-            content = content,
-        )
-        footer?.invoke()
+                .heightIn(max = SHEET_BODY_MAX_HEIGHT),
+        ) {
+            if (notice != null) {
+                Box(
+                    modifier = Modifier
+                        .padding(start = SHEET_ROW_START_PADDING, end = SHEET_ROW_START_PADDING, top = 24.dp),
+                ) {
+                    notice()
+                }
+            }
+            HorizontalDivider(
+                color = tokens.divider,
+                modifier = Modifier.padding(top = SHEET_DIVIDER_TOP_PADDING),
+            )
+            Column(
+                modifier = Modifier
+                    .weight(1f, fill = false)
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+                    .padding(
+                        start = SHEET_ROW_START_PADDING,
+                        end = contentEndPadding,
+                        top = SHEET_LIST_TOP_PADDING,
+                        bottom = 24.dp,
+                    ),
+                verticalArrangement = Arrangement.spacedBy(SHEET_ROW_SPACING),
+                content = content,
+            )
+            footer?.invoke()
+        }
     }
 }
 

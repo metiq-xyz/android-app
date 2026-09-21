@@ -75,6 +75,7 @@ import xyz.metiq.DEFAULT_SETTINGS
 import xyz.metiq.MAX_TIMER_PRESETS
 import xyz.metiq.R
 import xyz.metiq.Settings
+import xyz.metiq.StartupScreen
 import xyz.metiq.ThemePreference
 import xyz.metiq.clampFadeSeconds
 import xyz.metiq.ui.theme.LocalMetiqColors
@@ -114,6 +115,13 @@ private fun themeLabelRes(preference: ThemePreference): Int = when (preference) 
     ThemePreference.DARK -> R.string.settings_theme_dark
 }
 
+private fun startupScreenLabelRes(screen: StartupScreen): Int = when (screen) {
+    StartupScreen.HOME -> R.string.settings_startup_screen_home
+    StartupScreen.NOISE -> R.string.category_noise
+    StartupScreen.AMBIENT -> R.string.category_ambient
+    StartupScreen.BINAURAL -> R.string.category_binaural
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
@@ -125,6 +133,7 @@ fun SettingsScreen(
     onTimerFadeSeconds: (Float) -> Unit = {},
     onRequestAudioFocus: (Boolean) -> Unit = {},
     onThemePreference: (ThemePreference) -> Unit = {},
+    onStartupScreen: (StartupScreen) -> Unit = {},
     onTimerPresets: (List<Long>) -> Unit,
     onLanguageTag: (String?) -> Unit,
     onBack: () -> Unit,
@@ -170,6 +179,7 @@ fun SettingsScreen(
             onTimerFadeSeconds = onTimerFadeSeconds,
             onRequestAudioFocus = onRequestAudioFocus,
             onThemePreference = onThemePreference,
+            onStartupScreen = onStartupScreen,
             onTimerPresets = onTimerPresets,
             onLanguageTag = onLanguageTag,
             onOpenLicenses = onOpenLicenses,
@@ -191,6 +201,7 @@ fun SettingsContent(
     onTimerFadeSeconds: (Float) -> Unit = {},
     onRequestAudioFocus: (Boolean) -> Unit = {},
     onThemePreference: (ThemePreference) -> Unit = {},
+    onStartupScreen: (StartupScreen) -> Unit = {},
     onDynamicColors: (Boolean) -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -238,6 +249,13 @@ fun SettingsContent(
                 current = settings.themePreference,
                 labelFor = { stringResource(themeLabelRes(it)) },
                 onPick = onThemePreference,
+            )
+            DropdownPickerRow(
+                label = stringResource(R.string.settings_startup_screen_label),
+                options = StartupScreen.entries,
+                current = settings.startupScreen,
+                labelFor = { stringResource(startupScreenLabelRes(it)) },
+                onPick = onStartupScreen,
             )
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 ToggleRow(

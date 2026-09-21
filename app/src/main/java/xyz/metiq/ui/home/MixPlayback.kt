@@ -15,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
@@ -269,7 +268,7 @@ internal fun mixLabel(levels: Map<String, Float>, mixTitle: String?): String? {
         NOISE_COLORS.firstOrNull { it.id == id }?.let { return stringResource(it.noiseTitleRes) }
         AMBIENT_SOUNDS.firstOrNull { it.id == id }?.let { return stringResource(it.labelRes) }
         BINAURAL_BANDS.firstOrNull { it.id == id }?.let {
-            return stringResource(R.string.binaural_noti_label, it.glyph)
+            return stringResource(R.string.binaural_noti_label, stringResource(it.labelRes))
         }
     }
     return stringResource(R.string.mix_now_playing)
@@ -279,13 +278,5 @@ internal fun mixLabel(levels: Map<String, Float>, mixTitle: String?): String? {
 internal fun mixSoundNames(levels: Map<String, Float>): List<String> = buildList {
     NOISE_COLORS.filter { it.id in levels }.forEach { add(stringResource(it.noiseTitleRes)) }
     AMBIENT_SOUNDS.filter { it.id in levels }.forEach { add(stringResource(it.labelRes)) }
-    BINAURAL_BANDS.filter { it.id in levels }.forEach { add(stringResource(R.string.binaural_noti_label, it.glyph)) }
-}
-
-@Composable
-internal fun mixTint(levels: Map<String, Float>): Color? {
-    NOISE_COLORS.firstOrNull { it.id in levels }?.let { return noiseColorFor(it.id) }
-    AMBIENT_SOUNDS.firstOrNull { it.id in levels }?.let { return ambientAccentFor(it.id) }
-    BINAURAL_BANDS.firstOrNull { it.id in levels }?.let { return binauralAccentFor(it.id) }
-    return null
+    BINAURAL_BANDS.filter { it.id in levels }.forEach { add(stringResource(R.string.binaural_noti_label, stringResource(it.labelRes))) }
 }

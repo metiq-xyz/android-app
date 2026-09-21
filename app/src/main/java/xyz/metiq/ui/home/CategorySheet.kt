@@ -72,7 +72,6 @@ internal fun CategorySheet(
             title = stringResource(R.string.sheet_title_ambient),
             subtitle = countSubtitle(ids, levels),
             onDismiss = onDismiss,
-            maxVisibleRows = 5.5f,
             content = rows,
         )
         SoundCategory.BINAURAL -> SoundSheet(
@@ -105,7 +104,6 @@ internal fun MixSheet(
         title = title ?: stringResource(R.string.mix_now_playing),
         subtitle = pluralStringResource(R.plurals.mix_sheet_count, levels.size, levels.size),
         onDismiss = onDismiss,
-        maxVisibleRows = 5.5f,
         footer = {
             SaveMixSheetButton(
                 enabled = saveEnabled,

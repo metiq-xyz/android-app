@@ -61,6 +61,8 @@
     <string name="settings_theme_system">Sistema</string>
     <string name="settings_theme_light">Claro</string>
     <string name="settings_theme_dark">Escuro</string>
+    <string name="settings_startup_screen_label">Tela inicial</string>
+    <string name="settings_startup_screen_home">Início</string>
     <string name="settings_dynamic_colors_label">Cores dinâmicas</string>
     <string name="settings_dynamic_colors_description">Aplica ao app as cores do seu papel de parede (Material You)</string>
 

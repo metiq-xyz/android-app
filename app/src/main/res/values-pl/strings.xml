@@ -61,6 +61,8 @@
     <string name="settings_theme_system">Systemowy</string>
     <string name="settings_theme_light">Jasny</string>
     <string name="settings_theme_dark">Ciemny</string>
+    <string name="settings_startup_screen_label">Ekran startowy</string>
+    <string name="settings_startup_screen_home">Ekran główny</string>
     <string name="settings_dynamic_colors_label">Dynamiczne kolory</string>
     <string name="settings_dynamic_colors_description">Barwi aplikację kolorami tapety (Material You)</string>
 

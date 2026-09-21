@@ -24,6 +24,8 @@ data class CustomMix(
 
 enum class ThemePreference { SYSTEM, LIGHT, DARK }
 
+enum class StartupScreen { HOME, NOISE, AMBIENT, BINAURAL }
+
 data class Settings(
     val dynamicColorsEnabled: Boolean,
     val timerPresetsSeconds: List<Long>,
@@ -36,6 +38,7 @@ data class Settings(
     val themePreference: ThemePreference,
     val binauralVolume: Float,
     val binauralBand: String?,
+    val startupScreen: StartupScreen,
 )
 
 val DEFAULT_SETTINGS = Settings(
@@ -52,6 +55,7 @@ val DEFAULT_SETTINGS = Settings(
     themePreference = ThemePreference.SYSTEM,
     binauralVolume = 0.5f,
     binauralBand = null,
+    startupScreen = StartupScreen.HOME,
 )
 
 const val MAX_TIMER_PRESETS = 4
@@ -111,6 +115,7 @@ private object Keys {
     val TIMER_FADE_SECONDS = floatPreferencesKey("timer_fade_seconds")
     val REQUEST_AUDIO_FOCUS = booleanPreferencesKey("request_audio_focus")
     val THEME_PREFERENCE = stringPreferencesKey("theme_preference")
+    val STARTUP_SCREEN = stringPreferencesKey("startup_screen")
     val BINAURAL_VOLUME = floatPreferencesKey("binaural_volume")
     val BINAURAL_BAND = stringPreferencesKey("binaural_band")
     val TIMER_PRESETS = stringPreferencesKey("timer_presets")
@@ -150,6 +155,10 @@ class SettingsRepository(context: Context) {
 
     suspend fun setThemePreference(preference: ThemePreference) {
         store.edit { it[Keys.THEME_PREFERENCE] = preference.name }
+    }
+
+    suspend fun setStartupScreen(screen: StartupScreen) {
+        store.edit { it[Keys.STARTUP_SCREEN] = screen.name }
     }
 
     suspend fun setBinauralVolume(volume: Float) {
@@ -230,6 +239,9 @@ class SettingsRepository(context: Context) {
         val binauralVolume = (this[Keys.BINAURAL_VOLUME] ?: DEFAULT_SETTINGS.binauralVolume)
             .coerceIn(0f, 1f)
         val binauralBand = this[Keys.BINAURAL_BAND]
+        val startupScreen = this[Keys.STARTUP_SCREEN]
+            ?.let { runCatching { StartupScreen.valueOf(it) }.getOrNull() }
+            ?: DEFAULT_SETTINGS.startupScreen
         return Settings(
             dynamicColorsEnabled = dynamicColors,
             timerPresetsSeconds = presets,
@@ -242,6 +254,7 @@ class SettingsRepository(context: Context) {
             themePreference = themePreference,
             binauralVolume = binauralVolume,
             binauralBand = binauralBand,
+            startupScreen = startupScreen,
         )
     }
 }

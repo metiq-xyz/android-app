@@ -96,6 +96,8 @@
     <string name="settings_theme_system">System</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_theme_dark">Dark</string>
+    <string name="settings_startup_screen_label">Startup screen</string>
+    <string name="settings_startup_screen_home">Home</string>
     <string name="settings_dynamic_colors_label">Dynamic colors</string>
     <string name="settings_dynamic_colors_description">Tint the app with colors from your wallpaper (Material You)</string>
 

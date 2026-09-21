@@ -22,6 +22,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import xyz.metiq.R
 
 @OptIn(markerClass = [UnstableApi::class])
 class PlaybackService : MediaSessionService() {
@@ -43,8 +44,8 @@ class PlaybackService : MediaSessionService() {
         val engine: AudioEngine get() = this@PlaybackService.engine
         val timerRemainingSeconds: StateFlow<Long?>
             get() = this@PlaybackService.timerRemainingSeconds
-        fun setActiveColor(label: String?, tintArgb: Int?) {
-            this@PlaybackService.player.setActiveColor(label, tintArgb)
+        fun setActiveLabel(label: String?) {
+            this@PlaybackService.player.setActiveLabel(label)
         }
         fun requestAudioFocusNow(): Boolean = this@PlaybackService.requestAudioFocus()
         fun setRequestAudioFocus(enabled: Boolean) =
@@ -83,7 +84,8 @@ class PlaybackService : MediaSessionService() {
     override fun onCreate() {
         super.onCreate()
         engine = AudioEngine(this)
-        player = EnginePlayer(engine, mainLooper)
+        val artwork = resources.openRawResource(R.drawable.notification_artwork).use { it.readBytes() }
+        player = EnginePlayer(engine, mainLooper, artwork)
         player.addListener(playerListener)
         session = MediaSession.Builder(this, player).build()
 
@@ -143,7 +145,7 @@ class PlaybackService : MediaSessionService() {
                 delay(minOf(1000L, leftMs))
             }
             engine.stopAllTimerFade()
-            player.setActiveColor(null, null)
+            player.setActiveLabel(null)
             player.stop()
             timerRemainingSeconds.value = null
         }
@@ -158,7 +160,7 @@ class PlaybackService : MediaSessionService() {
     private fun hardStop() {
         cancelSleepTimer()
         engine.release()
-        player.setActiveColor(null, null)
+        player.setActiveLabel(null)
         player.notifyStopped()
         abandonAudioFocus()
         stopForeground(Service.STOP_FOREGROUND_REMOVE)

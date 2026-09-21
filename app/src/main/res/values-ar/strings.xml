@@ -86,6 +86,8 @@
     <string name="settings_theme_system">النظام</string>
     <string name="settings_theme_light">فاتح</string>
     <string name="settings_theme_dark">داكن</string>
+    <string name="settings_startup_screen_label">شاشة البدء</string>
+    <string name="settings_startup_screen_home">الرئيسية</string>
     <string name="settings_dynamic_colors_label">الألوان الديناميكية</string>
     <string name="settings_dynamic_colors_description">قم بتلوين التطبيق بألوان من خلفية الجهاز (Material You)</string>
 
