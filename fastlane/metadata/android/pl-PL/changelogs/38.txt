@@ -1,0 +1,5 @@
+• Metiq 1.0 to pełny redesign: ekran główny to teraz trzy kule: szum, otoczenie i binauralne
+• Jeden miks na wszystko: kolorowe szumy, dźwięki otoczenia i dudnienia binauralne grają razem
+• Szybkie miksy na start i zapisane miksy zawsze pod ręką
+• Wybierz, co otwiera się przy starcie: ekran główny, szum, otoczenie lub binauralne
+• Nowe logo i prostsze powiadomienie odtwarzania

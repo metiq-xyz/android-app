@@ -1,0 +1,5 @@
+• Metiq 1.0 est une refonte complète : l'accueil se compose désormais de trois orbes pour bruit, ambiance et binauraux
+• Un seul mix pour tout : bruits colorés, sons d'ambiance et battements binauraux jouent ensemble
+• Des mix rapides pour démarrer, et vos mix enregistrés toujours à portée de main
+• Choisissez ce qui s'ouvre au lancement : accueil, bruit, ambiance ou binauraux
+• Nouveau logo et une notification de lecture plus épurée

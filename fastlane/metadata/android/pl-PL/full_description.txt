@@ -10,7 +10,7 @@ Kolorowe szumy
 
 Dźwięki otoczenia
 • Fale morskie, deszcz, trzask ognia, śpiew ptaków, gwar kawiarni, wiatr, świerszcze i strumień.
-• Zacznij od presetu albo połącz odgłosy natury we własny relaksujący miks, ustaw poziom każdego z nich i zapisz jako preset.
+• Zacznij od szybkiego miksu albo połącz dźwięki z dowolnej kategorii we własny miks, ustaw poziom każdego z nich i zapisz go.
 
 Dudnienia binauralne
 • Nakładaj tony delta, theta, alfa, beta lub gamma na dowolny dźwięk — wymagane słuchawki.
@@ -18,8 +18,10 @@ Dudnienia binauralne
 
 Funkcje
 • Cztery kolorowe szumy, osiem dźwięków otoczenia i pięć pasm binauralnych, zapętlone bezszwowo.
-• Nakładaj i miksuj dźwięki otoczenia — szybkie presety i własne zapisane miksy.
+• Jeden miks na wszystko: kolorowe szumy, dźwięki otoczenia i dudnienia binauralne grają razem — szybkie miksy na start i własne zapisane miksy.
 • Minutnik z szybkimi presetami oraz własnym czasem (godziny/minuty/sekundy).
+• Wybierz, co otwiera się przy starcie: ekran główny, szum, otoczenie lub binauralne.
+• Motyw jasny, ciemny lub systemowy i osiem języków.
 • Opcjonalne dynamiczne kolory (Material You): aplikacja przyjmuje barwy tapety (Android 12+).
 • Integracja z sesją multimediów: steruj odtwarzaniem z ekranu blokady, powiadomienia lub słuchawek Bluetooth.
 • Działa w pełni offline. Dźwięki są wbudowane — bez streamingu, bez konta, bez uprawnienia do internetu.

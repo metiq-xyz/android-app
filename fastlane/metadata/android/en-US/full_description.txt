@@ -10,7 +10,7 @@ Colored noise
 
 Ambient sounds
 • Sea waves, rain, fire crackling, birds chirping, café ambience, wind, crickets, and a water stream.
-• Start from a preset, or blend nature sounds into your own relaxing mix, set each level, and save it as a preset.
+• Start from a quick mix, or blend sounds from any category into your own mix, set each level, and save it.
 
 Binaural beats
 • Layer delta, theta, alpha, beta or gamma tones under any sound — headphones required.
@@ -18,8 +18,10 @@ Binaural beats
 
 Features
 • Four colored noises, eight ambient sounds and five binaural bands, looped seamlessly.
-• Layer and mix ambient sounds, with quick presets and your own saved mixes.
+• One mix for everything: colored noise, ambient sounds and binaural beats play together, with quick mixes to start from and your own saved mixes.
 • Sleep timer with quick presets and custom hours/minutes/seconds.
+• Pick what opens at launch: home, or straight into noise, ambient or binaurals.
+• Light, dark or system theme, and eight app languages.
 • Optional dynamic colors (Material You): the app takes its palette from your wallpaper (Android 12+).
 • Media-session integration: control playback from your lock screen, notification, or Bluetooth headset.
 • Works fully offline. Audio is bundled — no streaming, no account, no internet permission.

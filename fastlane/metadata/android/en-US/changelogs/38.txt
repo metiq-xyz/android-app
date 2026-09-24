@@ -1,0 +1,5 @@
+• Metiq 1.0 is a full redesign: home is now three orbs for noise, ambient and binaurals
+• One mix for everything: colored noise, ambient sounds and binaural beats play together
+• Quick mixes to start from, with your saved mixes always at hand
+• Choose what opens at launch: home, noise, ambient or binaurals
+• New logo and a cleaner playback notification

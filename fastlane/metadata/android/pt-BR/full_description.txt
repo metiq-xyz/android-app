@@ -10,7 +10,7 @@ Ruído colorido
 
 Sons ambientes
 • Ondas do mar, chuva, fogo crepitando, pássaros cantando, ambiente de café, vento, grilos e um riacho.
-• Comece por um preset ou combine sons da natureza no seu próprio mix relaxante, ajuste cada nível e salve como preset.
+• Comece por uma mistura rápida ou combine sons de qualquer categoria na sua própria mistura, ajuste cada nível e salve.
 
 Batidas binaurais
 • Sobreponha tons delta, theta, alfa, beta ou gama a qualquer som — fones de ouvido necessários.
@@ -18,8 +18,10 @@ Batidas binaurais
 
 Recursos
 • Quatro ruídos coloridos, oito sons ambientes e cinco faixas binaurais, em loop contínuo.
-• Sobreponha e misture sons ambientes, com presets rápidos e seus próprios mixes salvos.
+• Uma única mistura para tudo: ruídos coloridos, sons ambientes e batidas binaurais tocam juntos, com misturas rápidas para começar e suas misturas salvas.
 • Timer de sono com presets rápidos e horas/minutos/segundos personalizados.
+• Escolha o que abre ao iniciar: início, ruído, ambiente ou binaurais.
+• Tema claro, escuro ou do sistema e oito idiomas.
 • Cores dinâmicas opcionais (Material You): o app se colore com o seu papel de parede (Android 12+).
 • Integração com a sessão de mídia: controle a reprodução pela tela de bloqueio, notificação ou fone Bluetooth.
 • Funciona totalmente offline. O áudio vem incluído — sem streaming, sem conta, sem permissão de internet.

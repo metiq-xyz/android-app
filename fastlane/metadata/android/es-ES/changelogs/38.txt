@@ -1,0 +1,5 @@
+• Metiq 1.0 es un rediseño completo: el inicio ahora son tres orbes para ruido, ambiente y binaurales
+• Una sola mezcla para todo: ruido de colores, sonidos ambientales y ondas binaurales suenan a la vez
+• Mezclas rápidas para empezar, con tus mezclas guardadas siempre a mano
+• Elige qué se abre al iniciar: inicio, ruido, ambiente o binaurales
+• Nuevo logo y una notificación de reproducción más limpia
