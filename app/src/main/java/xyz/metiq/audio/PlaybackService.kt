@@ -84,7 +84,7 @@ class PlaybackService : MediaSessionService() {
     override fun onCreate() {
         super.onCreate()
         engine = AudioEngine(this)
-        val artwork = resources.openRawResource(R.drawable.notification_artwork).use { it.readBytes() }
+        val artwork = resources.openRawResource(R.raw.notification_artwork).use { it.readBytes() }
         player = EnginePlayer(engine, mainLooper, artwork)
         player.addListener(playerListener)
         session = MediaSession.Builder(this, player).build()
