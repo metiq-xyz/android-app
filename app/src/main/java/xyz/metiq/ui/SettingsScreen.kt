@@ -107,6 +107,7 @@ private val LANGUAGE_OPTIONS = listOf(
     LanguageOption("pl", R.string.settings_language_polish),
     LanguageOption("zh", R.string.settings_language_chinese),
     LanguageOption("ar", R.string.settings_language_arabic),
+    LanguageOption("fa", R.string.settings_language_persian),
 )
 
 private fun themeLabelRes(preference: ThemePreference): Int = when (preference) {

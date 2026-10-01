@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category_noise">نویز</string>
+    <string name="category_ambient">محیطی</string>
+
+    <!-- Ambient mixer -->
+    <string name="ambient_off">خاموش</string>
+    <string name="ambient_seawaves">امواج دریا</string>
+    <string name="ambient_rain">باران</string>
+    <string name="ambient_fire">آتش</string>
+    <string name="ambient_birds">آواز پرندگان</string>
+    <string name="ambient_cafe">فضای کافه</string>
+    <string name="ambient_wind">باد</string>
+    <string name="ambient_crickets">جیرجیرک‌ها</string>
+    <string name="ambient_stream">رود</string>
+
+    <!-- Binaural beats -->
+    <string name="category_binaural">بای‌نورال</string>
+    <string name="binaural_noti_label">بای‌نورال %1$s</string>
+    <string name="binaural_headphone_notice">از هدفون استفاده کنید: برای اثرگذاری، هر گوش باید صدای جداگانه‌ی خودش را بشنود.</string>
+    <string name="binaural_delta_feel">خواب عمیق</string>
+    <string name="binaural_theta_feel">مدیتیشن</string>
+    <string name="binaural_alpha_feel">آرامش</string>
+    <string name="binaural_beta_feel">تمرکز</string>
+    <string name="binaural_gamma_feel">هوشیاری</string>
+
+    <!-- Mix presets -->
+    <string name="mix_cabin">کلبه‌ی دنج</string>
+    <string name="mix_beach">ساحل گرمسیری</string>
+    <string name="mix_bar">بار شلوغ</string>
+
+    <!-- Custom mixes -->
+    <string name="mix_save_chip">ذخیره‌ی ترکیب</string>
+    <string name="mix_save_title">ذخیره‌ی ترکیب فعلی</string>
+    <string name="mix_save_name_hint">نام</string>
+    <string name="mix_save_confirm">ذخیره</string>
+    <string name="mix_delete_title">ترکیب حذف شود؟</string>
+    <string name="mix_delete_message">«%1$s» حذف خواهد شد.</string>
+    <string name="mix_delete_confirm">حذف</string>
+    <string name="dialog_cancel">لغو</string>
+
+    <!-- Noise colors -->
+    <string name="color_pink">صورتی</string>
+    <string name="color_brown">قهوه‌ای</string>
+    <string name="color_white">سفید</string>
+    <string name="color_grey">خاکستری</string>
+
+    <!-- Notification / lock-screen title per color -->
+    <string name="noise_title_pink">نویز صورتی</string>
+    <string name="noise_title_brown">نویز قهوه‌ای</string>
+    <string name="noise_title_white">نویز سفید</string>
+    <string name="noise_title_grey">نویز خاکستری</string>
+
+    <!-- Timer -->
+    <string name="timer_label">زمان‌سنج</string>
+    <string name="timer_start">شروع زمان‌سنج</string>
+    <string name="timer_stop">توقف زمان‌سنج</string>
+    <string name="timer_hours">ساعت</string>
+    <string name="timer_minutes">دقیقه</string>
+    <string name="timer_seconds">ثانیه</string>
+
+    <!-- Settings: top bar -->
+    <string name="settings_title">تنظیمات</string>
+    <string name="settings_back_cd">بازگشت</string>
+
+    <!-- Settings: sound section -->
+    <string name="settings_section_sound">صدا</string>
+    <string name="settings_warmth_label">گرمی</string>
+    <string name="settings_warmth_description">فرکانس‌های بالا را کم می‌کند تا رنگ‌های نویز تند، نرم‌تر شوند. روی صداهای محیطی اثری ندارد.</string>
+    <string name="settings_warmth_bright">روشن</string>
+    <string name="settings_warmth_warm">گرم</string>
+    <string name="settings_fade_label">محو شدن</string>
+    <string name="settings_fade_description">مدت زمانی که صداها هنگام شروع، توقف یا تغییر، به‌آرامی بلند یا آرام می‌شوند.</string>
+    <string name="settings_timer_fade_label">محو شدن زمان‌سنج</string>
+    <string name="settings_timer_fade_description">مدت محو شدن صدا، وقتی زمان‌سنج پخش را متوقف می‌کند.</string>
+    <string name="settings_request_focus_label">درخواست فوکوس صوتی</string>
+    <string name="settings_request_focus_description">هنگام پخش صداها، صداهای دیگر مثل موسیقی یا پادکست را متوقف کن.</string>
+
+    <!-- Settings: appearance section -->
+    <string name="settings_section_appearance">ظاهر</string>
+    <string name="settings_theme_label">پوسته</string>
+    <string name="settings_theme_system">سیستم</string>
+    <string name="settings_theme_light">روشن</string>
+    <string name="settings_theme_dark">تیره</string>
+    <string name="settings_startup_screen_label">صفحه‌ی شروع</string>
+    <string name="settings_startup_screen_home">خانه</string>
+    <string name="settings_dynamic_colors_label">رنگ‌های پویا</string>
+    <string name="settings_dynamic_colors_description">رنگ‌های برنامه را از تصویر زمینه‌ی انتخاب کن. (Material You)</string>
+
+    <!-- Settings: language section -->
+    <string name="settings_section_language">زبان</string>
+    <string name="settings_language_label">زبان</string>
+    <string name="settings_language_system">پیش‌فرض سیستم</string>
+
+    <!-- Settings: timer presets section -->
+    <string name="settings_section_timer_presets">زمان‌های پیش‌فرض (دقیقه)</string>
+    <string name="settings_timer_unit_min">دقیقه</string>
+    <string name="settings_timer_save">ذخیره‌ی پیش‌فرض‌ها</string>
+
+    <!-- Settings: support section -->
+    <string name="settings_section_support">حمایت</string>
+    <string name="settings_rate_label">به Metiq در %1$s امتیاز دهید</string>
+    <string name="settings_donate_description">Metiq برای همیشه رایگان است. یک کمک کوچک آن را رایگان نگه می‌دارد.</string>
+    <string name="settings_donate_label">حمایت از Metiq</string>
+
+    <!-- Rate prompt -->
+    <string name="rate_prompt_title">از Metiq لذت می‌برید؟</string>
+    <string name="rate_prompt_message">در %1$s امتیاز دهید یا با کمک مالی آن را رایگان نگه دارید.</string>
+    <string name="rate_prompt_cta">امتیاز</string>
+    <string name="rate_prompt_feedback_cta">بازخورد</string>
+    <string name="rate_prompt_donate_cta">کمک مالی</string>
+    <string name="rate_prompt_dismiss_cd">بستن</string>
+
+    <!-- Settings: about section -->
+    <string name="settings_section_about">درباره</string>
+    <string name="settings_about_version">نسخه</string>
+    <string name="settings_about_open_licenses">مجوزهای متن‌باز</string>
+
+    <!-- Licenses screen -->
+    <string name="licenses_title">مجوزهای متن‌باز</string>
+    <string name="licenses_intro">Metiq بر پایه‌ی کار دیگران ساخته شده است. مجوزهای آن‌ها در ادامه آمده است.</string>
+
+    <!-- Home: mix builder -->
+    <string name="mix_panel_empty_title">ترکیب شما از اینجا شروع می‌شود</string>
+    <string name="mix_panel_empty_subtitle">هیچ صدایی انتخاب نشده</string>
+    <string name="mix_panel_quick_mixes">ترکیب‌های سریع</string>
+    <string name="mix_panel_play_cd">پخش</string>
+    <string name="mix_panel_open_cd">باز کردن ترکیب</string>
+    <string name="sheet_title_ambient">صداهای محیطی</string>
+    <string name="sheet_count_in_mix">%1$d از %2$d در ترکیب شما</string>
+    <string name="sheet_binaural_single">فقط یکی را می‌توانید انتخاب کنید.</string>
+    <string name="sheet_close_cd">بستن</string>
+    <string name="mix_now_playing">ترکیب شما</string>
+    <string name="mix_panel_pause_cd">توقف</string>
+    <plurals name="category_active_count">
+        <item quantity="one">%1$d روشن</item>
+        <item quantity="other">%1$d روشن</item>
+    </plurals>
+    <plurals name="mix_sheet_count">
+        <item quantity="one">%1$d صدا در ترکیب شما</item>
+        <item quantity="other">%1$d صدا در ترکیب شما</item>
+    </plurals>
+</resources>
