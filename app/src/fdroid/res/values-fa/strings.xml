@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- F-Droid flavor: "rating" is starring the GitHub repo. -->
+<resources>
+    <string name="rate_prompt_message">در GitHub به ما ستاره بدهید، بگویید چه چیزی کم است، یا کمک مالی کنید.</string>
+    <string name="rate_prompt_cta">ستاره</string>
+    <string name="settings_rate_label">به Metiq در GitHub ستاره دهید</string>
+</resources>

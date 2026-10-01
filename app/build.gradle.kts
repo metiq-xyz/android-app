@@ -29,7 +29,7 @@ android {
     }
 
     androidResources {
-        localeFilters += listOf("en", "it", "es", "fr", "pt", "pl", "zh", "ar")
+        localeFilters += listOf("en", "it", "es", "fr", "pt", "pl", "zh", "ar", "fa")
     }
 
     // Metiq switches locales in-app at runtime (see MainActivity's languageTag handling)
