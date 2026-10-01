@@ -9,7 +9,7 @@ Bruits colorés
 • Bruit gris — perceptuellement plat, conçu pour paraître uniforme sur tout le spectre.
 
 Sons ambiants
-• Vagues de la mer, pluie, feu qui crépite, chants d'oiseaux, ambiance de café, vent, chants de grillons et ruisseau.
+• Vagues de la mer, pluie, feu qui crépite, chants d'oiseaux, ambiance de café, vent, chants de grillons, ruisseau et train.
 • Partez d'un mix rapide ou mélangez des sons de n'importe quelle catégorie dans votre propre mix, réglez chaque niveau et enregistrez-le.
 
 Battements binauraux
@@ -17,7 +17,7 @@ Battements binauraux
 • Chaque bande favorise un état mental différent : sommeil profond, méditation, détente, concentration, vigilance.
 
 Fonctionnalités
-• Quatre bruits colorés, huit sons ambiants et cinq bandes binaurales, en boucle sans coupure.
+• Quatre bruits colorés, neuf sons ambiants et cinq bandes binaurales, en boucle sans coupure.
 • Un seul mix pour tout : bruits colorés, sons d'ambiance et battements binauraux jouent ensemble, avec des mix rapides pour démarrer et vos mix enregistrés.
 • Minuteur de sommeil avec préréglages rapides et durée personnalisée (heures/minutes/secondes).
 • Choisissez ce qui s'ouvre au lancement : accueil, bruit, ambiance ou binauraux.

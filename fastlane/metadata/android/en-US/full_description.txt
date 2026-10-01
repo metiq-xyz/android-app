@@ -9,7 +9,7 @@ Colored noise
 • Grey noise — perceptually flat, designed to feel even across the spectrum.
 
 Ambient sounds
-• Sea waves, rain, fire crackling, birds chirping, café ambience, wind, crickets, and a water stream.
+• Sea waves, rain, fire crackling, birds chirping, café ambience, wind, crickets, a water stream, and a train.
 • Start from a quick mix, or blend sounds from any category into your own mix, set each level, and save it.
 
 Binaural beats
@@ -17,7 +17,7 @@ Binaural beats
 • Each band nudges a different mental state: deep sleep, meditation, relaxation, focus, alertness.
 
 Features
-• Four colored noises, eight ambient sounds and five binaural bands, looped seamlessly.
+• Four colored noises, nine ambient sounds and five binaural bands, looped seamlessly.
 • One mix for everything: colored noise, ambient sounds and binaural beats play together, with quick mixes to start from and your own saved mixes.
 • Sleep timer with quick presets and custom hours/minutes/seconds.
 • Pick what opens at launch: home, or straight into noise, ambient or binaurals.

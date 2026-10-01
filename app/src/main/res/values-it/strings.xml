@@ -13,6 +13,7 @@
     <string name="ambient_wind">Vento</string>
     <string name="ambient_crickets">Grilli</string>
     <string name="ambient_stream">Ruscello</string>
+    <string name="ambient_train">Treno</string>
 
     <string name="category_binaural">Binaurali</string>
     <string name="binaural_noti_label">%1$s binaurale</string>

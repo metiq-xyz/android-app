@@ -49,6 +49,7 @@ object PcmStore {
         "wind" to "audio/ambient/wind.ogg",
         "crickets" to "audio/ambient/crickets.ogg",
         "stream" to "audio/ambient/stream.ogg",
+        "train" to "audio/ambient/train.ogg",
     )
 
     private val cache = ConcurrentHashMap<String, Deferred<Pcm>>()

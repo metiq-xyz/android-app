@@ -40,8 +40,9 @@ non-negotiables: simplicity and battery efficiency.
 
 - **Colored noise playback** — pre-rendered, seamless loops at -22 LUFS so every
   color sounds equally loud.
-- **Ambient sounds and mixes** — sea waves, rain, fire, birds, café, and wind.
-  Layer them at independent levels, start from a preset, or save your own mixes.
+- **Ambient sounds and mixes** — sea waves, rain, fire, birds, café, wind,
+  crickets, a water stream, and a train. Layer them at independent levels, start
+  from a quick mix, or save your own.
 - **Binaural beats** — layer brainwave tones (Delta through Gamma) over any
   noise or ambient sound to nudge toward sleep, relaxation, or focus. Headphones
   needed.
@@ -53,8 +54,8 @@ non-negotiables: simplicity and battery efficiency.
   `AudioTrack`, with a small memory and CPU footprint.
 - **Familiar media controls** — lock screen, notification, and Bluetooth headset
   transport buttons all work the way you'd expect.
-- **Five languages out of the box** — English, Italian, Spanish, French,
-  Portuguese.
+- **Eight languages out of the box** — English, Italian, Spanish, French,
+  Portuguese, Polish, Chinese (Simplified), Arabic.
 - **Free, forever** — Metiq is free and will stay free. If you'd like to support
   the project, you can [sponsor us on GitHub](https://github.com/sponsors/metiq-xyz),
   [buy us a coffee on Ko-fi](https://ko-fi.com/metiq), or

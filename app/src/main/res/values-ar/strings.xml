@@ -15,6 +15,7 @@
     <string name="ambient_wind">الرياح</string>
     <string name="ambient_crickets">صراصير الليل</string>
     <string name="ambient_stream">جدول ماء</string>
+    <string name="ambient_train">قطار</string>
 
     <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
          under each hints at the mental state it nudges toward. -->

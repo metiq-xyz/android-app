@@ -7,6 +7,7 @@ import androidx.compose.material.icons.outlined.Air
 import androidx.compose.material.icons.outlined.Grass
 import androidx.compose.material.icons.outlined.LocalFireDepartment
 import androidx.compose.material.icons.outlined.Storefront
+import androidx.compose.material.icons.outlined.Train
 import androidx.compose.material.icons.outlined.Water
 import androidx.compose.material.icons.outlined.WaterDrop
 import androidx.compose.material.icons.outlined.Waves
@@ -61,6 +62,7 @@ internal val AMBIENT_SOUNDS = listOf(
     AmbientSound("wind", R.string.ambient_wind, iconVector = Icons.Outlined.Air),
     AmbientSound("crickets", R.string.ambient_crickets, iconVector = Icons.Outlined.Grass),
     AmbientSound("stream", R.string.ambient_stream, iconVector = Icons.Outlined.Water),
+    AmbientSound("train", R.string.ambient_train, iconVector = Icons.Outlined.Train),
 )
 internal val AMBIENT_IDS = AMBIENT_SOUNDS.map { it.id }.toSet()
 

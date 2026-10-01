@@ -15,6 +15,10 @@
 # Masters must be named <ambient-id>.<ext> (e.g. cafe.mp3); unknown ids are
 # skipped so a not-yet-wired sound (say rain) can live in masters without
 # shipping an unused asset.
+#
+# Pass ids to encode only those (e.g. encode-audio.sh train), which leaves the
+# other committed .ogg files untouched; with no arguments every master is
+# encoded.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -25,7 +29,15 @@ LOOP_S=45          # loop length to ship (shorter masters use their full length)
 CROSSFADE_S=3      # tail-into-head crossfade
 TARGET_LUFS=-16
 
-KNOWN_IDS="seawaves rain fire birds cafe wind crickets stream"
+KNOWN_IDS="seawaves rain fire birds cafe wind crickets stream train"
+ONLY_IDS="$*"
+
+# Where to start reading a master, for the ones whose opening carries a
+# transient that the loudness pass would push into the limiter. train has one
+# around 16s, so it starts later.
+declare -A START_AT=(
+    [train]=30
+)
 
 for src in "$MASTERS"/*; do
     id=$(basename "${src%.*}")
@@ -33,17 +45,23 @@ for src in "$MASTERS"/*; do
         echo "SKIP $src: '$id' is not a known ambient id" >&2
         continue
     fi
+    if [ -n "$ONLY_IDS" ] && ! grep -qw "$id" <<<"$ONLY_IDS"; then
+        continue
+    fi
 
     dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
     sr=$(ffprobe -v error -select_streams a:0 -show_entries stream=sample_rate -of csv=p=0 "$src")
+    start=${START_AT[$id]:-0}
+    # Usable length from the start offset on.
+    avail=$(awk -v d="$dur" -v s="$start" 'BEGIN { printf "%.3f", d - s }')
     # Loop body length: LOOP_S when the master is long enough, else everything
     # minus the crossfade.
-    body=$(awk -v d="$dur" -v t="$LOOP_S" -v x="$CROSSFADE_S" \
+    body=$(awk -v d="$avail" -v t="$LOOP_S" -v x="$CROSSFADE_S" \
         'BEGIN { l = d - x - 0.1; if (l > t) l = t; printf "%.3f", l }')
     end=$(awk -v b="$body" -v x="$CROSSFADE_S" 'BEGIN { printf "%.3f", b + x }')
 
-    echo "== $id: master ${dur%.*}s -> loop ${body}s (${CROSSFADE_S}s crossfade)"
-    ffmpeg -hide_banner -loglevel error -y -i "$src" -filter_complex "
+    echo "== $id: master ${dur%.*}s from ${start}s -> loop ${body}s (${CROSSFADE_S}s crossfade)"
+    ffmpeg -hide_banner -loglevel error -y -ss "$start" -i "$src" -filter_complex "
         [0:a]atrim=start=${body}:end=${end},asetpts=PTS-STARTPTS[tail];
         [0:a]atrim=start=0:end=${CROSSFADE_S},asetpts=PTS-STARTPTS[head];
         [tail][head]acrossfade=d=${CROSSFADE_S}:c1=tri:c2=tri[loopstart];
