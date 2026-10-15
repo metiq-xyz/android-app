@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Metiq</string>
+
+
+    <string name="category_noise">Rauschen</string>
+    <string name="category_ambient">Umgebung</string>
+
+    <!-- Ambient mixer -->
+    <string name="ambient_off">Aus</string>
+    <string name="ambient_seawaves">Meeresrauschen</string>
+    <string name="ambient_rain">Regen</string>
+    <string name="ambient_fire">Knisterndes Feuer</string>
+    <string name="ambient_birds">Vogelgezwitscher</string>
+    <string name="ambient_cafe">Kaffeehaus</string>
+    <string name="ambient_wind">Wind</string>
+    <string name="ambient_crickets">Grillen</string>
+    <string name="ambient_stream">Fluss</string>
+
+    <!-- Binaural beats (Tones tab). Band names are the same worldwide; the feel word
+         under each hints at the mental state it nudges toward. -->
+    <string name="category_binaural">Binaurale Beats</string>
+    <!-- Notification suffix when a binaural beat plays; %1$s is the band's Greek letter -->
+    <string name="binaural_noti_label">%1$s binaural</string>
+    <string name="binaural_headphone_notice">Verwende Kopfhörer: Damit der Effekt funktioniert, wird für jedes Ohr ein eigener Ton erzeugt.</string>
+    <string name="binaural_delta" translatable="false">Delta</string>
+    <string name="binaural_theta" translatable="false">Theta</string>
+    <string name="binaural_alpha" translatable="false">Alpha</string>
+    <string name="binaural_beta" translatable="false">Beta</string>
+    <string name="binaural_gamma" translatable="false">Gamma</string>
+    <string name="binaural_delta_feel">Tiefschlaf</string>
+    <string name="binaural_theta_feel">Meditation</string>
+    <string name="binaural_alpha_feel">Entspannung</string>
+    <string name="binaural_beta_feel">Fokus</string>
+    <string name="binaural_gamma_feel">Aufmerksamkeit</string>
+
+    <!-- Mix presets -->
+    <string name="mix_cabin">Gemütliche Hütte</string>
+    <string name="mix_beach">Tropischer Strand</string>
+    <string name="mix_bar">Belebte Bar</string>
+
+    <!-- Custom mixes -->
+    <string name="mix_save_chip">Mix speichern</string>
+    <string name="mix_save_title">Aktuellen Mix speichern</string>
+    <string name="mix_save_name_hint">Name</string>
+    <string name="mix_save_confirm">Speichern</string>
+    <string name="mix_delete_title">Mix löschen?</string>
+    <string name="mix_delete_message">“%1$s” wird gelöscht.</string>
+    <string name="mix_delete_confirm">Löschen</string>
+    <string name="dialog_cancel">Abbrechen</string>
+
+    <!-- Noise colors (used in UI labels and default-color picker) -->
+    <string name="color_pink">Pink</string>
+    <string name="color_brown">Braun</string>
+    <string name="color_white">Weiß</string>
+    <string name="color_grey">Grau</string>
+
+    <!-- Notification / lock-screen title per color (full localized phrase, not "%s noise") -->
+    <string name="noise_title_pink">Rosa Rauschen</string>
+    <string name="noise_title_brown">Braunes Rauschen</string>
+    <string name="noise_title_white">Weißes Rauschen</string>
+    <string name="noise_title_grey">Graues Rauschen</string>
+
+    <!-- Timer cells + preset chip formatters -->
+    <string name="timer_label">Timer</string>
+    <string name="timer_start">Timer starten</string>
+    <string name="timer_stop">Timer stoppen</string>
+    <string name="timer_hours">Stunden</string>
+    <string name="timer_minutes">Minuten</string>
+    <string name="timer_seconds">Sekundem</string>
+    <string name="timer_preset_minutes" translatable="false">%1$dm</string>
+    <string name="timer_preset_hours" translatable="false">%1$dh</string>
+    <string name="timer_preset_hours_minutes" translatable="false">%1$dh %2$dm</string>
+
+    <!-- Settings: top bar -->
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_back_cd">Zurück</string>
+
+    <!-- Settings: sound section -->
+    <string name="settings_section_sound">Ton</string>
+    <string name="settings_warmth_label">Wärme</string>
+    <string name="settings_warmth_description">Dämpft die Höhen, um scharfes Rauschen abzumildern. Umgebungsgeräusche bleiben unberührt.</string>
+    <string name="settings_warmth_bright">Hell</string>
+    <string name="settings_warmth_warm">Warm</string>
+    <string name="settings_fade_label">Ein- und Ausblenden</string>
+    <string name="settings_fade_description">Dauer des Ein- und Ausblendes von Geräuschen beim Starten, Stoppen oder Wechseln.</string>
+    <string name="settings_fade_unit" translatable="false">s</string>
+    <string name="settings_timer_fade_label">Timer-Ausblenden</string>
+    <string name="settings_timer_fade_description">Ausblendedauer, wenn der Timer abgelaufen ist.</string>
+    <string name="settings_request_focus_label">Audiofpkus anfordern</string>
+    <string name="settings_request_focus_description">Pausiert andere Wiedergaben wie Musik oder Podcasts, wenn Gerääusche abgespielt werden.</string>
+
+    <!-- Settings: appearance section -->
+    <string name="settings_section_appearance">Darstellung</string>
+    <string name="settings_theme_label">Theme</string>
+    <string name="settings_theme_system">Systemstandard</string>
+    <string name="settings_theme_light">Hell</string>
+    <string name="settings_theme_dark">Dunkel</string>
+    <string name="settings_startup_screen_label">Startbildschirm</string>
+    <string name="settings_startup_screen_home">Startseite</string>
+    <string name="settings_dynamic_colors_label">Dynamische Farben</string>
+    <string name="settings_dynamic_colors_description">Färbt die App auf Basis deines Hintergrundbildes ein (Material You)</string>
+
+    <!-- Settings: language section -->
+    <string name="settings_section_language">Sprache</string>
+    <string name="settings_language_label">Sprache</string>
+    <string name="settings_language_system">Systemstandard</string>
+    <string name="settings_language_english" translatable="false">English</string>
+    <string name="settings_language_italian" translatable="false">Italiano</string>
+    <string name="settings_language_spanish" translatable="false">Español</string>
+    <string name="settings_language_french" translatable="false">Français</string>
+    <string name="settings_language_portuguese" translatable="false">Português</string>
+    <string name="settings_language_polish" translatable="false">Polski</string>
+    <string name="settings_language_chinese" translatable="false">简体中文</string>
+    <string name="settings_language_arabic" translatable="false">العربية</string>
+    <string name="settings_language_german" translatable="false">Deutsch</string>
+
+    <!-- Settings: timer presets section -->
+    <string name="settings_section_timer_presets">Timer-Voreinstellung (Minuten)</string>
+    <string name="settings_timer_unit_min">min</string>
+    <string name="settings_timer_save">Speichern</string>
+
+    <!-- Settings: support section -->
+    <string name="settings_section_support">Support</string>
+    <string name="settings_rate_label">Bewerte Metiq auf %1$s</string>
+    <string name="settings_donate_description">Metiq ist für immer kostenfrei. Eine kleine Spende sorgt dafür, dass dies so bleibt.</string>
+    <string name="settings_donate_label">Unterstütze Metiq</string>
+
+    <!-- Rate prompt (swipeable note) -->
+    <string name="rate_prompt_title">Gefällt dir Metiq?</string>
+    <string name="rate_prompt_message">Bewerte Metiq auf %1$s oder spende, um die App kostenfrei zu halten.</string>
+    <string name="rate_prompt_cta">Bewerten</string>
+    <string name="rate_prompt_feedback_cta">Feedback</string>
+    <string name="rate_prompt_donate_cta">Spenden</string>
+    <string name="rate_prompt_dismiss_cd">Schließen</string>
+
+    <!-- Settings: about section -->
+    <string name="settings_section_about">Über</string>
+    <string name="settings_about_version">Version</string>
+    <string name="settings_about_open_licenses">Open-Source-Lizenzen</string>
+
+    <!-- Licenses screen -->
+    <string name="licenses_title">Open-Source-Lizenzen</string>
+    <string name="licenses_intro">Metiq basiert auf der Arbeit von anderen. Die Lizenzen folgen.</string>
+    <string name="licenses_inter_title" translatable="false">Inter</string>
+    <string name="licenses_inter_body" translatable="false">Variable font by Rasmus Andersson, used as the app\'s display + body typeface. Licensed under the SIL Open Font License 1.1. Full license text: https://openfontlicense.org</string>
+    <string name="licenses_apache2_title" translatable="false">Apache License 2.0</string>
+    <string name="licenses_apache2_body" translatable="false">Used by Jetpack Compose, Material 3, AndroidX Lifecycle, AndroidX DataStore, AndroidX AppCompat and AndroidX Media3. Full license text: https://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="licenses_kotlin_title" translatable="false">Kotlin standard library</string>
+    <string name="licenses_kotlin_body" translatable="false">Apache License 2.0. © JetBrains s.r.o. and Kotlin Programming Language contributors.</string>
+
+    <!-- Home: mix builder -->
+    <string name="mix_panel_empty_title">Erstelle deinen Mix</string>
+    <string name="mix_panel_empty_subtitle">Keine Geräusche gewählt</string>
+    <string name="mix_panel_quick_mixes">Schnellmixes</string>
+    <string name="mix_panel_play_cd">Wiedergeben</string>
+    <string name="mix_panel_open_cd">Mix öffnen</string>
+    <string name="sheet_title_ambient">Umgebungsgeräusche</string>
+    <string name="sheet_count_in_mix">%1$d von %2$d in deinem Mix</string>
+    <string name="sheet_binaural_single">Du kannst nur einen wählen.</string>
+    <string name="sheet_close_cd">Schließen</string>
+    <string name="sound_level_percent" translatable="false">%1$d%%</string>
+    <string name="mix_now_playing">Dein Mix</string>
+    <string name="mix_panel_pause_cd">Pausieren</string>
+    <plurals name="category_active_count">
+        <item quantity="one">%1$d von</item>
+        <item quantity="other">%1$d von</item>
+    </plurals>
+    <plurals name="mix_sheet_count">
+        <item quantity="one">%1$d Geräusch in deinem Mix</item>
+        <item quantity="other">%1$d Geräusche in deinem Mix</item>
+    </plurals>
+</resources>
