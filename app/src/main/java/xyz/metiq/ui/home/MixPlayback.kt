@@ -34,6 +34,8 @@ private const val BED_GAIN = 0.70710678f
 
 private fun bedB(id: String) = "${id}_b"
 
+private fun hasSecondBed(id: String) = id in NOISE_IDS || id in AMBIENT_IDS
+
 @Stable
 internal class MixPlayback {
     val levels = mutableStateMapOf<String, Float>()
@@ -65,7 +67,7 @@ internal class MixPlayback {
         if (id !in levels) return
         levels[id] = level
         val engine = binder?.engine ?: return
-        if (id in AMBIENT_IDS) {
+        if (hasSecondBed(id)) {
             engine.setLayerVolume(id, level * BED_GAIN)
             engine.setLayerVolume(bedB(id), level * BED_GAIN)
         } else {
@@ -113,7 +115,10 @@ internal class MixPlayback {
     private fun add(id: String, level: Float) {
         val engine = binder?.engine ?: return
         when (id) {
-            in NOISE_IDS -> engine.startLayer(id, "audio/noise/$id.ogg", level, warmthEligible = true)
+            in NOISE_IDS -> {
+                engine.startLayer(id, "audio/noise/$id.ogg", level * BED_GAIN, warmthEligible = true)
+                engine.startLayer(bedB(id), "audio/noise/${id}_b.ogg", level * BED_GAIN, warmthEligible = true)
+            }
             in AMBIENT_IDS -> {
                 engine.startLayer(id, "audio/ambient/$id.ogg", level * BED_GAIN)
                 engine.startLayer(bedB(id), "audio/ambient/${id}_b.ogg", level * BED_GAIN)
@@ -141,7 +146,7 @@ internal class MixPlayback {
     private fun remove(id: String, stopWhenEmpty: Boolean = true) {
         levels.remove(id) ?: return
         binder?.engine?.stopLayer(engineId(id))
-        if (id in AMBIENT_IDS) {
+        if (hasSecondBed(id)) {
             binder?.engine?.stopLayer(bedB(id))
             PcmStore.evict(bedB(id))
         }
@@ -164,8 +169,7 @@ internal class MixPlayback {
         val ids = engine.activeLayerIds()
         ids.filter { it in NOISE_IDS || it in AMBIENT_IDS }.forEach { id ->
             if (id !in levels) {
-                val gain = if (id in AMBIENT_IDS) BED_GAIN else 1f
-                levels[id] = engine.layerVolume(id)?.div(gain) ?: DEFAULT_SOUND_LEVEL
+                levels[id] = engine.layerVolume(id)?.div(BED_GAIN) ?: DEFAULT_SOUND_LEVEL
             }
         }
         if (BINAURAL_ID in ids && levels.keys.none { it in BINAURAL_BAND_IDS }) {

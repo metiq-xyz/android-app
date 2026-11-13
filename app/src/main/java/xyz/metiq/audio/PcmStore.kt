@@ -54,7 +54,7 @@ object PcmStore {
     // Second beds decode on first use and are evicted when their sound stops, so the
     // memory they cost is only paid while they play. Preloading every sound is the
     // first bed's job.
-    private val bedBIds = AMBIENT_ASSETS.keys.map { "${it}_b" }.toSet()
+    private val bedBIds = (NOISE_ASSETS.keys + AMBIENT_ASSETS.keys).map { "${it}_b" }.toSet()
 
     private val cache = ConcurrentHashMap<String, Deferred<Pcm>>()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
