@@ -13,12 +13,17 @@ from pathlib import Path
 import numpy as np
 import pyloudnorm as pyln
 import soundfile as sf
-from scipy.signal import stft
+from scipy.ndimage import median_filter
+from scipy.signal import butter, sosfilt, stft
 
 WIN_S = 0.05           # short-time energy window
 MEDIAN_S = 6.0         # running-median span (centered, circular)
 EVENT_DB = 10.0        # window this far above the running median counts as an event
 SEAM_S = 1.0           # span compared on each side of the wrap point
+DROP_WIN_S = 0.005     # fine window for single drops, clicks and chirps
+DROP_MEDIAN_S = 2.0
+DROP_DB = 9.0
+DROP_HP_HZ = 2000      # drops and chirps live above the bed's body
 
 
 def short_time_db(mono, sr):
@@ -29,10 +34,7 @@ def short_time_db(mono, sr):
 
 
 def running_median_circular(x, span):
-    pad = span // 2
-    ext = np.concatenate([x[-pad:], x, x[:pad]])
-    win = np.lib.stride_tricks.sliding_window_view(ext, 2 * pad + 1)
-    return np.median(win, axis=1)[: len(x)]
+    return median_filter(x, size=span, mode="wrap")
 
 
 def events(mono, sr):
@@ -51,6 +53,25 @@ def events(mono, sr):
         else:
             i += 1
     return out, db
+
+
+def sharp_events(mono, sr):
+    """Isolated 5 ms bursts in the high band, well above the local median."""
+    hp = sosfilt(butter(4, DROP_HP_HZ, "highpass", fs=sr, output="sos"), mono)
+    n = int(DROP_WIN_S * sr)
+    frames = len(hp) // n
+    db = 10 * np.log10(np.mean(hp[: frames * n].reshape(frames, n) ** 2, axis=1) + 1e-14)
+    span = int(DROP_MEDIAN_S / DROP_WIN_S) | 1
+    excess = db - running_median_circular(db, span)
+    idx = np.flatnonzero(excess > DROP_DB)
+    out, last = [], -10**9
+    for i in idx:
+        if i - last > 20:  # merge bursts within 100 ms
+            out.append([i * DROP_WIN_S, float(excess[i])])
+        else:
+            out[-1][1] = max(out[-1][1], float(excess[i]))
+        last = i
+    return out
 
 
 def seam(x, sr):
@@ -74,6 +95,7 @@ def audit(path):
     mono = x.mean(axis=1)
     lufs = pyln.Meter(sr).integrated_loudness(x if x.shape[1] <= 2 else mono)
     ev, db = events(mono, sr)
+    sharp = sharp_events(mono, sr)
     step, level, lsd = seam(x, sr)
     print(f"{path.name:14s} {len(x)/sr:7.2f}s  {len(x):9d} fr  {sr/1000:g}k x{x.shape[1]}  {lufs:6.1f} LUFS")
     print(f"{'':14s} peak {20*np.log10(np.abs(x).max()+1e-12):5.1f} dBFS  "
@@ -82,6 +104,9 @@ def audit(path):
     if ev:
         top = sorted(ev, key=lambda e: -e[1])[:5]
         print(f"{'':14s} top: " + ", ".join(f"{t:.1f}s(+{e:.0f}dB)" for t, e in top))
+    per_min = len(sharp) / (len(mono) / sr / 60)
+    print(f"{'':14s} sharp bursts >{DROP_DB:g}dB (>{DROP_HP_HZ}Hz, {DROP_WIN_S*1000:g}ms): {len(sharp)} ({per_min:.1f}/min)"
+          + (f"  worst +{max(e[1] for e in sharp):.0f} dB" if sharp else ""))
     print(f"{'':14s} seam: step {step:.1f}x typical, level {level:+.1f} dB, spectral dist {lsd:.1f} dB")
 
 
