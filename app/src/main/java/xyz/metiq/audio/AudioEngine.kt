@@ -95,7 +95,13 @@ class AudioEngine(private val context: Context) {
             } catch (_: Throwable) {
                 return@launch
             }
-            val track = withContext(Dispatchers.IO) { buildStreamTrack(pcm, 0f) }
+            val track = try {
+                withContext(Dispatchers.IO) { buildStreamTrack(pcm, 0f) }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (_: Throwable) {
+                return@launch
+            }
             if (!isActive) {
                 runCatching { track.release() }
                 return@launch
@@ -263,7 +269,13 @@ class AudioEngine(private val context: Context) {
         val id = BINAURAL_ID
         if (layers.containsKey(id) || startJobs.containsKey(id)) return
         val job = feederScope.launch {
-            val track = withContext(Dispatchers.IO) { buildSynthTrack() }
+            val track = try {
+                withContext(Dispatchers.IO) { buildSynthTrack() }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (_: Throwable) {
+                return@launch
+            }
             if (!isActive) {
                 runCatching { track.release() }
                 return@launch
