@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds a second ambient bed for each sound from the masters in audio-src/masters/ambient.
+"""Builds a second bed for each ambient sound and each colored noise.
 
 Each ambient sound ships as two beds that play together at -3 dB each (uncorrelated beds add in
 power, so the level stays what one bed was). Bed "b" has a different length from bed "a" and
@@ -42,6 +42,16 @@ MIN_JUMP_S = 4.0       # next grain must start this far from the previous one
 EVENT_DB = 12.0        # steady textures reject grains with a burst this far above their median
 EVENT_FREE = {"rain", "wind", "seawaves", "stream", "crickets"}
 TARGET_LUFS = -16      # same as encode-audio.sh
+HORIZON_S = 8 * 3600   # a long night
+SEARCH_S = 3.0         # how far from the wanted length pick_length may wander
+AMBIENT_TIERS = [(HORIZON_S, 0.05)]
+# Over 8 h a 10 s loop has 2880 repeats to keep clear of, so the best reachable gap is ~7.5 ms
+# (pigeonhole); ask for much more where there are few repeats.
+NOISE_TIERS = [(1800, 0.04), (7200, 0.015), (HORIZON_S, 0.005)]
+NOISE_DIR = ROOT / "app/src/main/assets/audio/noise"
+NOISE_COLORS = ["pink", "brown", "white", "grey"]
+NOISE_B_S = 21         # longer second loops leave more room to avoid alignment
+NOISE_SMOOTH_HZ = 60   # smooth the measured spectrum so the new noise has the color, not the loop
 SEED = 20261113
 
 
@@ -54,6 +64,12 @@ def find_ffmpeg():
 
 
 FFMPEG = find_ffmpeg()
+
+
+def decoded_frames(path):
+    """Frames the app's decoder produces. sf.info().frames is the Ogg granule position, which
+    includes encoder padding and is wrong for files made by ffmpeg (checked on a Pixel)."""
+    return len(sf.read(path, always_2d=True, dtype="float32")[0])
 
 
 def equal_power(n):
@@ -110,52 +126,93 @@ def granular(x, sr, total, rng, event_free):
     return out[:total]
 
 
-def pick_length(sr, a_frames, seconds):
-    """Frames for bed b: close to `seconds`, coprime with bed a's frame count."""
-    n = int(seconds * sr)
-    while math.gcd(n, a_frames) != 1:
-        n += 1
-    return n
+def pick_length(sr, a_frames, seconds, tiers, max_frames=None):
+    """Frames for bed b near `seconds` such that multiples of a's length stay clear of multiples
+    of b's length. `tiers` is [(horizon_s, tol_s), ...]: within each horizon the nearest multiple
+    of b must be at least tol_s away, so early near-alignments need the widest clearance.
+    Tries the lengths closest to `seconds` first."""
+    k = np.arange(1, int(tiers[-1][0] * sr / a_frames) + 1, dtype=np.int64) * a_frames
+    tol = np.zeros(len(k), dtype=np.int64)
+    for horizon, t in reversed(tiers):
+        tol[k <= horizon * sr] = int(t * sr)
+    centre = int(seconds * sr)
+    for delta in range(int(SEARCH_S * sr)):
+        for n in (centre + delta, centre - delta):
+            if max_frames is not None and n > max_frames:
+                continue
+            r = k % n
+            if (np.minimum(r, n - r) >= tol).all():
+                return n
+    raise RuntimeError(f"no bed length within {SEARCH_S}s of {seconds}s avoids alignment")
+
+
+def encode(bed, sr, dst, lufs):
+    """Same normalize + encode chain as encode-audio.sh, so beds a and b are treated alike.
+    The decoded file must have exactly len(bed) frames: pick_length reasoned about that length."""
+    frames = len(bed)
+    with tempfile.TemporaryDirectory() as tmp:
+        wav = Path(tmp) / "bed.wav"
+        sf.write(wav, bed, sr, subtype="FLOAT")
+        subprocess.run(
+            [FFMPEG, "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav),
+             "-af", f"loudnorm=I={lufs:.1f}:TP=-1.5:LRA=11,aresample={sr}",
+             "-c:a", "libvorbis", "-q:a", "6", str(dst)],
+            check=True,
+        )
+    got = decoded_frames(dst)
+    if got != frames:
+        raise RuntimeError(f"{dst.name}: encoded {got} frames, expected {frames}")
 
 
 def build(sound_id):
     src = next(MASTERS.glob(f"{sound_id}.*"))
     x, sr = sf.read(src, always_2d=True, dtype="float64")
     n = len(x)
-    a_len = sf.info(OUT / f"{sound_id}.ogg").frames
-    b_len = pick_length(sr, a_len, B_LENGTH_S[sound_id])
+    a_len = decoded_frames(OUT / f"{sound_id}.ogg")
     used = int((A_LOOP_S + A_CROSSFADE_S) * sr)
     tail = x[used:]
     rng = np.random.default_rng(SEED + sum(map(ord, sound_id)))
     close = int(CLOSE_FADE_S * sr)
-    if len(tail) >= TAIL_MIN_S * sr:
+    from_tail = len(tail) >= TAIL_MIN_S * sr
+    cap = len(tail) - close if from_tail else None
+    want = min(B_LENGTH_S[sound_id], cap / sr - 0.1) if from_tail else B_LENGTH_S[sound_id]
+    b_len = pick_length(sr, a_len, want, AMBIENT_TIERS, cap)
+    if from_tail:
         how = f"tail {len(tail)/sr:.0f}s of master"
-        src_b = tail
-        if len(src_b) < b_len + close:
-            b_len = len(src_b) - close
-            while math.gcd(b_len, a_len) != 1:
-                b_len -= 1
-        bed = close_loop(src_b, b_len, close)
+        bed = close_loop(tail, b_len, close)
     else:
         how = "granular"
         bed = close_loop(granular(x, sr, b_len + close, rng, sound_id in EVENT_FREE), b_len, close)
 
     dst = OUT / f"{sound_id}_b.ogg"
-    with tempfile.TemporaryDirectory() as tmp:
-        wav = Path(tmp) / "bed.wav"
-        sf.write(wav, bed, sr, subtype="FLOAT")
-        # Same normalize + encode chain as encode-audio.sh, so beds a and b are treated alike.
-        subprocess.run(
-            [FFMPEG, "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav),
-             "-af", f"loudnorm=I={TARGET_LUFS}:TP=-1.5:LRA=11,aresample={sr}",
-             "-c:a", "libvorbis", "-q:a", "6", str(dst)],
-            check=True,
-        )
-    print(f"{sound_id:9s} b = {b_len/sr:6.2f}s ({b_len} fr, gcd with a = {math.gcd(b_len, a_len)}) "
-          f"{how}; {dst.stat().st_size/1024:.0f} KiB")
+    encode(bed, sr, dst, TARGET_LUFS)
+    print(f"{sound_id:9s} b = {b_len/sr:6.2f}s ({b_len} fr) {how}; {dst.stat().st_size/1024:.0f} KiB")
+
+
+def build_noise(color):
+    from scipy.ndimage import uniform_filter1d
+    from scipy.signal import welch
+    import pyloudnorm as pyln
+
+    x, sr = sf.read(NOISE_DIR / f"{color}.ogg", dtype="float64")
+    n = pick_length(sr, len(x), NOISE_B_S, NOISE_TIERS)
+    f, psd = welch(x, sr, nperseg=8192)
+    psd = uniform_filter1d(psd, max(1, int(NOISE_SMOOTH_HZ / (f[1] - f[0]))), mode="nearest")
+    freqs = np.fft.rfftfreq(n, 1 / sr)
+    rng = np.random.default_rng(SEED + sum(map(ord, color)))
+    phase = rng.uniform(0, 2 * np.pi, len(freqs))
+    phase[0] = 0
+    if n % 2 == 0:
+        phase[-1] = 0
+    y = np.fft.irfft(np.sqrt(np.interp(freqs, f, psd)) * np.exp(1j * phase), n)
+    y *= 0.5 / np.abs(y).max()
+    target = pyln.Meter(sr).integrated_loudness(x[:, None])
+    dst = NOISE_DIR / f"{color}_b.ogg"
+    encode(y[:, None], sr, dst, target)
+    print(f"{color:9s} b = {n/sr:6.2f}s ({n} fr) synthesized; target {target:.1f} LUFS; "
+          f"{dst.stat().st_size/1024:.0f} KiB")
 
 
 if __name__ == "__main__":
-    ids = sys.argv[1:] or list(B_LENGTH_S)
-    for i in ids:
-        build(i)
+    for i in sys.argv[1:] or list(B_LENGTH_S) + NOISE_COLORS:
+        build_noise(i) if i in NOISE_COLORS else build(i)
