@@ -51,6 +51,11 @@ object PcmStore {
         "stream" to "audio/ambient/stream.ogg",
     )
 
+    // Second beds decode on first use and are evicted when their sound stops, so the
+    // memory they cost is only paid while they play. Preloading every sound is the
+    // first bed's job.
+    private val bedBIds = AMBIENT_ASSETS.keys.map { "${it}_b" }.toSet()
+
     private val cache = ConcurrentHashMap<String, Deferred<Pcm>>()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
@@ -142,6 +147,10 @@ object PcmStore {
         }
     }
 
+    fun evict(id: String) {
+        if (id in bedBIds) cache.remove(id)
+    }
+
     fun preloadAll(context: Context) {
         val appContext = context.applicationContext
         scope.launch {
@@ -155,7 +164,7 @@ object PcmStore {
     // Deletes cache files that no current sound owns — renamed/removed ids
     // and half-written .tmp files from crashes.
     private fun sweepStaleCacheFiles(context: Context) {
-        val valid = (NOISE_ASSETS.keys + AMBIENT_ASSETS.keys).map { "$it.pcm" }.toSet()
+        val valid = (NOISE_ASSETS.keys + AMBIENT_ASSETS.keys + bedBIds).map { "$it.pcm" }.toSet()
         File(context.filesDir, "pcm").listFiles()?.forEach { f ->
             if (f.name !in valid) runCatching { f.delete() }
         }
