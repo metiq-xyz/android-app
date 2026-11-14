@@ -24,9 +24,17 @@ import androidx.media3.session.SessionToken
 import com.google.common.util.concurrent.ListenableFuture
 import xyz.metiq.R
 import xyz.metiq.audio.BINAURAL_ID
+import xyz.metiq.audio.PcmStore
 import xyz.metiq.audio.PlaybackService
 
 private const val FALLBACK_BINAURAL_BAND = "alpha"
+
+// Two uncorrelated beds add in power, so each plays at 1/sqrt(2) to keep a sound at its old loudness.
+private const val BED_GAIN = 0.70710678f
+
+private fun bedB(id: String) = "${id}_b"
+
+private fun hasSecondBed(id: String) = id in NOISE_IDS || id in AMBIENT_IDS
 
 @Stable
 internal class MixPlayback {
@@ -58,7 +66,13 @@ internal class MixPlayback {
     fun setLevel(id: String, level: Float) {
         if (id !in levels) return
         levels[id] = level
-        binder?.engine?.setLayerVolume(engineId(id), level)
+        val engine = binder?.engine ?: return
+        if (hasSecondBed(id)) {
+            engine.setLayerVolume(id, level * BED_GAIN)
+            engine.setLayerVolume(bedB(id), level * BED_GAIN)
+        } else {
+            engine.setLayerVolume(engineId(id), level)
+        }
     }
 
     fun settleLevel(id: String) {
@@ -101,8 +115,14 @@ internal class MixPlayback {
     private fun add(id: String, level: Float) {
         val engine = binder?.engine ?: return
         when (id) {
-            in NOISE_IDS -> engine.startLayer(id, "audio/noise/$id.ogg", level, warmthEligible = true)
-            in AMBIENT_IDS -> engine.startLayer(id, "audio/ambient/$id.ogg", level)
+            in NOISE_IDS -> {
+                engine.startLayer(id, "audio/noise/$id.ogg", level * BED_GAIN, warmthEligible = true)
+                engine.startLayer(bedB(id), "audio/noise/${id}_b.ogg", level * BED_GAIN, warmthEligible = true)
+            }
+            in AMBIENT_IDS -> {
+                engine.startLayer(id, "audio/ambient/$id.ogg", level * BED_GAIN)
+                engine.startLayer(bedB(id), "audio/ambient/${id}_b.ogg", level * BED_GAIN)
+            }
             in BINAURAL_BAND_IDS -> {
                 val band = BINAURAL_BANDS.first { it.id == id }
                 val current = levels.keys.firstOrNull { it in BINAURAL_BAND_IDS }
@@ -126,6 +146,10 @@ internal class MixPlayback {
     private fun remove(id: String, stopWhenEmpty: Boolean = true) {
         levels.remove(id) ?: return
         binder?.engine?.stopLayer(engineId(id))
+        if (hasSecondBed(id)) {
+            binder?.engine?.stopLayer(bedB(id))
+            PcmStore.evict(bedB(id))
+        }
         if (stopWhenEmpty && levels.isEmpty()) {
             controller?.stop()
             playing = false
@@ -144,7 +168,9 @@ internal class MixPlayback {
         val engine = bound.engine
         val ids = engine.activeLayerIds()
         ids.filter { it in NOISE_IDS || it in AMBIENT_IDS }.forEach { id ->
-            if (id !in levels) levels[id] = engine.layerVolume(id) ?: DEFAULT_SOUND_LEVEL
+            if (id !in levels) {
+                levels[id] = engine.layerVolume(id)?.div(BED_GAIN) ?: DEFAULT_SOUND_LEVEL
+            }
         }
         if (BINAURAL_ID in ids && levels.keys.none { it in BINAURAL_BAND_IDS }) {
             val band = savedBand?.takeIf { it in BINAURAL_BAND_IDS } ?: FALLBACK_BINAURAL_BAND
