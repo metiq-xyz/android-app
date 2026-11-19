@@ -40,6 +40,7 @@ private val LICENSES = listOf(
     LicenseEntry(R.string.licenses_inter_title, R.string.licenses_inter_body),
     LicenseEntry(R.string.licenses_apache2_title, R.string.licenses_apache2_body),
     LicenseEntry(R.string.licenses_kotlin_title, R.string.licenses_kotlin_body),
+    LicenseEntry(R.string.licenses_sounds_title, R.string.licenses_sounds_body),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)

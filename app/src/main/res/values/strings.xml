@@ -150,6 +150,8 @@
     <string name="licenses_apache2_body" translatable="false">Used by Jetpack Compose, Material 3, AndroidX Lifecycle, AndroidX DataStore, AndroidX AppCompat and AndroidX Media3. Full license text: https://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="licenses_kotlin_title" translatable="false">Kotlin standard library</string>
     <string name="licenses_kotlin_body" translatable="false">Apache License 2.0. © JetBrains s.r.o. and Kotlin Programming Language contributors.</string>
+    <string name="licenses_sounds_title" translatable="false">Sound recordings</string>
+    <string name="licenses_sounds_body" translatable="false">Birds: \"Birds\" by SoundReality, Pixabay Content License. https://pixabay.com/sound-effects/nature-birds-576540/\n\nCrickets: \"AMBIENCE NIGHT FIELD CRICKET 01\" by sengjinn, CC0 1.0. https://freesound.org/s/175020/\n\nFire: \"Fireplace with crackling sounds 2 min. RK\" by RonKoster2023, Pixabay Content License. https://pixabay.com/sound-effects/film-special-effects-fireplace-with-crackling-sounds-2-min-rk-178392/\n\nSea waves: \"Sea Waves\" by kokoreli777, Pixabay Content License. https://pixabay.com/sound-effects/nature-sea-waves-169411/\n\nStream: \"Water Stream\" by Pixabay user 26327991, Pixabay Content License. https://pixabay.com/sound-effects/water-stream-108384/\n\nTrain: \"Train Ambience 3\" by Fission9, CC0 1.0. https://freesound.org/s/491919/\n\nWind: \"Wind Blowing\" by SoundReality, Pixabay Content License. https://pixabay.com/sound-effects/nature-wind-blowing-457954/</string>
 
     <!-- Home: mix builder -->
     <string name="mix_panel_empty_title">Your mix starts here</string>
