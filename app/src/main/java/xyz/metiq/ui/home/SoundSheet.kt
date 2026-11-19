@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
@@ -121,6 +122,9 @@ internal fun SoundSheet(
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
+        // Keep tall sheets below the status bar: otherwise M3 shrinks the top inset padding as the
+        // sheet is dragged, the sheet height changes every frame and it jitters on swipe-to-dismiss.
+        modifier = Modifier.statusBarsPadding(),
         sheetState = sheetState,
         containerColor = tokens.foreground,
         scrimColor = tokens.scrim.copy(alpha = 0.6f),

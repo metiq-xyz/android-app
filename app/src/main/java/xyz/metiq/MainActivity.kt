@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                     MetiqTheme(darkTheme = darkTheme, dynamicColors = settings.dynamicColorsEnabled) {
                         HomeScreen(
                             settings = settings,
+                            onParticlesEnabled = { scope.launch { repo.setParticlesEnabled(it) } },
                             onDynamicColors = { scope.launch { repo.setDynamicColorsEnabled(it) } },
                             onWarmth = { scope.launch { repo.setWarmth(it) } },
                             onFadeSeconds = { scope.launch { repo.setFadeSeconds(it) } },

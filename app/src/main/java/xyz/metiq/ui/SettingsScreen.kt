@@ -126,6 +126,7 @@ private fun startupScreenLabelRes(screen: StartupScreen): Int = when (screen) {
 @Composable
 fun SettingsScreen(
     settings: Settings,
+    onParticlesEnabled: (Boolean) -> Unit = {},
     onDynamicColors: (Boolean) -> Unit = {},
     onWarmth: (Float) -> Unit,
     onWarmthPreview: (Float) -> Unit = {},
@@ -172,6 +173,7 @@ fun SettingsScreen(
     ) { padding ->
         SettingsContent(
             settings = settings,
+            onParticlesEnabled = onParticlesEnabled,
             onDynamicColors = onDynamicColors,
             onWarmth = onWarmth,
             onWarmthPreview = onWarmthPreview,
@@ -203,6 +205,7 @@ fun SettingsContent(
     onThemePreference: (ThemePreference) -> Unit = {},
     onStartupScreen: (StartupScreen) -> Unit = {},
     onDynamicColors: (Boolean) -> Unit = {},
+    onParticlesEnabled: (Boolean) -> Unit = {},
 ) {
     val context = LocalContext.current
     val version = remember {
@@ -265,6 +268,12 @@ fun SettingsContent(
                     onToggle = onDynamicColors,
                 )
             }
+            ToggleRow(
+                label = stringResource(R.string.settings_particles_label),
+                description = stringResource(R.string.settings_particles_description),
+                checked = settings.particlesEnabled,
+                onToggle = onParticlesEnabled,
+            )
         }
         Section(stringResource(R.string.settings_section_language)) {
             DropdownPickerRow(

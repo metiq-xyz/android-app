@@ -101,6 +101,8 @@
     <string name="settings_startup_screen_home">Home</string>
     <string name="settings_dynamic_colors_label">Dynamic colors</string>
     <string name="settings_dynamic_colors_description">Tint the app with colors from your wallpaper (Material You)</string>
+    <string name="settings_particles_label">Background particles</string>
+    <string name="settings_particles_description">Animated dots that drift while sounds play</string>
 
     <!-- Settings: language section -->
     <string name="settings_section_language">Language</string>

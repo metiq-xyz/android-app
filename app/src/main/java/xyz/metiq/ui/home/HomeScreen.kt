@@ -3,6 +3,8 @@ package xyz.metiq.ui.home
 import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
@@ -38,7 +40,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -51,6 +55,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.currentStateAsState
 import kotlinx.coroutines.delay
 import xyz.metiq.BuildConfig
 import xyz.metiq.CustomMix
@@ -64,6 +71,7 @@ import xyz.metiq.ui.FEEDBACK_URL
 import xyz.metiq.ui.LicensesScreen
 import xyz.metiq.ui.SUPPORT_URL
 import xyz.metiq.ui.SettingsScreen
+import xyz.metiq.ui.components.ParticleField
 import xyz.metiq.ui.components.RatePromptDialog
 import xyz.metiq.ui.openStoreRating
 import xyz.metiq.ui.openUrl
@@ -72,12 +80,15 @@ import xyz.metiq.ui.theme.LocalMetiqColors
 import xyz.metiq.ui.theme.MetiqTheme
 
 private val CARD_INSET: Dp = 20.dp
+private const val PARTICLE_FADE_MS = 400
+private const val PARTICLE_TOTAL = 90
 private const val RATE_PROMPT_DELAY_MS = 1500L
 private val CONTENT_HORIZONTAL_PADDING: Dp = 12.dp
 
 @Composable
 fun HomeScreen(
     settings: Settings,
+    onParticlesEnabled: (Boolean) -> Unit,
     onDynamicColors: (Boolean) -> Unit,
     onWarmth: (Float) -> Unit,
     onFadeSeconds: (Float) -> Unit,
@@ -178,6 +189,10 @@ fun HomeScreen(
         binder?.setActiveLabel(nowPlaying)
     }
 
+    val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
+    val particlesOn = settings.particlesEnabled && playback.playing && !mixEmpty &&
+            lifecycleState.isAtLeast(Lifecycle.State.STARTED)
+
     BackHandler(enabled = showLicenses) { showLicenses = false }
     BackHandler(enabled = showSettings && !showLicenses) { showSettings = false }
 
@@ -200,6 +215,7 @@ fun HomeScreen(
                     onOpenSettings = { showSettings = true },
                     onSelectCategory = { openCategory = it },
                     levels = playback.levels,
+                    particlesOn = particlesOn,
                     playing = playback.playing,
                     onPlayPause = playback::togglePlayPause,
                     onQuickMix = { index ->
@@ -292,6 +308,7 @@ fun HomeScreen(
         ) {
             SettingsScreen(
                 settings = settings,
+                onParticlesEnabled = onParticlesEnabled,
                 onDynamicColors = onDynamicColors,
                 onWarmth = onWarmth,
                 onWarmthPreview = { w -> binder?.engine?.setWarmth(w) },
@@ -323,6 +340,7 @@ private fun HomeCard(
     onOpenSettings: () -> Unit,
     onSelectCategory: (SoundCategory) -> Unit,
     levels: Map<String, Float>,
+    particlesOn: Boolean,
     playing: Boolean,
     onPlayPause: () -> Unit,
     onQuickMix: (Int) -> Unit,
@@ -345,6 +363,54 @@ private fun HomeCard(
             .clip(RoundedCornerShape(32.dp))
             .background(tokens.foreground),
     ) {
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
+        ) {
+            MixParticles(
+                levels = levels,
+                visible = particlesOn,
+                modifier = Modifier.matchParentSize(),
+            )
+            SoundsCardContent(
+                onOpenSettings = onOpenSettings,
+                onSelectCategory = onSelectCategory,
+                levels = levels,
+                timerEnabled = timerEnabled,
+                timerRemainingSeconds = timerRemainingSeconds,
+                onOpenTimer = onOpenTimer,
+            )
+        }
+        MixPanel(
+            quickMixes = quickMixes,
+            mixTitle = mixTitle,
+            soundNames = mixSoundNames(levels),
+            playing = playing,
+            saveEnabled = saveEnabled,
+            onPlayPause = onPlayPause,
+            onSaveMix = onSaveMix,
+            onOpenMix = onOpenMix,
+            onQuickMix = onQuickMix,
+            activeQuickMixes = activeQuickMixes,
+            deletableQuickMixes = customMixCount,
+            onDeleteQuickMix = onDeleteQuickMix,
+            modifier = Modifier.padding(start = CARD_INSET, end = CARD_INSET, bottom = CARD_INSET),
+        )
+    }
+}
+
+@Composable
+private fun SoundsCardContent(
+    onOpenSettings: () -> Unit,
+    onSelectCategory: (SoundCategory) -> Unit,
+    levels: Map<String, Float>,
+    timerEnabled: Boolean,
+    timerRemainingSeconds: Long?,
+    onOpenTimer: () -> Unit,
+) {
+    val tokens = LocalMetiqColors.current
+    Column(modifier = Modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -400,21 +466,48 @@ private fun HomeCard(
                     .padding(end = CARD_INSET, bottom = CARD_INSET),
             )
         }
-        MixPanel(
-            quickMixes = quickMixes,
-            mixTitle = mixTitle,
-            soundNames = mixSoundNames(levels),
-            playing = playing,
-            saveEnabled = saveEnabled,
-            onPlayPause = onPlayPause,
-            onSaveMix = onSaveMix,
-            onOpenMix = onOpenMix,
-            onQuickMix = onQuickMix,
-            activeQuickMixes = activeQuickMixes,
-            deletableQuickMixes = customMixCount,
-            onDeleteQuickMix = onDeleteQuickMix,
-            modifier = Modifier.padding(start = CARD_INSET, end = CARD_INSET, bottom = CARD_INSET),
-        )
+    }
+}
+
+private data class ParticleLayer(val color: Color, val count: Int, val seed: Long)
+
+/**
+ * Flow-field dots behind the category orbs, one layer per sound in the mix, tinted like its orb.
+ * The last layers are kept while fading out so the dots don't vanish the instant playback stops.
+ */
+@Composable
+private fun MixParticles(levels: Map<String, Float>, visible: Boolean, modifier: Modifier = Modifier) {
+    val tokens = LocalMetiqColors.current
+    val alpha by animateFloatAsState(
+        targetValue = if (visible) 1f else 0f,
+        animationSpec = tween(durationMillis = PARTICLE_FADE_MS),
+        label = "particleFade",
+    )
+    var layers by remember { mutableStateOf(emptyList<ParticleLayer>()) }
+    if (visible && levels.isNotEmpty()) {
+        val perLayer = (PARTICLE_TOTAL / levels.size).coerceAtLeast(1)
+        layers = levels.keys.sorted().map { id ->
+            val color = when {
+                id == "white" -> tokens.textPrimary
+                NOISE_COLORS.any { it.id == id } -> noiseColorFor(id)
+                id in BINAURAL_BAND_IDS -> lerp(binauralAccentFor(id), tokens.accentHighlight, 0.40f)
+                else -> lerp(ambientAccentFor(id), tokens.accentHighlight, 0.40f)
+            }
+            ParticleLayer(color = color, count = perLayer, seed = id.hashCode().toLong())
+        }
+    }
+    if (alpha > 0f) {
+        Box(modifier = modifier) {
+            layers.forEach { layer ->
+                ParticleField(
+                    color = layer.color,
+                    count = layer.count,
+                    seed = layer.seed,
+                    intensity = alpha,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+        }
     }
 }
 
@@ -425,6 +518,7 @@ private fun HomeScreenPreview() {
     MetiqTheme(darkTheme = isSystemInDarkTheme()) {
         HomeScreen(
             settings = DEFAULT_SETTINGS,
+            onParticlesEnabled = {},
             onDynamicColors = {},
             onWarmth = {},
             onFadeSeconds = {},

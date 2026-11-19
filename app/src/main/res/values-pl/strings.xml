@@ -66,6 +66,8 @@
     <string name="settings_startup_screen_home">Ekran główny</string>
     <string name="settings_dynamic_colors_label">Dynamiczne kolory</string>
     <string name="settings_dynamic_colors_description">Barwi aplikację kolorami tapety (Material You)</string>
+    <string name="settings_particles_label">Cząsteczki tła</string>
+    <string name="settings_particles_description">Animowane kropki unoszące się podczas odtwarzania dźwięków</string>
 
     <string name="settings_section_language">Język</string>
     <string name="settings_language_label">Język</string>

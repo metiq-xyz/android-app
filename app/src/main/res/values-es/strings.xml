@@ -66,6 +66,8 @@
     <string name="settings_startup_screen_home">Inicio</string>
     <string name="settings_dynamic_colors_label">Colores dinámicos</string>
     <string name="settings_dynamic_colors_description">Tiñe la aplicación con los colores de tu fondo de pantalla (Material You)</string>
+    <string name="settings_particles_label">Partículas de fondo</string>
+    <string name="settings_particles_description">Puntos animados que fluyen mientras suenan los sonidos</string>
 
     <string name="settings_section_language">Idioma</string>
     <string name="settings_language_label">Idioma</string>

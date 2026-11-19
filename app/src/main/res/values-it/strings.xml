@@ -66,6 +66,8 @@
     <string name="settings_startup_screen_home">Home</string>
     <string name="settings_dynamic_colors_label">Colori dinamici</string>
     <string name="settings_dynamic_colors_description">Colora l\'app con i colori dello sfondo (Material You)</string>
+    <string name="settings_particles_label">Particelle di sfondo</string>
+    <string name="settings_particles_description">Puntini animati che fluttuano durante la riproduzione</string>
 
     <string name="settings_section_language">Lingua</string>
     <string name="settings_language_label">Lingua</string>

@@ -91,6 +91,8 @@
     <string name="settings_startup_screen_home">الرئيسية</string>
     <string name="settings_dynamic_colors_label">الألوان الديناميكية</string>
     <string name="settings_dynamic_colors_description">قم بتلوين التطبيق بألوان من خلفية الجهاز (Material You)</string>
+    <string name="settings_particles_label">جسيمات الخلفية</string>
+    <string name="settings_particles_description">نقاط متحركة تنساب أثناء تشغيل الأصوات</string>
 
     <!-- Settings: language section -->
     <string name="settings_section_language">اللغة</string>

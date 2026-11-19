@@ -27,6 +27,7 @@ enum class ThemePreference { SYSTEM, LIGHT, DARK }
 enum class StartupScreen { HOME, NOISE, AMBIENT, BINAURAL }
 
 data class Settings(
+    val particlesEnabled: Boolean,
     val dynamicColorsEnabled: Boolean,
     val timerPresetsSeconds: List<Long>,
     val languageTag: String?,
@@ -42,6 +43,7 @@ data class Settings(
 )
 
 val DEFAULT_SETTINGS = Settings(
+    particlesEnabled = true,
     dynamicColorsEnabled = false,
     timerPresetsSeconds = listOf(
         15L * 60, 30L * 60, 45L * 60, 60L * 60
@@ -109,6 +111,7 @@ private const val RATE_REPROMPT_MILLIS = 21L * 24 * 60 * 60 * 1000 // 3 weeks af
 private val Context.dataStore by preferencesDataStore(name = "metiq_settings")
 
 private object Keys {
+    val PARTICLES_ENABLED = booleanPreferencesKey("particles_enabled")
     val DYNAMIC_COLORS_ENABLED = booleanPreferencesKey("dynamic_colors_enabled")
     val WARMTH = floatPreferencesKey("warmth")
     val FADE_SECONDS = floatPreferencesKey("fade_seconds")
@@ -132,6 +135,10 @@ class SettingsRepository(context: Context) {
     val flow: Flow<Settings> = store.data.catch { e ->
         if (e is IOException) emit(emptyPreferences()) else throw e
     }.map { prefs -> prefs.toSettings() }
+
+    suspend fun setParticlesEnabled(enabled: Boolean) {
+        store.edit { it[Keys.PARTICLES_ENABLED] = enabled }
+    }
 
     suspend fun setDynamicColorsEnabled(enabled: Boolean) {
         store.edit { it[Keys.DYNAMIC_COLORS_ENABLED] = enabled }
@@ -219,6 +226,7 @@ class SettingsRepository(context: Context) {
     }
 
     private fun Preferences.toSettings(): Settings {
+        val particles = this[Keys.PARTICLES_ENABLED] ?: DEFAULT_SETTINGS.particlesEnabled
         val dynamicColors = this[Keys.DYNAMIC_COLORS_ENABLED]
             ?: DEFAULT_SETTINGS.dynamicColorsEnabled
         val warmth = (this[Keys.WARMTH] ?: DEFAULT_SETTINGS.warmth).coerceIn(0f, 1f)
@@ -243,6 +251,7 @@ class SettingsRepository(context: Context) {
             ?.let { runCatching { StartupScreen.valueOf(it) }.getOrNull() }
             ?: DEFAULT_SETTINGS.startupScreen
         return Settings(
+            particlesEnabled = particles,
             dynamicColorsEnabled = dynamicColors,
             timerPresetsSeconds = presets,
             languageTag = languageTag,

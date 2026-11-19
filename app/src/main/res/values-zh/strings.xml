@@ -67,6 +67,8 @@
     <string name="settings_startup_screen_home">首页</string>
     <string name="settings_dynamic_colors_label">动态取色</string>
     <string name="settings_dynamic_colors_description">根据壁纸为应用着色（Material You）</string>
+    <string name="settings_particles_label">背景粒子</string>
+    <string name="settings_particles_description">播放声音时显示漂浮的彩色颗粒动画</string>
 
     <string name="settings_section_language">语言</string>
     <string name="settings_language_label">语言</string>

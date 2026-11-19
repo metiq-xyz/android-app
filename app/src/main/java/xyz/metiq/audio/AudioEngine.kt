@@ -5,6 +5,7 @@ import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
 import android.os.Process
+import android.util.Log
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +23,7 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+private const val TAG = "AudioEngine"
 private const val FADE_STEP_MS = 10L
 private const val MAX_FADE_MILLIS = 30_000L
 private const val NOISE_BLOCK_FRAMES = 1024
@@ -95,7 +97,14 @@ class AudioEngine(private val context: Context) {
             } catch (_: Throwable) {
                 return@launch
             }
-            val track = withContext(Dispatchers.IO) { buildStreamTrack(pcm, 0f) }
+            val track = try {
+                withContext(Dispatchers.IO) { buildStreamTrack(pcm, 0f) }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                Log.w(TAG, "Could not create AudioTrack for layer $id", e)
+                return@launch
+            }
             if (!isActive) {
                 runCatching { track.release() }
                 return@launch
@@ -263,7 +272,14 @@ class AudioEngine(private val context: Context) {
         val id = BINAURAL_ID
         if (layers.containsKey(id) || startJobs.containsKey(id)) return
         val job = feederScope.launch {
-            val track = withContext(Dispatchers.IO) { buildSynthTrack() }
+            val track = try {
+                withContext(Dispatchers.IO) { buildSynthTrack() }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                Log.w(TAG, "Could not create AudioTrack for binaural layer", e)
+                return@launch
+            }
             if (!isActive) {
                 runCatching { track.release() }
                 return@launch
